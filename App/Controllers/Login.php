@@ -40,7 +40,9 @@ use \App\Models\User;
             session_regenerate_id(true);
 
             $_SESSION['user_id']=$user->id;
+
             $this->redirect('/');
+            
          }else{
              View::renderTemplate('Login/new.html',[
                  'email'=>$_POST['email']
