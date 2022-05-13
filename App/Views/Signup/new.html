@@ -50,21 +50,23 @@
                             <div class="input-group">
                                 <i class="fa-solid fa-user"></i>
                                 <input class="form-control" type="text" name="name" placeholder="Name" autofocus
-                                    value="{{user.name}}">
+                                    value="{{user.name}}" required>
                             </div>
                         </div>
                         <div class=" row mb-3">
                             <div class="input-group">
                                 <i class="fa-solid fa-envelope"></i>
                                 <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                                    placeholder="Email address" value="{{user.email}}">
+                                    placeholder="Email address" required value="{{user.email}}">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="input-group">
                                 <i class="fa-solid fa-lock"></i>
                                 <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Password">
+                                    placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                                    title="Minimum 6 chars, at least one letter and number" />
+
                             </div>
                             <div>
                                 <input type="checkbox" id="checkbox" name="checkbox">
