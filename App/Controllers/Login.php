@@ -36,8 +36,7 @@ use \App\Models\User;
          $user = User::authenticate($_POST['email'], $_POST['password']);
 
          if($user){
-             header('Location: http://'.$_SERVER['HTTP_HOST'].'/', true, 303);
-             exit;
+            $this->redirect('/');
          }else{
              View::renderTemplate('Login/new.html',[
                  'email'=>$_POST['email']
