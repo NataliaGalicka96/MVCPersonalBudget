@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use \Core\View;
 
 
 /**
