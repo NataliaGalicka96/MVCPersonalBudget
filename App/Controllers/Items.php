@@ -22,6 +22,8 @@ class Items extends \Core\Controller
     {
 
         if(! Auth::isLoggedIn()){
+
+            Auth::rememberRequestedPage();
             $this->redirect('/login');
         }
         View::renderTemplate('Items/index.html');
