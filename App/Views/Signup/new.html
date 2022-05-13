@@ -5,6 +5,7 @@
 
 
 {% block footer %}
+<script src="/js/hideShowPassword.min.js"></script>
 <script>
     $.validator.addMethod('validPassword',
         function (value, element, param) {
@@ -22,10 +23,11 @@
         'Must contain at least one letter and one number'
     );
 
-
-
     $(document).ready(function () {
 
+        /**
+         * Validate the form
+         */
         $('#formSignup').validate({
             rules: {
                 name: 'required',
@@ -36,19 +38,29 @@
                 },
                 password: {
                     required: true,
-                    minlength: 6
+                    minlength: 6,
+                    validPassword: true
                 }
-
             },
             messages: {
                 email: {
-                    remote: 'Email already taken'
+                    remote: 'email already taken'
                 }
             }
         });
 
+
+        /**
+          * Show password toggle button
+          */
+        $('#password').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
     });
+
 </script>
+
 {% endblock %}
 
 {% block body %}
@@ -128,7 +140,8 @@
             </div>
         </div>
     </div>
+</div>
 
 
 
-    {% endblock %}
+{% endblock %}
