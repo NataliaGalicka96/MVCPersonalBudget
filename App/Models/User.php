@@ -45,7 +45,7 @@ class User extends \Core\Model
      }
 
      if($this->emailExists($this->email)){
-         $this->errors[]='email already taken';
+         $this->errors[]='Email already taken';
      }
 
      //Password
