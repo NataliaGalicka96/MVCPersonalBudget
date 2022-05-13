@@ -11,6 +11,12 @@ use PDO;
  */
 class User extends \Core\Model
 {
+        /**
+     * Error messages
+     *
+     * @var array
+     */
+    public $errors = [];
 
 /**
    * Class constructor
@@ -26,11 +32,12 @@ class User extends \Core\Model
     };
   }
  
-/**
- * 
- * 
- * 
- */
+    /**
+     * Validate current property values, adding valiation error messages to the errors array property
+     *
+     * @return void
+     */
+
 
  public function validate()
  {
@@ -44,7 +51,7 @@ class User extends \Core\Model
          $this->errors[] = 'Invalid email';
      }
 
-     if($this->emailExists($this->email)){
+     if(static::emailExists($this->email)){
          $this->errors[]='Email already taken';
      }
 
@@ -65,13 +72,10 @@ class User extends \Core\Model
 
  }
 
-
-
-
   /**
    * Save the user model with the current property values
    *
-   * @return void
+   * @return boolean True if the user was saved, false otherwise
    */
   public function save()
   {
@@ -98,8 +102,15 @@ class User extends \Core\Model
     return false;
   }
 
+ /**
+     * See if a user record already exists with the specified email
+     *
+     * @param string $email email address to search for
+     *
+     * @return boolean  True if a record already exists with the specified email, false otherwise
+     */
 
-    protected function emailExists($email)
+   public static function emailExists($email)
     {
         $sql = 'SELECT * FROM users WHERE email = :email';
  
