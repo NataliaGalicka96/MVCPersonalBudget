@@ -39,7 +39,9 @@ use \App\Models\User;
              header('Location: http://'.$_SERVER['HTTP_HOST'].'/', true, 303);
              exit;
          }else{
-             View::renderTemplate('Login/new.html');
+             View::renderTemplate('Login/new.html',[
+                 'email'=>$_POST['email']
+             ]);
 
          }
 
