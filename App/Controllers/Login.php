@@ -21,7 +21,17 @@ use \Core\View;
 
       public function newAction()
       {
-
         View::renderTemplate('Login/new.html');
       }
+
+      /**
+     * Log in a user
+     *
+     * @return void
+     */
+
+     public function createAction()
+     {
+         echo($_POST['email'].', '.$_POST['password']);
+     }
  }
