@@ -44,6 +44,10 @@ class User extends \Core\Model
          $this->errors[] = 'Invalid email';
      }
 
+     if($this->emailExists($this->email)){
+         $this->errors[]='email already taken';
+     }
+
      //Password
 
      if (strlen($this->password) < 6) {
@@ -93,7 +97,23 @@ class User extends \Core\Model
     }
     return false;
   }
-}
+
+
+    protected function emailExists($email)
+    {
+        $sql = 'SELECT * FROM users WHERE email = :email';
+ 
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+ 
+        $stmt->execute();
+ 
+        return $stmt->fetch() !== false;
+    }
+
+  }
+
 
 
 
