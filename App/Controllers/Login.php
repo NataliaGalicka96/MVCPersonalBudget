@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\User;
 
 /**
  * Login controller
@@ -32,6 +33,7 @@ use \Core\View;
 
      public function createAction()
      {
-         echo($_POST['email'].', '.$_POST['password']);
-     }
+         $user = User::findByEmail($_POST['email']);
+
+         var_dump($user);     }
  }
