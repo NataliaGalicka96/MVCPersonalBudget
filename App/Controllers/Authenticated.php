@@ -7,9 +7,8 @@ namespace App\Controllers;
  *
  * PHP version 7.0
  */
-
- abstract class Authenticated extends Core\Controller
- {
+abstract class Authenticated extends \Core\Controller
+{
     /**
      * Require the user to be authenticated before giving access to all methods in the controller
      *
