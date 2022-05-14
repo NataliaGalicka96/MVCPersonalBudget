@@ -27,9 +27,20 @@ namespace App;
      */
     public function __construct()
     {
-        
+
 	    $this->token = bin2hex(random_bytes(16));  // 16 bytes = 128 bits = 32 hex characters
  
     }
+
+        /**
+     * Get the token value
+     *
+     * @return string The value
+     */
+    public function getValue()
+    {
+        return $this->token;
+    }
+
 
  }
