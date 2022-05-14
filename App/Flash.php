@@ -17,15 +17,16 @@ class Flash
      *
      * @return void
      */
-    public static function addMessage($message)
+    public static function getMessages()
     {
-        // Create array in the session if it doesn't already exist
-        if (! isset($_SESSION['flash_notifications'])) {
-            $_SESSION['flash_notifications'] = [];
-        }
+        if (isset($_SESSION['flash_notifications'])) {
+            //return $_SESSION['flash_notifications'];
+            $messages = $_SESSION['flash_notifications'];
+            unset($_SESSION['flash_notifications']);
  
-        // Append the message to the array
-        $_SESSION['flash_notifications'][] = $message;
+            return $messages;
+        }
     }
+
 }
 
