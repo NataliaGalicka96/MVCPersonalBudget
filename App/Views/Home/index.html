@@ -6,8 +6,8 @@
 
 <h1>Welcome</h1>
 
-{% if session.user_id %}
-User with ID {{ session.user_id }} is logged in.
+{% if current_user %}
+Hello {{current_user.name}}.
 <a href="/logout">Log out</a>
 
 {% else %}
