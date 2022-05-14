@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use \Core\View;
+use \App\Token;
 
 
 /**
@@ -200,7 +201,7 @@ class User extends \Core\Model
         $expiry_timestamp = time() + 60 * 60 * 24 * 30;  // 30 days from now
 
         $sql = 'INSERT INTO remembered_logins(token_hash, user_id, expires_at)
-        VALUES (:token_hash, :user_id, :expires_at)'
+        VALUES (:token_hash, :user_id, :expires_at)';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
