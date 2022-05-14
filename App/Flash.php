@@ -10,7 +10,26 @@ namespace App;
  */
 class Flash
 {
-        /**
+
+    /**
+     * Success message type
+     * @var string
+     */
+    const SUCCESS = 'success';
+
+    /**
+     * Information message type
+     * @var string
+     */
+    const INFO = 'info';
+
+    /**
+     * Warning message type
+     * @var string
+     */
+    const WARNING = 'warning';
+
+    /**
      * Add a message
      *
      * @param string $message  The message content
@@ -49,6 +68,4 @@ class Flash
             return $messages;
         }
     }
-
 }
-

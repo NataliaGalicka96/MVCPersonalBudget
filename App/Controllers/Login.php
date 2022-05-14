@@ -40,13 +40,13 @@ class Login extends \Core\Controller
  
             Auth::login($user);
  
-            Flash::addMessage('Login successful');
+            Flash::addMessage('Login successful', Flash::SUCCESS);
  
             $this->redirect(Auth::getReturnToPage());
  
         } else {
  
-            Flash::addMessage('Login unsuccessful, please try again');
+            Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
  
             View::renderTemplate('Login/new.html', [
                 'email' => $_POST['email'],
@@ -75,7 +75,7 @@ class Login extends \Core\Controller
      */
     public function showLogoutMessageAction()
     {
-      Flash::addMessage('Logout successful');
+      Flash::addMessage('Logout successful', Flash::SUCCESS);
  
       $this->redirect('/');
     }
