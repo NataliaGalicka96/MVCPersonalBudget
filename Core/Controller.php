@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Auth;
+
 /**
  * Base controller
  *
