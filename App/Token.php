@@ -42,5 +42,15 @@ namespace App;
         return $this->token;
     }
 
+    /**
+     * Get the hashed token value
+     *
+     * @return string The hashed value
+     */
+    public function getHash()
+    {
+        return hash_hmac('sha256', $this->token, "Secret");  // sha256 = 64 chars
+    }
+
 
  }
