@@ -52,5 +52,16 @@ use \App\Models\User;
         var_dump($user);
     }
 
+    /**
+     * Reset the user's password
+     *
+     * @return void
+     */
+    public function resetPasswordAction()
+    {
+            }
+
+
+
 
  }
