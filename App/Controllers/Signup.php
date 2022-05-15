@@ -65,6 +65,8 @@ class Signup extends \Core\Controller
     public function activateAction()
     {
         User::activate($this->route_params['token']);    
+
+        $this->redirect('/signup/activated');
     }
 
 /**
