@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Reset password{% endblock %}
+
+
+
+{% block footer %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+<script src="/js/hideShowPassword.min.js"></script>
+<script>
+    $.validator.addMethod('validPassword',
+        function (value, element, param) {
+            if (value != '') {
+                if (value.match(/.*[a-z]+.*/i) == null) {
+                    return false;
+                }
+                if (value.match(/.*\d+.*/) == null) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+        'Must contain at least one letter and one number'
+    );
+
+    $(document).ready(function () {
+
+        /**
+         * Validate the form
+         */
+        $('#formPassword').validate({
+            rules: {
+
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+
+            }
+        });
+
+
+        /**
+          * Show password toggle button
+          */
+        $('#password').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
+    });
+
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+
+{% if user.errors is not empty %}
+<p>Errors:</p>
+<ul>
+    {% for error in user.errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+
+<div class="main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid ">
+            <a class="navbar-brand"><i class="fa-solid fa-hand-holding-dollar me-2"></i>PERSONAL BUDGET</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-8 col-lg-5">
+                <div class="sentence">
+                    <p class="h2"><span>Budgets</span> can open your life to achieving goals you never thought
+                        possible.
+                    </p>
+                    <blockquote class="blockquote">
+                        <p class="h5 mt-5"><em>Don’t let your finances stress you out to the point of inaction.
+                                Instead, take control of your finances.</em></p>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="login">
+
+
+                    <div class="title"><span>Reset password</span></div>
+
+
+                    <form method="post" id="formPassword">
+                        <div class="row mb-3">
+                            <div class="input-group">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required>
+
+                            </div>
+                            <div>
+                                <input type="checkbox" id="checkbox" name="checkbox">
+                                <label for="checkbox">Show password</label>
+                            </div>
+                        </div>
+
+                        <div class="button"><button type="submit" class="btn btn-warning">Reset password</button></div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
