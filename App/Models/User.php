@@ -280,6 +280,19 @@ class User extends \Core\Model
         Mail::send($this->email, 'Password reset', $text, $html);
     }
 
+    /**
+     * Find a user model by password reset token and expiry
+     *
+     * @param string $token Password reset token sent to user
+     *
+     * @return mixed User object if found and the token hasn't expired, null otherwise
+     */
+    public static function findByPasswordReset($token)
+    {
+        
+        
+     
+    }
 
 
 
