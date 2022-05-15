@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use \Core\View;
+use \App\Models\User;
+
 /**
  * Password controller
  * 
@@ -18,5 +21,18 @@ namespace App\Controllers;
     {
         
     }
+
+    /**
+     * Send the password reset link to the supplied email
+     * 
+     * @return void
+     */
+
+     public function requestResetAction()
+     {
+         User::sendPasswordReset($_POST['email']);
+
+         View::renderTemplate('Password/reseat_requested.html');         
+     }
 
  }
