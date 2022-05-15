@@ -45,6 +45,10 @@ use \App\Models\User;
 
         $user = User::findByPasswordReset($token);
 
+        if($user){
+            View::renderTemplate();
+        }
+
         var_dump($user);
     }
 
