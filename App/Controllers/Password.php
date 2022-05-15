@@ -46,10 +46,10 @@ use \App\Models\User;
         $user = User::findByPasswordReset($token);
 
         if($user){
-            View::renderTemplate();
+            View::renderTemplate('Password/reset.html');
+        }else{
+            echo "Password reset token invalid";
         }
-
-        var_dump($user);
     }
 
     /**
@@ -59,7 +59,8 @@ use \App\Models\User;
      */
     public function resetPasswordAction()
     {
-            }
+    
+    }
 
 
 
