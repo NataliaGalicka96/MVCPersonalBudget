@@ -55,9 +55,10 @@ class User extends \Core\Model
          $this->errors[] = 'Invalid email';
      }
 
-     if(static::emailExists($this->email)){
-         $this->errors[]='Email already taken';
-     }
+     if (static::emailExists($this->email, $this->id ?? null)) {
+        $this->errors[] = 'email already taken';
+    }
+
 
      //Password
 
@@ -110,23 +111,15 @@ class User extends \Core\Model
      * See if a user record already exists with the specified email
      *
      * @param string $email email address to search for
-     * @param string $ignore_id Return false anyway if the record found has this ID
      *
      * @return boolean  True if a record already exists with the specified email, false otherwise
      */
+
+
     public static function emailExists($email, $ignore_id = null)
     {
-        $user = static::findByEmail($email);
- 
-        if ($user) {
-            if ($user->id != $ignore_id) {
-                return true;
-            }
-        }
- 
-        return false;
+        return static::findByEmail($email) !==false;
     }
-
 
     /**
      * Find a user model by email address
@@ -325,39 +318,20 @@ class User extends \Core\Model
     }
 
         /**
-     * Reset the password
-     *
-     * @param string $password The new password
-     *
-     * @return boolean  True if the password was updated successfully, false otherwise
-     */
-    public function resetPassword($password)
-    {
-        $this->password = $password;
- 
-        $this->validate();
- 
-        if (empty($this->errors)) {
- 
-            $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
- 
-            $sql = 'UPDATE users
-                    SET password_hash = :password_hash,
-                        password_reset_hash = NULL,
-                        password_reset_expires_at = NULL
-                    WHERE id = :id';
- 
-            $db = static::getDB();
-            $stmt = $db->prepare($sql);
- 
-            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
- 
-            return $stmt->execute();
+         * Reset the password
+         *
+         * @param string $password The new password
+         *
+         * @return boolean  True if the password was updated successfully, false otherwise
+         */
+        public function resetPassword($password)
+        {
+            $this->password = $password;
+    
+            $this->validate();
+    
+            return empty($this->errors);
         }
- 
-        return false;
-    }
 
 
 
