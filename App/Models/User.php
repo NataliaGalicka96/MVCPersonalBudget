@@ -265,20 +265,21 @@ class User extends \Core\Model
         return $stmt->execute();
     }
 
-    //**
-    * Send password reset instructions in an email to the user
-    *
-    * @return void
-    */
-   protected function sendPasswordResetEmail()
-   {
-       $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->password_reset_token;
+    /**
+     * Send password reset instructions in an email to the user
+     *
+     * @return void
+     */
+    protected function sendPasswordResetEmail()
+    {
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->password_reset_token;
+ 
+        $text = View::getTemplate('Password/reset_email.txt', ['url' => $url]);
+        $html = View::getTemplate('Password/reset_email.html', ['url' => $url]);
+ 
+        Mail::send($this->email, 'Password reset', $text, $html);
+    }
 
-       $text = View::getTemplate('Password/reset_email.txt', ['url' => $url]);
-       $html = View::getTemplate('Password/reset_email.html', ['url' => $url]);
-
-       Mail::send($this->email, 'Password reset', $text, $html);
-   }
 
 
 
