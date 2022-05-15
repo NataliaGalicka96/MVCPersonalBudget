@@ -316,6 +316,23 @@ class User extends \Core\Model
         }
     }
 
+        /**
+         * Reset the password
+         *
+         * @param string $password The new password
+         *
+         * @return boolean  True if the password was updated successfully, false otherwise
+         */
+        public function resetPassword($password)
+        {
+            $this->password = $password;
+    
+            $this->validate();
+    
+            return empty($this->errors);
+        }
+
+
 
 
   }
