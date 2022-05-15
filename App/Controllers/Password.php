@@ -41,7 +41,7 @@ use \App\Models\User;
      */
     public function resetAction()
     {
-        $token = $this->route+params['token'];
+        $token = $this->route_params['token'];
 
         $user = User::findByPasswordReset($token);
 
