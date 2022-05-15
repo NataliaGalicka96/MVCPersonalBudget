@@ -67,6 +67,15 @@ class Signup extends \Core\Controller
         User::activate($this->route_params['token']);    
     }
 
+/**
+     * Show the activation success page
+     *
+     * @return void
+     */
+    public function activatedAction()
+    {
+        View::renderTemplate('Signup/activated.html');
+    }
 
 
 
