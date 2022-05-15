@@ -93,6 +93,7 @@ class User extends \Core\Model
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
         $token = new Token();
         $hashed_token = $token->getHash();
+        $this->activation_token = $token->getValue();
 
         $sql = 'INSERT INTO users (name, email, password_hash, activation_hash)
                 VALUES (:name, :email, :password_hash, :activation_hash)';
