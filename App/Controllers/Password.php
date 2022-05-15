@@ -32,7 +32,7 @@ use \App\Models\User;
      {
          User::sendPasswordReset($_POST['email']);
 
-         View::renderTemplate('Password/reseat_requested.html');         
+         View::renderTemplate('Password/reset_requested.html');         
      }
 
  }
