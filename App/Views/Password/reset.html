@@ -88,6 +88,9 @@
 
 
                     <form method="post" id="formPassword" action="/password/reset-password">
+
+                        <input type="hidden" name="token" value="{{ token }}" />
+
                         <div class="row mb-3">
                             <div class="input-group">
                                 <i class="fa-solid fa-lock"></i>
