@@ -34,4 +34,15 @@ use \App\Models\User;
         View::renderTemplate('Password/reset_requested.html');
     }
 
+    /**
+     * Show the reset password form
+     *
+     * @return void
+     */
+    public function resetAction()
+    {
+ 
+    }
+
+
  }
