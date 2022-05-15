@@ -19,20 +19,19 @@ use \App\Models\User;
      */
     public function forgotAction()
     {
-        
+        View::renderTemplate('Password/forgot.html');
     }
 
     /**
      * Send the password reset link to the supplied email
-     * 
+     *
      * @return void
      */
+    public function requestResetAction()
+    {
+        User::sendPasswordReset($_POST['email']);
 
-     public function requestResetAction()
-     {
-         User::sendPasswordReset($_POST['email']);
-
-         View::renderTemplate('Password/reset_requested.html');         
-     }
+        View::renderTemplate('Password/reset_requested.html');
+    }
 
  }
