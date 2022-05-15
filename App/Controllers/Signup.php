@@ -57,15 +57,16 @@ class Signup extends \Core\Controller
         View::renderTemplate('Signup/success.html');
     }
 
-    /**
+
      * Activate a new account
      *
      * @return void
      */
     public function activateAction()
     {
-      $this->route_params['token']);      
+        User::activate($this->route_params['token']);    
     }
+
 
 
 
