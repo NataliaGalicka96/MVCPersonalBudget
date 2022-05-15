@@ -61,7 +61,21 @@ use \App\Models\User;
      */
     public function resetPasswordAction()
     {
-    
+        $token = $_POST['token'];
+ 
+        $user = User::findByPasswordReset($token);
+ 
+        if ($user) {
+ 
+            echo "reset user's password here";
+ 
+        } else {
+ 
+            echo "password reset token invalid";
+ 
+        }
+    }
+
     }
 
 
