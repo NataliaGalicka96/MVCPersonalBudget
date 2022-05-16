@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Sign up{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="/css/registration.css" />
@@ -22,7 +22,7 @@
         /**
          * Validate the form
          */
-        $('#formSignup').validate({
+        $('#formProfile').validate({
             rules: {
                 name: 'required',
                 email: {
@@ -89,14 +89,14 @@
                 <div class="login">
 
 
-                    <div class="title"><span>Registration</span></div>
+                    <div class="title"><span>Profile</span></div>
 
 
-                    <form method="post" action="/signup/create" id="formSignup">
+                    <form method="post" id="formProfile">
                         <div class="row mb-3">
                             <div class="input-group">
                                 <i class="fa-solid fa-user"></i>
-                                <input class="form-control" type="text" name="name" placeholder="Name" autofocus
+                                <input class="form-control" type="text" name="name" placeholder="Name"
                                     value="{{user.name}}" required>
                             </div>
                         </div>
@@ -120,9 +120,8 @@
                             </div>
                         </div>
 
-                        <div class="button"><button type="submit" class="btn btn-warning">Sign up</button></div>
-
-                        <div class="signin">Already have an account? <a href="/login"> Sign in now!</a></div>
+                        <div class="button"><button type="submit" class="btn btn-warning">Save</button></div>
+                        <a href="/profile/show">Cancel</a>
                     </form>
                 </div>
             </div>

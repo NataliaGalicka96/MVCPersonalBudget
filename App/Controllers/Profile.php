@@ -40,3 +40,5 @@ use \App\Auth;
              'user' => Auth::getUser()
          ]);
      }
+
+    }
