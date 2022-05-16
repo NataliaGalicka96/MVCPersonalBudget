@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use Core/View;
+use Core\View;
+use \App\Auth;
 
 /**
  * Profile controller
