@@ -11,7 +11,7 @@ use Core/View;
  */
 
 
- class Profile extends Core\Controller
+ class Profile extends Authenticated
  {
      /**
       * Show the profile 
