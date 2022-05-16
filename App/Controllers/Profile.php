@@ -41,4 +41,15 @@ use \App\Auth;
          ]);
      }
 
+     /**
+     * Update the profile
+     *
+     * @return void
+     */
+    public function updateAction()
+    {
+
+        $user = Auth::getUser();
+        
+
     }
