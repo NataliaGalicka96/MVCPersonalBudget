@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+
+    {% block css %}
     <link rel="stylesheet" href="/css/styles.css" />
+    {% endblock %}
+
+
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0493276a63.js" crossorigin="anonymous"></script>
-
     <link
         href="https://fonts.googleapis.com/css2?family=Cookie&family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -18,10 +24,11 @@
 <body>
     {% for message in flash_messages %}
     <div class="alert alert-{{message.type}}">
-
         {{ message.body }}
     </div>
     {% endfor %}
+
+
 
     {% block body %}
     {% endblock %}

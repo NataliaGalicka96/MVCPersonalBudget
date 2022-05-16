@@ -108,22 +108,22 @@ form .row i {
     color: rgb(23 22 53);
 }
 
-.pass {
+.password {
     display: flex;
     justify-content: space-between;
     font-size: 13px;
 }
 
-form .pass label {
+form .password label {
     color: rgb(68, 68, 68);
 }
 
-form .pass a {
+form .password a {
     color: rgb(68, 68, 68);
     text-decoration: none;
 }
 
-form .pass a:hover {
+form .password a:hover {
     text-decoration: underline;
 }
 
