@@ -22,6 +22,20 @@
 </head>
 
 <body>
+
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            {% if current_user %}
+            <li><a href="/profile/show">Profile</a></li>
+            <li><a href="/logout">Log out</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+
     {% for message in flash_messages %}
     <div class="alert alert-{{message.type}}">
         {{ message.body }}
