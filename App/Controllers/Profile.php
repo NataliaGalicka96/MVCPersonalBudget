@@ -12,8 +12,22 @@ use \App\Auth;
  */
 
 
- class Profile extends Authenticated
- {
+class Profile extends Authenticated
+{
+ 
+    /**
+     * Before filter - called before each action method
+     *
+     * @return void
+     */
+    protected function before()
+    {
+        parent::before();
+        $this->user = Auth::getUser();
+    }
+
+
+
      /**
       * Show the profile 
       *
@@ -50,6 +64,8 @@ use \App\Auth;
     {
 
         $user = Auth::getUser();
-        
+
 
     }
+
+}
