@@ -26,4 +26,17 @@ use \App\Auth;
               'user'=> Auth::getUser()
           ]);
       }
-}
+
+
+      /**
+     * Show the form for editing the profile
+     *
+     * @return void
+     */
+
+     public function editAction()
+     {
+         View::renderTemplate('Profile/edit.html', [
+             'user' => Auth::getUser()
+         ]);
+     }
