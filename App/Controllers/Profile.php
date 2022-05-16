@@ -21,6 +21,8 @@ use Core/View;
 
       public function showAction()
       {
-          View::renderTemplate('Profile/show.html');
+          View::renderTemplate('Profile/show.html', [
+              'user'=> Auth::getUser()
+          ]);
       }
 }
