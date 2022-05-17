@@ -7,75 +7,84 @@ use \App\Token;
 use \App\Mail;
 use \Core\View;
 
-
-/**
- * Example user model
- *
- * PHP version 7.0
- */
 class User extends \Core\Model
 {
-        /**
+    /**
      * Error messages
      *
      * @var array
      */
     public $errors = [];
 
-/**
+    /**
    * Class constructor
    *
    * @param array $data  Initial property values
    *
    * @return void
    */
-  public function __construct($data=[])
-  {
-    foreach ($data as $key => $value) {
-      $this->$key = $value;
-    };
-  }
+    public function __construct($data=[])
+    {
+        foreach ($data as $key => $value) {
+        $this->$key = $value;
+        };
+    }
  
     /**
      * Validate current property values, adding valiation error messages to the errors array property
      *
      * @return void
      */
+        public function validate()
+        {
+            //Name
+            if(isset($this->name)){
+
+                if($this->name == ''){
+                    $this->errors['nameError1'] = 'Name is required.';
+                }
+
+                if(strlen($this->name)<2 || strlen($this->name)>20){
+                    $this->errors['nameError2'] = "Name needs to be between 2 to 20 characters.";
+                }
 
 
- public function validate()
- {
-     //Name
-     if($this->name == ''){
-        $this->errors[] = 'Name is required';
-     }
+                if(!preg_match('/^[A-Za-z]+$/', $this->name)){
+                    $this->errors['nameError3'] = "Name must contain letters only. Special characters are not allowed."
+                }
+            }
+            //email address
 
-     //email address
-     if(filter_var($this->email, FILTER_VALIDATE_EMAIL) === false){
-         $this->errors[] = 'Invalid email';
-     }
+            if(isset($this->email)){
 
-     if (static::emailExists($this->email, $this->id ?? null)) {
-        $this->errors[] = 'email already taken';
-    }
+                if(!filter_var($this->email, FILTER_VALIDATE_EMAIL) || filter_var($this -> email, FILTER_SANITIZE_EMAIL) != $this -> email){
+                    $this->errors['emailError1'] = 'Please enter a valid e-mail address.';
+                }
 
+                if (static::emailExists($this->email, $this->id ?? null)) {
+                    $this->errors['emailError2'] = 'Email already taken.';
+                }
+             
+             }
 
-// Password
-if (isset($this->password)) {
- 
-    if (strlen($this->password) < 6) {
-        $this->errors[] = 'Please enter at least 6 characters for the password';
-    }
+        
 
-    if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
-        $this->errors[] = 'Password needs at least one letter';
-    }
+            // Password
+            if (isset($this->password)) {
+            
+                if (strlen($this->password) < 6) {
+                    $this->errors['errorPassword1'] = 'Please enter at least 6 characters for the password';
+                }
 
-    if (preg_match('/.*\d+.*/i', $this->password) == 0) {
-        $this->errors[] = 'Password needs at least one number';
-    }
-}
- }
+                if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
+                    $this->errors['errorPassword2'] = 'Password needs at least one letter';
+                }
+
+                if (preg_match('/.*\d+.*/i', $this->password) == 0) {
+                    $this->errors['errorPassword3'] = 'Password needs at least one number';
+                }
+            }
+        }
 
 
   /**
@@ -83,7 +92,7 @@ if (isset($this->password)) {
    *
    * @return boolean True if the user was saved, false otherwise
    */
-  public function save()
+  public function saveUserToDB()
   {
 
     $this->validate();
@@ -366,7 +375,8 @@ if (isset($this->password)) {
  
         return false;
     }
-/**
+
+    /**
      * Send an email to the user containing the activation link
      *
      * @return void
@@ -388,7 +398,7 @@ if (isset($this->password)) {
      *
      * @return void
      */
-    public static function activate($value)
+    public static function activateAccount($value)
     {
         $token = new Token($value);
         $hashed_token = $token->getHash();
