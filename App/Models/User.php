@@ -50,7 +50,7 @@ class User extends \Core\Model
 
 
                 if(!preg_match('/^[A-Za-z]+$/', $this->name)){
-                    $this->errors['nameError3'] = "Name must contain letters only. Special characters are not allowed."
+                    $this->errors['nameError3'] = "Name must contain letters only. Special characters are not allowed.";
                 }
             }
             //email address
