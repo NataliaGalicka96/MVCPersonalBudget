@@ -55,7 +55,7 @@ body {
     color: #F0D000;
     height: auto;
     margin-top: 75px;
-    padding: 30px 25px 30px 25px;
+    padding: 30px 25px 25px 25px;
     text-align: center;
 
 }
@@ -81,69 +81,16 @@ body {
     font-weight: 500;
 }
 
-
-/*
-
-
-.main {
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("20.jpg");
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-}
-
-.navbar {
-    height: 75px;
-    margin: auto;
-}
-
-.navbar-dark .navbar-nav {
-    text-align: right;
-    margin-right: 20px;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-    background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
-    background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #ffd700;
-    font-weight: 500;
-    display: inline-block;
-}
-
-.navbar-dark .navbar-brand {
-    color: #ffd700;
-    font-size: 35px;
-    padding: 0 0;
-    font-family: 'Cookie', cursive;
-    background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
-    background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-
-.nav-link:hover {
-    font-weight: 600;
-    border-bottom: 1px solid #FC38AE;
-}
-
-.navbar-dark .navbar-toggler {
-    color: #F0D000;
-    border-color: #F0D000;
-}
-
-.getStarted {
+.row {
     background: rgb(23 22 53 / 75%);
     border: 15px solid rgba(92, 91, 141, 0.25);
+    margin-top: 225px;
+    width: 70%;
     color: #F0D000;
+    display: flex;
+    justify-content: center;
 }
 
-.getStarted p {
-    font-size: 20px;
-    text-align: center;
+.container {
+    margin-top: 225px;
 }
-
-*/
