@@ -7,12 +7,6 @@ use \App\Models\User;
 use \App\Auth;
 use \App\Flash;
 
-/**
- * Login controller
- * 
- * 
- * PHP version 7.0
- */
 
 class Login extends \Core\Controller
 {

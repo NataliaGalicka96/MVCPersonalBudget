@@ -31,7 +31,7 @@ class View
         }
     }
 
- /**
+    /**
      * Render a view template using Twig
      *
      * @param string $template  The template file
