@@ -55,7 +55,7 @@ body {
     color: #F0D000;
     height: auto;
     margin-top: 75px;
-    padding: 20px 25px 25px 25px;
+    padding: 30px 25px 30px 25px;
     text-align: center;
 
 }
@@ -74,7 +74,12 @@ body {
 
 }
 
-
+.btn {
+    border: 2px solid rgb(23 22 53);
+    background-color: #FFB300;
+    color: rgb(23 22 53);
+    font-weight: 500;
+}
 
 
 /*

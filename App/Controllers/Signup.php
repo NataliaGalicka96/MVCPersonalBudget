@@ -5,11 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\User;
 
-/**
- * Signup controller
- *
- * PHP version 7.0
- */
+
 class Signup extends \Core\Controller
 {
 
@@ -18,6 +14,7 @@ class Signup extends \Core\Controller
      *
      * @return void
      */
+
     public function newAction()
     {
         View::renderTemplate('Signup/new.html');
@@ -32,7 +29,7 @@ class Signup extends \Core\Controller
     {
         $user = new User($_POST);
 
-        if ($user->save()) {
+        if ($user->saveUserToDB()) {
 
             $user->sendActivationEmail();
 
@@ -40,10 +37,8 @@ class Signup extends \Core\Controller
 
         } else {
 
-            View::renderTemplate('Signup/new.html', [
-                'user' => $user
-            ]);
-
+            View::renderTemplate('Signup/new.html', ['user' => $user]);
+        
         }
     }
 
@@ -52,33 +47,34 @@ class Signup extends \Core\Controller
      *
      * @return void
      */
+
     public function successAction()
     {
         View::renderTemplate('Signup/success.html');
     }
 
-/** 
+    /** 
      * Activate a new account
      *
      * @return void
      */
+
     public function activateAction()
     {
-        User::activate($this->route_params['token']);    
+        User::activateAccount($this->route_params['token']);    
 
         $this->redirect('/signup/activated');
     }
 
-/**
+    /**
      * Show the activation success page
      *
      * @return void
      */
+
     public function activatedAction()
     {
         View::renderTemplate('Signup/activated.html');
     }
-
-
 
 }
