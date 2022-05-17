@@ -49,14 +49,14 @@ body {
     border-color: #F0D000;
 }
 
-
-.signup {
+.getStarted {
     background: rgb(23 22 53 / 75%);
     border: 15px solid rgba(92, 91, 141, 0.25);
-    color: #FFB300;
+    color: #F0D000;
     height: auto;
     margin-top: 75px;
-    padding: 20px 25px 25px 25px;
+    padding: 30px 25px 30px 25px;
+    text-align: center;
 
 }
 
@@ -70,61 +70,8 @@ body {
     background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: #ffd700;
-
-}
-
-.title {
-    padding: 0px 10px 10px 10px;
     color: #FFB300;
-    font-size: 25px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-form .row input {
-
-    border: 2px solid rgb(23 22 53);
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-form .row input:focus {
-    border-color: #6c7673;
-    box-shadow: inset 0px 0px 2px 2px rgba(255, 215, 0);
-}
-
-form .row i {
-    background-color: #FFB300;
-    height: 100%;
-    width: 47px;
-    border: 2px solid rgb(23 22 53);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px 0 0 6px;
-    color: rgb(23 22 53);
-}
-
-.password {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-}
-
-form .password label {
-    color: rgb(68, 68, 68);
-}
-
-form .password a {
-    color: rgb(68, 68, 68);
-    text-decoration: none;
-}
-
-form .password a:hover {
-    text-decoration: underline;
 }
 
 .btn {
@@ -134,22 +81,69 @@ form .password a:hover {
     font-weight: 500;
 }
 
-.button {
-    display: flex;
-    justify-content: center;
+
+/*
+
+
+.main {
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("20.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
 
-.signin {
+.navbar {
+    height: 75px;
+    margin: auto;
+}
+
+.navbar-dark .navbar-nav {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+    background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #ffd700;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.navbar-dark .navbar-brand {
+    color: #ffd700;
+    font-size: 35px;
+    padding: 0 0;
+    font-family: 'Cookie', cursive;
+    background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+    background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.nav-link:hover {
+    font-weight: 600;
+    border-bottom: 1px solid #FC38AE;
+}
+
+.navbar-dark .navbar-toggler {
+    color: #F0D000;
+    border-color: #F0D000;
+}
+
+.getStarted {
+    background: rgb(23 22 53 / 75%);
+    border: 15px solid rgba(92, 91, 141, 0.25);
+    color: #F0D000;
+}
+
+.getStarted p {
+    font-size: 20px;
     text-align: center;
-    margin-top: 20px;
-    font-size: 13px;
 }
 
-.signin a {
-    color: rgb(68, 68, 68);
-    text-decoration: none;
-}
-
-form .signin a:hover {
-    text-decoration: underline;
-}
+*/

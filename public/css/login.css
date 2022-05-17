@@ -50,11 +50,11 @@ body {
 }
 
 
-.signup {
+
+.login {
     background: rgb(23 22 53 / 75%);
     border: 15px solid rgba(92, 91, 141, 0.25);
-    color: #FFB300;
-    height: auto;
+    color: #F0D000;
     margin-top: 75px;
     padding: 20px 25px 25px 25px;
 
@@ -70,7 +70,7 @@ body {
     background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: #ffd700;
+    color: #FFB300;
 
 }
 
@@ -82,6 +82,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 form .row input {
@@ -91,9 +92,12 @@ form .row input {
     transition: all 0.3s ease;
 }
 
+
+
+
 form .row input:focus {
     border-color: #6c7673;
-    box-shadow: inset 0px 0px 2px 2px rgba(255, 215, 0);
+    box-shadow: inset 0px 0px 2px 2px #ffd700;
 }
 
 form .row i {
@@ -108,22 +112,22 @@ form .row i {
     color: rgb(23 22 53);
 }
 
-.password {
+.pass {
     display: flex;
     justify-content: space-between;
     font-size: 13px;
 }
 
-form .password label {
+form .pass label {
     color: rgb(68, 68, 68);
 }
 
-form .password a {
+form .pass a {
     color: rgb(68, 68, 68);
     text-decoration: none;
 }
 
-form .password a:hover {
+form .pass a:hover {
     text-decoration: underline;
 }
 
@@ -132,6 +136,7 @@ form .password a:hover {
     background-color: #FFB300;
     color: rgb(23 22 53);
     font-weight: 500;
+
 }
 
 .button {
@@ -139,17 +144,17 @@ form .password a:hover {
     justify-content: center;
 }
 
-.signin {
+.signup {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 13px;
 }
 
-.signin a {
+.signup a {
     color: rgb(68, 68, 68);
     text-decoration: none;
 }
 
-form .signin a:hover {
+form .signup a:hover {
     text-decoration: underline;
 }

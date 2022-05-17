@@ -1,7 +1,7 @@
 <?php
-
+ 
 namespace App\Controllers;
-
+ 
 /**
  * Authenticated base controller
  *
@@ -19,3 +19,4 @@ abstract class Authenticated extends \Core\Controller
         $this->requireLogin();
     }
 }
+

@@ -2,16 +2,115 @@
 
 {% block title %}Home{% endblock %}
 
+
+{% block css %}
+<link rel="stylesheet" href="/css/home.css" />
+
+{% endblock %}
+
+
 {% block body %}
 
-<h1>Welcome</h1>
 
 {% if current_user %}
-Hello {{current_user.name}}.
-<a href="/logout">Log out</a>
+
+<div class="main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid ">
+            <a class="navbar-brand"><i class="fa-solid fa-hand-holding-dollar me-2"></i>PERSONAL
+                BUDGET</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item px-1">
+                        <a class="nav-link px-1" aria-current="page" href="#"><i
+                                class="fa-solid fa-house me-2"></i>Home</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="#"><i class="fas fa-coins mr me-2"></i>Add
+                            Income</a>
+
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-money-bill-1-wave me-2"></i>Add
+                            Expense</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-chart-pie me-2"></i>View
+                            Balance</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="#"><i class="fas fa-cog me-2"></i>Settings</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row mx-auto">
+            <div class="col text-center getStarted">
+                Hello {{current_user.name}}.
+                <p>You are on the main page of the application. Select the options you are
+                    interested in from
+                    the navigation bar. You can add income, add expense, view the balance for the
+                    selected period.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% else %}
-<a href="/signup/new">Sign up</a> or <a href="/login">log in</a>.
+
+<div class="main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid ">
+            <a class="navbar-brand"><i class="fa-solid fa-hand-holding-dollar me-2"></i>PERSONAL BUDGET</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-8 col-lg-5">
+                <div class="sentence">
+                    <p class="h2"><span>Budgets</span> can open your life to achieving goals you never thought
+                        possible.
+                    </p>
+                    <blockquote class="blockquote">
+                        <p class="h5 mt-5"><em>Don’t let your finances stress you out to the point of inaction.
+                                Instead, take control of your finances.</em></p>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="getStarted">
+                    <p>
+                        Log in to control your finances, add income, add expense, check the balance for a selected
+                        period.
+                        <br>
+                        If you do not have an account yet,
+                        <br>register now!
+                    </p>
+                    <div class="d-flex justify-content-around mt-4">
+                        <a href="/login" class="btn btn-warning btn-lg" role=" button" aria-pressed="true">Sign
+                            in</a>
+                        <a href="Signup/new" class="btn btn-warning btn-lg" role="button" aria-pressed="true">Sign
+                            up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 {% endif %}
 
 {% endblock %}
