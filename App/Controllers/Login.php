@@ -42,13 +42,14 @@ class Login extends \Core\Controller
     
                 Auth::login($user, $remember_me);
     
-                Flash::addMessage('Login successful', Flash::SUCCESS);
+                Flash::addMessage('You\'ve successfully logged in.', Flash::SUCCESS);
     
                 $this->redirect(Auth::getReturnToPage());
     
             } else {
     
-                Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
+                Flash::addMessage('Login unsuccessful, please try again. 
+                Maybe you haven\'t activated your account yet?', Flash::WARNING);
     
                 View::renderTemplate('Login/new.html', [
                     'email' => $_POST['email'],
