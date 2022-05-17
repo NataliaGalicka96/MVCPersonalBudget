@@ -67,8 +67,6 @@ class User extends \Core\Model
              
              }
 
-        
-
             // Password
             if (isset($this->password)) {
             
@@ -87,39 +85,42 @@ class User extends \Core\Model
         }
 
 
-  /**
-   * Save the user model with the current property values
-   *
-   * @return boolean True if the user was saved, false otherwise
-   */
-  public function saveUserToDB()
-  {
+    /**
+     * Save the user model with the current property values
+     *
+     * @return boolean True if the user was saved, false otherwise
+     */
 
-    $this->validate();
+        public function saveUserToDB()
+        {
 
-    if (empty($this->errors))
+            $this->validate();
 
-    {
-        $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $token = new Token();
-        $hashed_token = $token->getHash();
-        $this->activation_token = $token->getValue();
+            if (empty($this->errors))
+            {
+                $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+                
+                $token = new Token();
 
-        $sql = 'INSERT INTO users (name, email, password_hash, activation_hash)
-                VALUES (:name, :email, :password_hash, :activation_hash)';
-    
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-    
-        $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
-        $stmt->bindValue(':activation_hash', $hashed_token, PDO::PARAM_STR);
-    
-        return $stmt->execute();
-    }
-    return false;
-  }
+                $hashed_token = $token->getHash();
+                $this->activation_token = $token->getValue();
+
+                $sql = 'INSERT INTO users (name, email, password_hash, activation_hash_token)
+                        VALUES (:name, :email, :password_hash, :activation_token)';
+            
+                $db = static::getDBConnection();
+                $stmt = $db->prepare($sql);
+            
+                $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+                $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+                $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+                $stmt->bindValue(':activation_token', $hashed_token, PDO::PARAM_STR);
+            
+                return $stmt->execute();
+            }
+
+            return false;
+        }
 
     /**
      * See if a user record already exists with the specified email
@@ -130,18 +131,18 @@ class User extends \Core\Model
      */
 
 
-    public static function emailExists($email, $ignore_id = null)
-    {
-        $user = static::findByEmail($email);
- 
-        if ($user) {
-            if ($user->id != $ignore_id) {
-                return true;
+        public static function emailExists($email, $existing_user_id = null)
+        {
+            $user = static::findByEmail($email);
+    
+            if ($user) {
+                if ($user->id != $existing_user_id) {
+                    return true;
+                }
             }
+    
+            return false;
         }
- 
-        return false;
-    }
 
 
     /**
