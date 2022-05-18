@@ -144,6 +144,28 @@ class User extends \Core\Model
             return false;
         }
 
+    /**
+     * See if a user record already exists with the specified name
+     *
+     * @param string $name name address to search for
+     *
+     * @return boolean  True if a record already exists with the specified name, false otherwise
+     */
+        
+        publi static function nameExists($name, $existing_user_id = null)
+        {
+            $user = static::findUserByName($name);
+
+            if($user){
+                if($user->id != $existing_user_id){
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        
 
     /**
      * Find a user model by email address
