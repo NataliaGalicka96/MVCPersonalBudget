@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item px-1">
-                        <a class="nav-link px-1" aria-current="page" href="#"><i
+                        <a class="nav-link px-1" aria-current="page" href="/"><i
                                 class="fa-solid fa-house me-2"></i>Home</a>
                     </li>
                     <li class="nav-item px-1">
@@ -52,10 +52,11 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="row mx-auto">
-            <div class="col text-center getStarted">
-                Hello {{current_user.name}}.
+    <div id="HomePage" class="container">
+        <div class="row mx-auto getStarted">
+            <div class="col text-center">
+                <p>Hello {{current_user.username}}!</p>
+
                 <p>You are on the main page of the application. Select the options you are
                     interested in from
                     the navigation bar. You can add income, add expense, view the balance for the
@@ -65,6 +66,8 @@
         </div>
     </div>
 </div>
+
+
 
 {% else %}
 

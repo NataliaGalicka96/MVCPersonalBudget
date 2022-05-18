@@ -2,10 +2,26 @@
 
 {% block title %}Forgot password{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="/css/home.css" />
+
+{% endblock %}
+
 {% block body %}
 
-    <h1>Request password reset</h1>
+<div id="HomePage" class="container">
+    <div class="row mx-auto getStarted">
+        <div class="col text-center">
+            <div style="padding-top: 10px; padding-bottom: 10px; text-align:center;">
+                <h4>Request password reset</h4>
+                <br />
+                <p>Password reset link invalid or expired, please click <a href="/password/forgot">here</a> to request
+                    another one.</p>
 
-    <p>Password reset link invalid or expired, please click <a href="/password/forgot">here</a> to request another one.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
