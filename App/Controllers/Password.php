@@ -87,7 +87,7 @@ use \App\Models\User;
      */
     protected function getUserOrExit($token)
     {
-        $user = User::findByPasswordReset($token);
+        $user = User::findUserByPasswordReset($token);
  
         if ($user) {
  
