@@ -98,7 +98,6 @@ form .row input:focus {
 
 form .row i {
     background-color: #FFB300;
-    height: 100%;
     width: 47px;
     border: 2px solid rgb(23 22 53);
     display: flex;
@@ -107,6 +106,8 @@ form .row i {
     border-radius: 6px 0 0 6px;
     color: rgb(23 22 53);
 }
+
+
 
 .password {
     display: flex;

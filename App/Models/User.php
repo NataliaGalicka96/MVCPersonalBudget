@@ -169,6 +169,32 @@ class User extends \Core\Model
     
             return $stmt->fetch();
         }
+    
+    /**
+     * Find a user model by name
+     *
+     * @param string $name name to search for
+     *
+     * @return mixed User object if found, false otherwise
+     */
+
+        public static function findUserByName($name)
+        {
+            $sql = 'SELECT * FROM users
+            WHERE name = :name';
+
+            $db = static::getDBConnection();
+
+            $stmt = $db -> prepare($sql);
+
+            $stm->bindValue(':name', $name, PDO::PARAM_STR);
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+        }
 
     /**
      * Authenticate a user by email and password. User account has to be active.
