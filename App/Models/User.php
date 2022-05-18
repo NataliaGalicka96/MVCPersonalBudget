@@ -37,20 +37,24 @@ class User extends \Core\Model
      */
         public function validate()
         {
-            //Name
-            if(isset($this->name)){
+            //username
+            if(isset($this->username)){
 
-                if($this->name == ''){
-                    $this->errors['nameError1'] = 'Name is required.';
+                if($this->username == ''){
+                    $this->errors['usernameError1'] = 'Username is required.';
                 }
 
-                if(strlen($this->name)<2 || strlen($this->name)>20){
-                    $this->errors['nameError2'] = "Name needs to be between 2 to 20 characters.";
+                if(strlen($this->username)<2 || strlen($this->username)>20){
+                    $this->errors['usernameError2'] = "Username needs to be between 2 to 20 characters.";
                 }
 
 
-                if(!preg_match('/^[A-Za-z]+$/', $this->name)){
-                    $this->errors['nameError3'] = "Name must contain letters only. Special characters are not allowed.";
+                if(!preg_match('/^[A-Za-z]+$/', $this->username)){
+                    $this->errors['usernameError3'] = "Username must contain letters only. Special characters are not allowed.";
+                }
+
+                if(static::usernameExists($this->username, $this-> id ?? NULL)){
+                    $this->errors['usernameError4'] = 'Username already taken.';
                 }
             }
             //email address
@@ -105,13 +109,13 @@ class User extends \Core\Model
                 $hashed_token = $token->getHash();
                 $this->activation_token = $token->getValue();
 
-                $sql = 'INSERT INTO users (name, email, password_hash, activation_hash_token)
-                        VALUES (:name, :email, :password_hash, :activation_token)';
+                $sql = 'INSERT INTO users (username, email, password_hash, activation_hash_token)
+                        VALUES (:username, :email, :password_hash, :activation_token)';
             
                 $db = static::getDBConnection();
                 $stmt = $db->prepare($sql);
             
-                $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+                $stmt->bindValue(':username', $this->username, PDO::PARAM_STR);
                 $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
                 $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
                 $stmt->bindValue(':activation_token', $hashed_token, PDO::PARAM_STR);
@@ -145,16 +149,16 @@ class User extends \Core\Model
         }
 
     /**
-     * See if a user record already exists with the specified name
+     * See if a user record already exists with the specified username
      *
-     * @param string $name name address to search for
+     * @param string $username username address to search for
      *
-     * @return boolean  True if a record already exists with the specified name, false otherwise
+     * @return boolean  True if a record already exists with the specified username, false otherwise
      */
         
-        publi static function nameExists($name, $existing_user_id = null)
+        public static function usernameExists($username, $existing_user_id = null)
         {
-            $user = static::findUserByName($name);
+            $user = static::findUserByUsername($username);
 
             if($user){
                 if($user->id != $existing_user_id){
@@ -193,23 +197,23 @@ class User extends \Core\Model
         }
     
     /**
-     * Find a user model by name
+     * Find a user model by username
      *
-     * @param string $name name to search for
+     * @param string $username username to search for
      *
      * @return mixed User object if found, false otherwise
      */
 
-        public static function findUserByName($name)
+        public static function findUserByUsername($username)
         {
             $sql = 'SELECT * FROM users
-            WHERE name = :name';
+            WHERE username = :username';
 
             $db = static::getDBConnection();
 
             $stmt = $db -> prepare($sql);
 
-            $stm->bindValue(':name', $name, PDO::PARAM_STR);
+            $stmt->bindValue(':username', $username, PDO::PARAM_STR);
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
@@ -486,7 +490,7 @@ class User extends \Core\Model
 
         public function updateProfile($data){
 
-            $this->name = $data['name'];
+            $this->username = $data['username'];
             $this->email = $data['email'];
 
             // Only validate and update the password if a value provided
@@ -499,7 +503,7 @@ class User extends \Core\Model
             if (empty($this->errors)) {
 
                 $sql = 'UPDATE users
-                        SET name = :name,
+                        SET username = :username,
                             email = :email';
 
                 // Add password if it's set
@@ -512,7 +516,7 @@ class User extends \Core\Model
                 $db = static::getDBConnection();
                 $stmt = $db->prepare($sql);
 
-                $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+                $stmt->bindValue(':username', $this->username, PDO::PARAM_STR);
                 $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
                 $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
 
