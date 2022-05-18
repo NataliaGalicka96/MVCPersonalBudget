@@ -2,10 +2,27 @@
 
 {% block title %}Forgot password{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="/css/home.css" />
+
+{% endblock %}
+
 {% block body %}
 
-<h1>Request password reset</h1>
+<div id="HomePage" class="container">
+    <div class="row mx-auto getStarted">
+        <div class="col text-center">
+            <div style="padding-top: 10px; padding-bottom: 10px; text-align:center;">
+                Request password reset<br /><br />
+                <p>Please check your email and change your password.</p>
 
-<p>Please check your email.</p>
+                <a href="/login" style="color: #444444; font-size: 20px;">
+                    Go to the login page!</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
