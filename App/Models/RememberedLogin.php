@@ -30,7 +30,7 @@ class RememberedLogin extends \Core\Model
         $sql = 'SELECT * FROM remembered_logins
         WHERE token_hash = :token_hash';
 
-        $db = static::getDB();
+        $db = static::getDBConnection();
         $stmt=$db->prepare($sql);
 
         $stmt->bindValue(':token_hash', $token_hash, PDO::PARAM_STR);
@@ -62,7 +62,7 @@ class RememberedLogin extends \Core\Model
         $sql = 'DELETE FROM remembered_logins
                 WHERE token_hash = :token_hash';
  
-        $db = static::getDB();
+        $db = static::getDBConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':token_hash', $this->token_hash, PDO::PARAM_STR);
  
