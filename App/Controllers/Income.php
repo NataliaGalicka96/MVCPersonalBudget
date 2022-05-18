@@ -12,8 +12,19 @@ class Income extends \Core\Controller
      * @return void
      */
 
-     public function newAction()
+     public function newIncomeAction()
      {
-         View::renderTemplate('Income/new-income.html');
+         View::renderTemplate('Income/newIncome.html');
      }
+
+
+     /**
+      * Add new income
+      *
+      * @return void
+      */
+      public function createAction()
+      {
+
+      }
 }
