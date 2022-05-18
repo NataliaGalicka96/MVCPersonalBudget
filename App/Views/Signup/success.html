@@ -3,21 +3,28 @@
 {% block title %}Sign up{% endblock %}
 
 
+{% block css %}
+<link rel="stylesheet" href="/css/home.css" />
+
+{% endblock %}
+
 
 {% block body %}
+<div id="HomePage" class="container">
+    <div class="row mx-auto getStarted">
+        <div class="col text-center">
+            <div style="padding-top: 10px; padding-bottom: 10px; text-align:center;">
+                Thank you for your registration!<br /><br />
 
-<div class="main" style="padding-top: 50px;">
-    <div class="row" style=" width: 75%; margin-right:auto; margin-left:auto;">
-        <div style="padding-top: 10px; padding-bottom: 10px; text-align:center;">
-            Thank you for your registration!<br /><br />
-
-            <p>Please check your email to activate your account.</p>
+                <p>Please check your email to activate your account.</p>
 
 
-            <a href="/login">Log in to your account!</a>
+                <a href="/login" style="color: #444444; font-size: 20px;">Log in to your account!</a>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 
