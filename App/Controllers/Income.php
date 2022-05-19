@@ -29,7 +29,16 @@ class Income extends \Core\Controller
          
         $income = new Income($_POST);
 
-        $income -> saveIncomeToDB();
+        if ($income -> saveIncomeToDB()){
+
+            View::renderTemplate('Income/newIncome.html', [
+                'income' => $income
+            ]);
+        } else {
+            View::renderTemplate('Income/newIncome.html', [
+                'income' => $income
+            ]);
+        }
 
       }
 

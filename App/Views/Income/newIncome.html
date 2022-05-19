@@ -98,6 +98,9 @@
 
                     <form method="post" action="/income/create">
 
+
+
+
                         <!--
                             <?php
                                 if(isset($_SESSION['error_incomeAdded']))
@@ -121,16 +124,19 @@
                             <div class="input-group">
                                 <label for="amount" class="form-label">Amount</label>
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
-                                    aria-label="default input example" name="amount">
+                                    aria-label="default input example" name="amount" value="{{income.amount}}">
                             </div>
-                            <!--
-                                <?php
-                                    if(isset($_SESSION['error_incomeAmount'])){
-                                        echo '<div class="error">'.$_SESSION['error_incomeAmount'].'</div>';
-                                        unset($_SESSION['error_incomeAmount']);
-                                    }
-                                ?>
-                                -->
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if income.errors['errorAmount1'] is defined %}
+                                <li>{{ income.errors['errorAmount1'] }}</li>
+                                {% endif %}
+
+                                {% if income.errors['errorAmount2'] is defined %}
+                                <li>{{ income.errors['errorAmount2'] }}</li>
+                                {% endif %}
+
+                            </ul>
+
                         </div>
 
                         <div class="row mb-3">
@@ -146,6 +152,8 @@
                                 <label for="exampleDataList" class="form-label">Category</label>
                                 <select class="form-control userInput labeledInput" name="category"
                                     id="exampleDataList">
+
+
                                     <!--
                                         <?php
 
@@ -177,14 +185,12 @@
                                 <input id="area" class="form-control" type="text" name="comment"
                                     aria-label="default input example">
                             </div>
-                            <!--
-                            <?php
-                                    if(isset($_SESSION['error_comment'])){
-                                        echo '<div class="error">'.$_SESSION['error_comment'].'</div>';
-                                        unset($_SESSION['error_comment']);
-                                    }
-                                ?> 
-                                -->
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if income.errors['errorComment'] is defined %}
+                                <li>{{ income.errors['errorComment'] }}</li>
+                                {% endif %}
+                            </ul>
+
                         </div>
 
                         <div class="button">
