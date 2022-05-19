@@ -26,5 +26,7 @@ class Income extends \Core\Controller
       public function createAction()
       {
 
+        $income = new Income ($_POST);
+
       }
 }
