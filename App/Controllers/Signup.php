@@ -33,7 +33,9 @@ class Signup extends \Core\Controller
 
             if ($user->saveUserToDB()) {
 
-                Category::assignDefaultCategoriesToNewUser();
+                Category::copy_default_expenses();
+                Category::copy_default_incomes();
+                Category::copy_default_payment_methods();
 
                 $user->sendActivationEmail();
 
