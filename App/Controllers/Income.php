@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\Income;
 
 class Income extends \Core\Controller
 {
@@ -25,8 +26,13 @@ class Income extends \Core\Controller
       */
       public function createAction()
       {
+         
+        $income = new Income($_POST);
 
-        $income = new Income ($_POST);
+        $income -> saveIncomeToDB();
 
       }
+
+
+
 }

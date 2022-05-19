@@ -22,17 +22,31 @@ class Income extends \Core\Model
         };
     }
 
-
-
-
     /**
-     * Get all the incomes as an associative array
-     *
-     * @return array
+     * Save income with the current property values
+     * 
+     * @return void
      */
 
-     public static function getAllIncomes()
-     {
-        
-     }
+      public function saveIncomeToDB()
+      {
+           $income = new Income ($_POST);
+
+           $sql = 'INSERT INTO incomes
+           VALUES (NULL, :userId, :category, :amount, :date, :comment)';
+           
+           $db = static::getDBConnection();
+
+           $stmt = $db->prepare($sql);
+
+           $stmt->bindValue();
+           $stmt->bindValue();
+           $stmt->bindValue();
+           $stmt->bindValue();
+           $stmt->bindValue();
+
+           $stmt->execute();
+
+      }
+
 }
