@@ -2,15 +2,14 @@ body {
     font-family: 'Poppins', sans-serif !important;
     padding: 0px;
     margin: 0px;
-}
-
-.main {
     width: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("20.jpg");
     background-size: cover;
     background-position: center;
     height: 100vh;
+
 }
+
 
 .navbar {
     height: 75px;
