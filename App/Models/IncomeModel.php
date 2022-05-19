@@ -83,15 +83,16 @@ class IncomeModel extends \Core\Model
             if(empty($this->amount )){
                 $this->errors['errorAmount1'] = 'Amount is required';
             }
+            /*
+            $incomeAmount = number_format($this->amount, 2, '.','');
+            $amountArray = explode('.', $incomeAmount);
 
-            $this->amount = number_format($this->amount, 2, '.','');
-            $amount = explode('.', $this->amount);
-
-            if(!is_numeric($this->amount) || strlen($this->amount) <0 || strlen($this->amount) >8 || strlen($amount[1])>2 || strlen($amount[0])>6){
-
+            if(!is_numeric($incomeAmount) || strlen($incomeAmount) <0 ||strlen($incomeAmount) >8 || strlen($amountArray[1])>2 || strlen($amountArray[0])>6)
+                    {
                 $this->errors['errorAmount2'] = 'Enter valid positive amount - maximum 6 integer digits and 2 decimal places.';
         
             }
+            */
         }
 
         //Category validation

@@ -3,9 +3,10 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \App\Models\Income;
+use \App\Models\IncomeModel;
+use App\Flash;
 
-class Income extends \Core\Controller
+class Income extends Authenticated
 {
     /**
      * Show the income page
@@ -27,20 +28,32 @@ class Income extends \Core\Controller
       public function createAction()
       {
          
-        $income = new Income($_POST);
+        $income = new IncomeModel($_POST);
 
         if ($income -> saveIncomeToDB()){
 
-            View::renderTemplate('Income/newIncome.html', [
-                'income' => $income
-            ]);
+            Flash::addMessage("Income has been added", Flash::SUCCESS);
+
+            $this->redirect('/income/success');
+            
         } else {
-            View::renderTemplate('Income/newIncome.html', [
-                'income' => $income
-            ]);
+
+            Flash::addMessage("There was a problem adding income. Try again.", Flash::WARNING);
+
+            $this->redirect('/income/failed');
         }
 
       }
+
+    public function successAction()
+    {
+        View::renderTemplate('Income/newIncome.html');
+    }
+
+    public function failedAction()
+    {
+        View::renderTemplate('Income/newIncome.html');
+    }
 
 
 

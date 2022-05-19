@@ -65,11 +65,11 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item px-1">
-                        <a class="nav-link px-1" aria-current="page" href="#"><i
+                        <a class="nav-link px-1" aria-current="page" href="/"><i
                                 class="fa-solid fa-house me-2"></i>Home</a>
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="#"><i class="fas fa-coins mr me-2"></i>Add Income</a>
+                        <a class="nav-link" href=""><i class="fas fa-coins mr me-2"></i>Add Income</a>
                     </li>
                     <li class="nav-item px-1">
                         <a class="nav-link" href="#"><i class="fa-solid fa-money-bill-1-wave me-2"></i>Add
@@ -98,28 +98,6 @@
 
                     <form method="post" action="/income/create">
 
-
-
-
-                        <!--
-                            <?php
-                                if(isset($_SESSION['error_incomeAdded']))
-                                {
-                                    echo '<div class="error">'.$_SESSION['error_incomeAdded'].'</div>';
-                                    unset($_SESSION['error_incomeAdded']);
-                                }else if(isset( $_SESSION['incomeAdded'] ))
-                                {
-                                    echo '<div class="complete">'.$_SESSION['incomeAdded'].'</div>';
-                                    unset($_SESSION['incomeAdded']);
-                                    unset($_SESSION['fr_incomeAmount']);
-                                    unset($_SESSION['fr_incomeDate']);
-                                    unset($_SESSION['fr_incomeCategory']);
-                                    unset( $_SESSION['fr_incomeComment']);
-                                }
-
-
-                            ?>
-                        -->
                         <div class="row mb-3">
                             <div class="input-group">
                                 <label for="amount" class="form-label">Amount</label>
@@ -145,6 +123,13 @@
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
                                     name="date" required>
                             </div>
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if income.errors['errorDate'] is defined %}
+                                <li>{{ income.errors['errorDate'] }}</li>
+                                {% endif %}
+
+                            </ul>
+
                         </div>
 
                         <div class=" row mb-3">
@@ -152,6 +137,8 @@
                                 <label for="exampleDataList" class="form-label">Category</label>
                                 <select class="form-control userInput labeledInput" name="category"
                                     id="exampleDataList">
+
+
 
 
                                     <!--
@@ -177,6 +164,13 @@
                                         -->
                                 </select>
                             </div>
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if income.errors['errorCategory'] is defined %}
+                                <li>{{ income.errors['errorCategory'] }}</li>
+                                {% endif %}
+
+                            </ul>
+
                         </div>
 
                         <div class="row mb-3">
