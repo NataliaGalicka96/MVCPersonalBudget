@@ -42,6 +42,23 @@ class Category extends \Core\Models
     }
 
 
+    public static function getCurrentUserIncomeCategories()
+    {
+        $db = static::getDBConnection();
+
+        $sql = "SELECT ica.id, ica.name
+        FROM  incomes_category_assigned_to_users AS ica
+        WHERE ica.user_id=:userId";
+
+
+        $stmt= $db -> prepare($sql);
+        $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt -> execute();
+
+        return $stmt -> fetchAll();
+    }
+
+
 
 
 
