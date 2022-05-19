@@ -3,11 +3,19 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\Category;
 use \App\Models\IncomeModel;
 use App\Flash;
 
 class Income extends Authenticated
 {
+    protected $incomeCategories;
+
+
+    protected function before()
+    {
+        $this->incomeCategories = Category::getCurrentUserIncomeCategories();
+    }
     /**
      * Show the income page
      * 
