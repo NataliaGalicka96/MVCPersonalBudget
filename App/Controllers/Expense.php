@@ -36,4 +36,33 @@ class Expense extends Authenticated
              'paymentMethods' => $this->paymentMethods
             ]);
      }
+
+    /**
+     * Add new expense
+     * 
+     * @return voic
+     */
+
+     public function createAction()
+     {
+         $expense = new ExpenseModel($_POST);
+
+         if($expense -> saveExpenseToDB()){
+            Flash::addMessage("Expense has been added", Flash::SUCCESS);
+        
+            View::renderTemplate('Expense/newExpense.html', [
+                'expenseCategories' => $this->expenseCategories,
+                'paymentMethods' => $this->paymentMethods
+               ]);
+        } else {
+            Flash::addMessage("There was a problem adding income. Fill in the necessary fields: amount, date and category", Flash::WARNING);
+
+
+            View::renderTemplate('Income/newIncome.html', [
+                'expenseCategories' => $this->expenseCategories,
+                'paymentMethods' => $this->paymentMethods,
+                'expense' => $expense
+            ]);
+        }
+     }
 }
