@@ -11,7 +11,7 @@ class ExpenseModel extends \Core\Model
      * @var array
      */
 
-     public errors = [];
+     public $errors = [];
 
      /**
       * Class constructor 
