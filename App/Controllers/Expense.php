@@ -23,7 +23,6 @@ class Expense extends Authenticated
 
     }
 
-
     /**
      * Show the expense page
      * 

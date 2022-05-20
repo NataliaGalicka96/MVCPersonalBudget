@@ -87,6 +87,17 @@
                                 <select class="form-control userInput labeledInput" name="payment"
                                     id="exampleDataList2">
 
+                                    <option value="" disabled selected hidden>- select method -</option>
+
+                                    {% for category in paymentMethods %}
+
+                                    {% if expense.payment is defined and expense.payment == category.name %}
+                                    <option selected>{{ category.name }}</option>
+                                    {% else %}
+                                    <option>{{ category.name }}</option>
+                                    {% endif %}
+
+                                    {% endfor %}
                                 </select>
 
                             </div>
@@ -98,6 +109,18 @@
                                 <label for="exampleDataList" class="form-label">Category</label>
                                 <select class="form-control userInput labeledInput" name="category"
                                     id="exampleDataList">
+
+                                    <option value="" disabled selected hidden>- select category -</option>
+
+                                    {% for category in expenseCategories %}
+
+                                    {% if expense.category is defined and expense.category == category.name %}
+                                    <option selected>{{ category.name }}</option>
+                                    {% else %}
+                                    <option>{{ category.name }}</option>
+                                    {% endif %}
+
+                                    {% endfor %}
 
                                 </select>
                             </div>
