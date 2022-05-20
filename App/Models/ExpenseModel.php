@@ -36,9 +36,9 @@ class ExpenseModel extends \Core\Model
 
        public function saveExpenseToDB()
        {
-           //$this->validateExpenseData();
+           $this->validateExpenseData();
 
-           //if(empty($this->errors)){
+           if(empty($this->errors)){
 
             $sql = 'INSERT INTO expenses
             VALUES (NULL, :userId, (SELECT eca.id
@@ -60,9 +60,70 @@ class ExpenseModel extends \Core\Model
             $stmt->bindValue(':comment', $this->comment, PDO::PARAM_STR);
  
             return $stmt->execute();
-         //}
+         }
  
-        // return false;
+         return false;
  
        }
+
+       /**
+     * Validate current property values, adding valiation error messages to the errors array property
+     *
+     * @return void
+     */
+
+     public function validateExpenseData()
+     {
+         
+        //Amount must be a number, maximum 2 decimals
+        
+        if(isset($this -> amount)) {
+            
+            if(empty($this -> amount)) {
+
+                $this->errors['errorAmount1'] = 'Amount is required';
+            
+            }
+
+        }
+
+
+        //Category validation
+
+        if(!isset($this -> category)) {
+            
+            $this -> errors['categoryError'] = 'Expense category is required.';
+        
+        }
+
+        //Payment method validation
+
+        //Category validation
+
+        if(!isset($this -> payment)) {
+            
+            $this -> errors['paymentError'] = 'Payment method is required.';
+        
+        }
+
+        //Date validation
+        if(!isset($this -> date)) {
+            
+            $this -> errors['dateError'] = 'Date is required.';
+        
+        }
+
+
+        //Commment max length 100 characters
+        if(isset($this -> comment)) {
+
+            if(strlen($this->comment)>100){
+                $this->errors['commentError']= "Comment can contain up to 100 characters";
+                
+            }
+
+        }
+
+     }
+
 }

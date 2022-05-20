@@ -101,7 +101,7 @@ class IncomeModel extends \Core\Model
         //Date validation
         if(!isset($this -> date)) {
             
-            $this -> validationErrors['dateError'] = 'Date is required.';
+            $this -> errors['dateError'] = 'Date is required.';
         
         }
 
