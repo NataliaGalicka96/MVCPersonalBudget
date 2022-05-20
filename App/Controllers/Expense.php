@@ -9,11 +9,17 @@ use \App\Models\Category;
 class Expense extends Authenticated
 {
     protected $expenseCategories;
+    protected $paymentMethods;
 
 
     protected function before()
     {
         parent::before();
+
+        $this->expenseCategories = Category::getCurrentUserExpenseCategories();
+
+        $this->paymentMethods = Category::getCurrentUserPaymentMethods();
+
 
     }
 
@@ -26,6 +32,9 @@ class Expense extends Authenticated
 
      public function newExpenseAction()
      {
-         View::renderTemplate('Expense/newExpense.html');
+         View::renderTemplate('Expense/newExpense.html', [
+             'expenseCategories' => $this->expenseCategories,
+             'paymentMethods' => $this->paymentMethods
+            ]);
      }
 }
