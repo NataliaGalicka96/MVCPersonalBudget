@@ -46,14 +46,16 @@ class IncomeModel extends \Core\Model
            $income = new IncomeModel ($_POST);
 
            $sql = 'INSERT INTO incomes
-           VALUES (NULL, :userId, :category, :amount, :date, :comment)';
+           VALUES (NULL, :userId, (SELECT ica.id
+                    FROM  incomes_category_assigned_to_users AS ica
+                    WHERE ica.name=:category_name AND ica.user_id =:userId), :amount, :date, :comment)';
            
            $db = static::getDBConnection();
 
            $stmt = $db->prepare($sql);
 
            $stmt->bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
-           $stmt->bindValue(':category', $this->category, PDO::PARAM_STR);
+           $stmt->bindValue(':category_name', $this->category, PDO::PARAM_STR);
            $stmt->bindValue(':amount', $this->amount, PDO::PARAM_INT);
            $stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
            $stmt->bindValue(':comment', $this->comment, PDO::PARAM_STR);
