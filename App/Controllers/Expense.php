@@ -26,6 +26,6 @@ class Expense extends Authenticated
 
      public function newExpenseAction()
      {
-         
+         View::renderTemplate('Expense/newExpense.html');
      }
 }
