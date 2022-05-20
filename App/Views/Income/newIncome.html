@@ -138,6 +138,18 @@
                                 <select class="form-control userInput labeledInput" name="category"
                                     id="exampleDataList">
 
+                                    <option value="" disabled selected hidden>- select category -</option>
+
+                                    {% for category in incomeCategories %}
+
+                                    {% if income.category is defined and income.category == category.name %}
+                                    <option selected>{{ category.name }}</option>
+                                    {% else %}
+                                    <option>{{ category.name }}</option>
+                                    {% endif %}
+
+                                    {% endfor %}
+
 
 
 
