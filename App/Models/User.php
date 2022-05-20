@@ -7,6 +7,7 @@ use \App\Token;
 use \App\Mail;
 use \Core\View;
 
+
 class User extends \Core\Model
 {
     /**

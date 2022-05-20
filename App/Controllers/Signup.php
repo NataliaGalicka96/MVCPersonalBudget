@@ -33,11 +33,11 @@ class Signup extends \Core\Controller
 
             if ($user->saveUserToDB()) {
 
+                $user->sendActivationEmail();
+
                 Category::copy_default_expenses();
                 Category::copy_default_incomes();
                 Category::copy_default_payment_methods();
-
-                $user->sendActivationEmail();
 
                 $this->redirect('/signup/success');
 

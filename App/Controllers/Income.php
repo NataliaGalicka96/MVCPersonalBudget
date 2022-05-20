@@ -54,7 +54,7 @@ class Income extends Authenticated
             
         } else {
 
-            Flash::addMessage("There was a problem adding income. Try again.", Flash::WARNING);
+            Flash::addMessage("There was a problem adding income. Fill in the necessary fields: amount, date and category", Flash::WARNING);
 
 
             View::renderTemplate('Income/newIncome.html', [
