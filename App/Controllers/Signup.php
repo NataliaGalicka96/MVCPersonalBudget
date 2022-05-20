@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\User;
+use \App\Models\Category;
 
 
 class Signup extends \Core\Controller
@@ -33,6 +34,10 @@ class Signup extends \Core\Controller
             if ($user->saveUserToDB()) {
 
                 $user->sendActivationEmail();
+
+                Category::copy_default_expenses();
+                Category::copy_default_incomes();
+                Category::copy_default_payment_methods();
 
                 $this->redirect('/signup/success');
 

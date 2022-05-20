@@ -2,10 +2,26 @@
 
 {% block title %}Sign up{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="/css/home.css" />
+
+{% endblock %}
+
+
 {% block body %}
 
-    <h1>Sign up</h1>
+<div id="HomePage" class="container">
+    <div class="row mx-auto getStarted">
+        <div class="col text-center">
+            <div style="padding-top: 10px; padding-bottom: 10px; text-align:center;">
+                Thank you for your registration!<br /><br />
 
-    <p>Success! Your account is now active. You can now <a href="/login">log in</a>.</p>
+                <p>Success! Your account is now active. You can now <a href="/login"
+                        style="color: #444444; font-size: 20px;">log in</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

@@ -1,0 +1,150 @@
+body {
+    font-family: 'Poppins', sans-serif !important;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("20.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+}
+
+
+.navbar {
+    height: 75px;
+    margin: auto;
+}
+
+.navbar-dark .navbar-nav {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+    background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #ffd700;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.navbar-dark .navbar-brand {
+    color: #ffd700;
+    font-size: 35px;
+    padding: 0 0;
+    font-family: 'Cookie', cursive;
+    background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+    background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.nav-link:hover {
+    font-weight: 600;
+    border-bottom: 1px solid #FC38AE;
+}
+
+.navbar-dark .navbar-toggler {
+    color: #F0D000;
+    border-color: #F0D000;
+}
+
+
+.incomes {
+    background: rgb(23 22 53 / 75%);
+    border: 15px solid rgba(92, 91, 141, 0.25);
+    color: #F0D000;
+    height: auto;
+    margin-top: 20px;
+    padding: 20px 25px 25px 25px;
+
+}
+
+.title {
+    padding: 0px 10px 10px 10px;
+    color: #FFB300;
+    font-size: 25px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+form .row input {
+    border: 2px solid rgb(23 22 53);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    width: 300px;
+    height: 100%;
+
+
+}
+
+form .row select {
+    border: 2px solid rgb(23 22 53);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    width: 300px;
+    height: 100%;
+
+
+}
+
+
+form .row label {
+    background-color: #FFB300;
+    width: 125px;
+    border: 2px solid rgb(23 22 53);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px 0 0 6px;
+    color: rgb(23 22 53);
+    height: 100%;
+}
+
+.btn {
+    font-weight: 500;
+}
+
+.button {
+    display: flex;
+    justify-content: end;
+
+}
+
+#exampleDataList {
+    border-radius: 0 6px 6px 0;
+}
+
+@media (max-width: 1000px) {
+
+    #content {
+        margin-top: 100px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    #content {
+        margin-top: 210px;
+    }
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.complete {
+    color: green;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
