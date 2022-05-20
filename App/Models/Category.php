@@ -23,7 +23,8 @@ class Category extends \Core\Model
         WHERE users.id = (SELECT max(id) FROM users)';
 					
 		$db = static::getDBConnection();
-		$stmt = $db->prepare($sql);
+		
+        $stmt = $db->prepare($sql);
 			
 		return $stmt->execute();
 	}
@@ -37,7 +38,8 @@ class Category extends \Core\Model
         WHERE users.id = (SELECT max(id) FROM users)';
 		
 		$db = static::getDBConnection();
-		$stmt = $db->prepare($sql);
+		
+        $stmt = $db->prepare($sql);
 			
 		return $stmt->execute();
 	}
@@ -50,7 +52,8 @@ class Category extends \Core\Model
         WHERE users.id = (SELECT max(id) FROM users)';
 		
 		$db = static::getDBConnection();
-		$stmt = $db->prepare($sql);
+		
+        $stmt = $db->prepare($sql);
 			
 		return $stmt->execute();
 	}
