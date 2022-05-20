@@ -60,7 +60,7 @@ class IncomeModel extends \Core\Model
            $stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
            $stmt->bindValue(':comment', $this->comment, PDO::PARAM_STR);
 
-           $stmt->execute();
+           return $stmt->execute();
         }
 
         return false;
@@ -75,27 +75,27 @@ class IncomeModel extends \Core\Model
      */
 
      public function validateIncomeData()
-
      {
          
         //Amount must be a number, maximum 2 decimals
         
         if(isset($this -> amount)) {
+            
+            if(empty($this -> amount)) {
 
-            if(empty($this->amount )){
                 $this->errors['errorAmount1'] = 'Amount is required';
+            
             }
-            /*
-            $incomeAmount = number_format($this->amount, 2, '.','');
-            $amountArray = explode('.', $incomeAmount);
 
-            if(!is_numeric($incomeAmount) || strlen($incomeAmount) <0 ||strlen($incomeAmount) >8 || strlen($amountArray[1])>2 || strlen($amountArray[0])>6)
-                    {
+            $this -> amount = number_format($this -> amount, 2, '.', '');
+            $amount = explode('.', $this -> amount);
+
+            if(!is_numeric($this -> amount) || strlen($this -> amount) > 8 || strlen($this -> amount) < 0 || strlen($amount[1])>2 || strlen($amount[0])>6) {
+                
                 $this->errors['errorAmount2'] = 'Enter valid positive amount - maximum 6 integer digits and 2 decimal places.';
-        
             }
-            */
         }
+
 
         //Category validation
 

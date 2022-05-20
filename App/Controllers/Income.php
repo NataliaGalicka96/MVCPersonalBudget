@@ -14,6 +14,8 @@ class Income extends Authenticated
 
     protected function before()
     {
+        parent::before();
+
         $this->incomeCategories = Category::getCurrentUserIncomeCategories();
     }
     /**
@@ -50,7 +52,7 @@ class Income extends Authenticated
 
             Flash::addMessage("There was a problem adding income. Try again.", Flash::WARNING);
 
-            $this->redirect('/income/failed', [
+            View::renderTemplate('Income/newIncome.html', [
                 'incomeCategories' => $this->incomeCategories,
                 'income' => $income
             ]);
@@ -65,7 +67,10 @@ class Income extends Authenticated
 
     public function failedAction()
     {
-        View::renderTemplate('Income/newIncome.html');
+        View::renderTemplate('Income/newIncome.html', [
+                'incomeCategories' => $this->incomeCategories,
+                'income' => $income
+            ]);
     }
 
 
