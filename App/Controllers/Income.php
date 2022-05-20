@@ -46,7 +46,7 @@ class Income extends Authenticated
 
             Flash::addMessage("Income has been added", Flash::SUCCESS);
 
-            $this->redirect('/income/success');
+            View::renderTemplate('Income/newIncome.html');
             
         } else {
 
@@ -59,20 +59,5 @@ class Income extends Authenticated
         }
 
       }
-
-    public function successAction()
-    {
-        View::renderTemplate('Income/newIncome.html');
-    }
-
-    public function failedAction()
-    {
-        View::renderTemplate('Income/newIncome.html', [
-                'incomeCategories' => $this->incomeCategories,
-                'income' => $income
-            ]);
-    }
-
-
 
 }
