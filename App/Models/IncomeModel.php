@@ -86,7 +86,7 @@ class IncomeModel extends \Core\Model
                 $this->errors['errorAmount1'] = 'Amount is required';
             
             }
-
+            /*
             $this -> amount = number_format($this -> amount, 2, '.', '');
             $amount = explode('.', $this -> amount);
 
@@ -94,6 +94,7 @@ class IncomeModel extends \Core\Model
                 
                 $this->errors['errorAmount2'] = 'Enter valid positive amount - maximum 6 integer digits and 2 decimal places.';
             }
+            */
         }
 
 
@@ -117,7 +118,7 @@ class IncomeModel extends \Core\Model
         if(isset($this -> comment)) {
 
             if(strlen($this->comment)>100){
-                $this->errors['errorComment']= "Comment can contain up to 100 characters";
+                $this->errors['commentError']= "Comment can contain up to 100 characters";
                 
             }
 

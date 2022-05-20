@@ -121,11 +121,11 @@
                             <div class="input-group">
                                 <label for="date" class="form-label">Date</label>
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
-                                    name="date" required>
+                                    name="date" required value="{{income.date}}">
                             </div>
                             <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['errorDate'] is defined %}
-                                <li>{{ income.errors['errorDate'] }}</li>
+                                {% if income.errors['dateError'] is defined %}
+                                <li>{{ income.errors['dateError'] }}</li>
                                 {% endif %}
 
                             </ul>
@@ -150,35 +150,11 @@
 
                                     {% endfor %}
 
-
-
-
-                                    <!--
-                                        <?php
-
-                                                
-                                            foreach($incomeCategoriesOfLoggedUser as $category)
-                                            {
-                                                if(isset($_SESSION['fr_incomeCategory']) && $_SESSION['fr_incomeCategory'] == $category['name']) {
-                                                                                            
-                                                    echo '<option selected>'.$category['name']."</option>";
-                                                    unset($_SESSION['fr_incomeCategory']);
-                                                } else {
-                                                    
-                                                    echo "<option>".$category['name']."</option>";
-                                                }
-                                            
-                                               
-                                            }
-                                            
-                                    
-                                    ?>
-                                        -->
                                 </select>
                             </div>
                             <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['errorCategory'] is defined %}
-                                <li>{{ income.errors['errorCategory'] }}</li>
+                                {% if income.errors['categoryError'] is defined %}
+                                <li>{{ income.errors['categoryError'] }}</li>
                                 {% endif %}
 
                             </ul>
@@ -189,11 +165,11 @@
                             <div class="input-group">
                                 <label for="area" class="form-label">Comments</label>
                                 <input id="area" class="form-control" type="text" name="comment"
-                                    aria-label="default input example">
+                                    aria-label="default input example" value="{{income.comment}}">
                             </div>
                             <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['errorComment'] is defined %}
-                                <li>{{ income.errors['errorComment'] }}</li>
+                                {% if income.errors['commentError'] is defined %}
+                                <li>{{ income.errors['commentError'] }}</li>
                                 {% endif %}
                             </ul>
 
