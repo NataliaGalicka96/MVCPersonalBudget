@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\ExpenseModel;
 use \App\Models\Category;
+use App\Flash;
 
 class Expense extends Authenticated
 {
@@ -48,6 +49,7 @@ class Expense extends Authenticated
          $expense = new ExpenseModel($_POST);
 
          if($expense -> saveExpenseToDB()){
+
             Flash::addMessage("Expense has been added", Flash::SUCCESS);
         
             View::renderTemplate('Expense/newExpense.html', [
@@ -55,7 +57,8 @@ class Expense extends Authenticated
                 'paymentMethods' => $this->paymentMethods
                ]);
         } else {
-            Flash::addMessage("There was a problem adding income. Fill in the necessary fields: amount, date and category", Flash::WARNING);
+
+            Flash::addMessage("There was a problem adding expense. Fill in the necessary fields: amount, payment method, date and category", Flash::WARNING);
 
 
             View::renderTemplate('Income/newIncome.html', [

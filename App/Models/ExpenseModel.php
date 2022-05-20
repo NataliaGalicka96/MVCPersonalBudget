@@ -38,7 +38,7 @@ class ExpenseModel extends \Core\Model
        {
            //$this->validateExpenseData();
 
-           if(empty($this->errors)){
+           //if(empty($this->errors)){
 
             $sql = 'INSERT INTO expenses
             VALUES (NULL, :userId, (SELECT eca.id
@@ -60,9 +60,9 @@ class ExpenseModel extends \Core\Model
             $stmt->bindValue(':comment', $this->comment, PDO::PARAM_STR);
  
             return $stmt->execute();
-         }
+         //}
  
-         return false;
+        // return false;
  
        }
 }
