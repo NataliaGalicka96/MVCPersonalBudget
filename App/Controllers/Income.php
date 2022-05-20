@@ -46,16 +46,22 @@ class Income extends Authenticated
 
             Flash::addMessage("Income has been added", Flash::SUCCESS);
 
-            View::renderTemplate('Income/newIncome.html');
+            View::renderTemplate('Income/newIncome.html', [
+                'incomeCategories' => $this->incomeCategories,
+                
+            ]);
+        
             
         } else {
 
             Flash::addMessage("There was a problem adding income. Try again.", Flash::WARNING);
 
+
             View::renderTemplate('Income/newIncome.html', [
                 'incomeCategories' => $this->incomeCategories,
                 'income' => $income
             ]);
+            
         }
 
       }
