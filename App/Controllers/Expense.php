@@ -61,7 +61,7 @@ class Expense extends Authenticated
             Flash::addMessage("There was a problem adding expense. Fill in the necessary fields: amount, payment method, date and category", Flash::WARNING);
 
 
-            View::renderTemplate('Income/newIncome.html', [
+            View::renderTemplate('Expense/newExpense.html', [
                 'expenseCategories' => $this->expenseCategories,
                 'paymentMethods' => $this->paymentMethods,
                 'expense' => $expense
