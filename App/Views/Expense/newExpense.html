@@ -66,6 +66,12 @@
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
                                     aria-label="default input example" name="amount" required>
                             </div>
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if expense.errors['errorAmount'] is defined %}
+                                <li> {{expense.errors['errorAmount'] }}</li>
+                                {% endif %}
+
+                            </ul>
 
 
 
@@ -78,6 +84,12 @@
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
                                     name="date" required>
                             </div>
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if expense.errors['dateError'] is defined %}
+                                <li> {{expense.errors['dateError'] }}</li>
+                                {% endif %}
+                            </ul>
+
                         </div>
 
                         <div class="row mb-3">
@@ -101,6 +113,12 @@
                                 </select>
 
                             </div>
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if income.errors['paymentError'] is defined %}
+                                <li>{{ income.errors['paymentError'] }}</li>
+                                {% endif %}
+
+                            </ul>
                         </div>
 
                         <div class="row mb-3">
@@ -124,6 +142,12 @@
 
                                 </select>
                             </div>
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if income.errors['categoryError'] is defined %}
+                                <li>{{ income.errors['categoryError'] }}</li>
+                                {% endif %}
+
+                            </ul>
                         </div>
 
                         <div class="row mb-3">
@@ -132,6 +156,11 @@
                                 <input id="area" class="form-control" type="text" name="comment"
                                     aria-label="default input example">
                             </div>
+                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                                {% if expense.errors['commentError'] is defined %}
+                                <li>{{ expense.errors['commentError'] }}</li>
+                                {% endif %}
+                            </ul>
 
                         </div>
                         <div class="button">

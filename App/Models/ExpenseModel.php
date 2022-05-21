@@ -81,7 +81,7 @@ class ExpenseModel extends \Core\Model
             
             if(empty($this -> amount)) {
 
-                $this->errors['errorAmount1'] = 'Amount is required';
+                $this->errors['errorAmount'] = 'Amount is required';
             
             }
 
@@ -118,7 +118,7 @@ class ExpenseModel extends \Core\Model
         if(isset($this -> comment)) {
 
             if(strlen($this->comment)>100){
-                $this->errors['commentError']= "Comment can contain up to 100 characters";
+                $this->errors['commentError']= "Comment can contain up to 100 characters.";
                 
             }
 
