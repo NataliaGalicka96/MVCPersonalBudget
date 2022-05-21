@@ -105,16 +105,7 @@
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
                                     aria-label="default input example" name="amount" value="{{income.amount}}" required>
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['errorAmount1'] is defined %}
-                                <li>{{ income.errors['errorAmount1'] }}</li>
-                                {% endif %}
-
-                                {% if income.errors['errorAmount2'] is defined %}
-                                <li>{{ income.errors['errorAmount2'] }}</li>
-                                {% endif %}
-
-                            </ul>
+                            <span class="error text-center">{{ income.errors.amountError }}</span>
 
                         </div>
 
@@ -124,12 +115,7 @@
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
                                     name="date" required value="{{income.date}}">
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['dateError'] is defined %}
-                                <li>{{ income.errors['dateError'] }}</li>
-                                {% endif %}
-
-                            </ul>
+                            <span class="error text-center">{{ income.errors.dateError }}</span>
 
                         </div>
 
@@ -153,12 +139,7 @@
 
                                 </select>
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['categoryError'] is defined %}
-                                <li>{{ income.errors['categoryError'] }}</li>
-                                {% endif %}
-
-                            </ul>
+                            <span class="error text-center">{{ income.errors.categoryError }}</span>
 
                         </div>
 
@@ -168,11 +149,8 @@
                                 <input id="area" class="form-control" type="text" name="comment"
                                     aria-label="default input example" value="{{income.comment}}">
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['commentError'] is defined %}
-                                <li>{{ income.errors['commentError'] }}</li>
-                                {% endif %}
-                            </ul>
+
+                            <span class="error text-center">{{ income.errors.commentError }}</span>
 
                         </div>
 

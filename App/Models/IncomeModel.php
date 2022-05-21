@@ -83,7 +83,7 @@ class IncomeModel extends \Core\Model
             
             if(empty($this -> amount)) {
 
-                $this->errors['errorAmount1'] = 'Amount is required';
+                $this->errors['amounError'] = 'Amount is required.';
             
             }
 
@@ -110,7 +110,7 @@ class IncomeModel extends \Core\Model
         if(isset($this -> comment)) {
 
             if(strlen($this->comment)>100){
-                $this->errors['commentError']= "Comment can contain up to 100 characters";
+                $this->errors['commentError']= "Comment can contain up to 100 characters.";
                 
             }
 
