@@ -60,39 +60,27 @@
 
 
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
                                 <label for="amount" class="form-label">Amount</label>
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
                                     aria-label="default input example" name="amount" required>
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if expense.errors['errorAmount'] is defined %}
-                                <li> {{expense.errors['errorAmount'] }}</li>
-                                {% endif %}
-
-                            </ul>
-
-
-
+                            <span class="error text-center">{{expense.errors.amountError}}</span>
 
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
                                 <label for="date" class="form-label">Date</label>
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
                                     name="date" required>
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if expense.errors['dateError'] is defined %}
-                                <li> {{expense.errors['dateError'] }}</li>
-                                {% endif %}
-                            </ul>
+                            <span class="error text-center">{{expense.errors.dateError}}</span>
 
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
 
                                 <label for="exampleDataList2" class="form-label text-center">Payment Methods</label>
@@ -113,15 +101,10 @@
                                 </select>
 
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['paymentError'] is defined %}
-                                <li>{{ income.errors['paymentError'] }}</li>
-                                {% endif %}
-
-                            </ul>
+                            <span class="error text-center">{{expense.errors.paymentError}}</span>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
 
                                 <label for="exampleDataList" class="form-label">Category</label>
@@ -142,25 +125,16 @@
 
                                 </select>
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if income.errors['categoryError'] is defined %}
-                                <li>{{ income.errors['categoryError'] }}</li>
-                                {% endif %}
-
-                            </ul>
+                            <span class="error text-center">{{expense.errors.categoryError}}</span>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
                                 <label for="area" class="form-label">Comments</label>
                                 <input id="area" class="form-control" type="text" name="comment"
                                     aria-label="default input example">
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                                {% if expense.errors['commentError'] is defined %}
-                                <li>{{ expense.errors['commentError'] }}</li>
-                                {% endif %}
-                            </ul>
+                            <span class="error text-center">{{expense.errors.commentError}}</span>
 
                         </div>
                         <div class="button">

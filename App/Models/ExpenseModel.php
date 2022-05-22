@@ -81,7 +81,7 @@ class ExpenseModel extends \Core\Model
             
             if(empty($this -> amount)) {
 
-                $this->errors['errorAmount'] = 'Amount is required';
+                $this->errors['amountError'] = 'Amount is required';
             
             }
 
