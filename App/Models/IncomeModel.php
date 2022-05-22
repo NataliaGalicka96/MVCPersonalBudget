@@ -105,6 +105,11 @@ class IncomeModel extends \Core\Model
         
         }
 
+        if($this->date < '2000-01-01' || $this->date > Date::getLastDayOfCurrentMonth())
+        {
+            $this->errors['dateError2'] = 'The date must be between 2000-01-01 and '.Date::getLastDayOfCurrentMonth().'.';
+        }
+
 
         //Commment max length 100 characters
         if(isset($this -> comment)) {
