@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use \App\Date;
 
 class ExpenseModel extends \Core\Model
 {
@@ -52,10 +53,10 @@ class ExpenseModel extends \Core\Model
 
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_STR);
             $stmt->bindValue(':category_name', $this->category, PDO::PARAM_STR);
             $stmt->bindValue(':paymentMethod', $this->payment, PDO::PARAM_STR);
-            $stmt->bindValue(':amount', $this->amount, PDO::PARAM_INT);
+            $stmt->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
             $stmt->bindValue(':comment', $this->comment, PDO::PARAM_STR);
  
@@ -85,6 +86,10 @@ class ExpenseModel extends \Core\Model
             
             }
 
+            if($this->amount <0 || $this->amount >=1000000) {
+				$this->errors['amountError'] = 'The amount quoted must be between 0 and 1 million.';
+			}
+
         }
 
 
@@ -111,6 +116,15 @@ class ExpenseModel extends \Core\Model
             
             $this -> errors['dateError'] = 'Date is required.';
         
+        }
+
+        if(isset($this -> date)){
+
+            if($this->date < '2000-01-01' || $this->date > Date::getLastDayOfCurrentMonth())
+                {
+                    $this->errors['dateError'] = 'The date must be between 2000-01-01 and '.Date::getLastDayOfCurrentMonth().'.';
+                }
+
         }
 
 
