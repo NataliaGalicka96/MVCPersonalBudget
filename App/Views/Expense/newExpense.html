@@ -65,7 +65,7 @@
                             <div class="input-group">
                                 <label for="amount" class="form-label">Amount</label>
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
-                                    aria-label="default input example" name="amount" required>
+                                    aria-label="default input example" name="amount" required value={{expense.amount}}>
                             </div>
                             <span class="error text-center">{{expense.errors.amountError}}</span>
 
@@ -75,7 +75,7 @@
                             <div class="input-group">
                                 <label for="date" class="form-label">Date</label>
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
-                                    name="date" required>
+                                    name="date" required value={{expense.date}}>
                             </div>
                             <span class="error text-center">{{expense.errors.dateError}}</span>
 
@@ -86,7 +86,7 @@
 
                                 <label for="exampleDataList2" class="form-label text-center">Payment Methods</label>
                                 <select class="form-control userInput labeledInput" name="payment" id="exampleDataList2"
-                                    required>
+                                    required value="{{expense.payment}}">
 
                                     <option value="" disabled selected hidden>- select method -</option>
 
@@ -110,7 +110,7 @@
 
                                 <label for="exampleDataList" class="form-label">Category</label>
                                 <select class="form-control userInput labeledInput" name="category" id="exampleDataList"
-                                    required>
+                                    required value={{expense.category}}>
 
                                     <option value="" disabled selected hidden>- select category -</option>
 
@@ -133,7 +133,7 @@
                             <div class="input-group">
                                 <label for="area" class="form-label">Comments</label>
                                 <input id="area" class="form-control" type="text" name="comment"
-                                    aria-label="default input example">
+                                    aria-label="default input example" value="{{expense.comment}}">
                             </div>
                             <span class="error text-center">{{expense.errors.commentError}}</span>
 
