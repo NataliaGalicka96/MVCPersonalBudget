@@ -75,7 +75,7 @@
                             <div class="input-group">
                                 <label for="date" class="form-label">Date</label>
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
-                                    name="date" required value={{expense.date}}>
+                                    name="date" required value="{{expense.date ? expense.date : current_date}}">
                             </div>
                             <span class="error text-center">{{expense.errors.dateError}}</span>
 

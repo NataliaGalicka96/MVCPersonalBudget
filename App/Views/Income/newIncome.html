@@ -99,7 +99,7 @@
 
                     <form method="post" action="/income/create">
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
                                 <label for="amount" class="form-label">Amount</label>
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
@@ -109,17 +109,17 @@
 
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
                                 <label for="date" class="form-label">Date</label>
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
-                                    name="date" required value="{{income.date}}">
+                                    name="date" required value="{{income.date ? income.date : current_date}}">
                             </div>
                             <span class="error text-center">{{ income.errors.dateError }}</span>
 
                         </div>
 
-                        <div class=" row mb-3">
+                        <div class=" row mb-2">
                             <div class="input-group">
                                 <label for="exampleDataList" class="form-label">Category</label>
                                 <select class="form-control userInput labeledInput" name="category" id="exampleDataList"
@@ -143,7 +143,7 @@
 
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="input-group">
                                 <label for="area" class="form-label">Comments</label>
                                 <input id="area" class="form-control" type="text" name="comment"
