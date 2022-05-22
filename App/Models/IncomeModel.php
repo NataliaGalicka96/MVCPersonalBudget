@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use \App\Date;
 
 class IncomeModel extends \Core\Model
 {
@@ -45,6 +46,8 @@ class IncomeModel extends \Core\Model
 
            $income = new IncomeModel ($_POST);
 
+           $incomeAmount = number_format($this->amount, 2, '.', '');
+
            $sql = 'INSERT INTO incomes
            VALUES (NULL, :userId, (SELECT ica.id
                     FROM  incomes_category_assigned_to_users AS ica
@@ -54,9 +57,9 @@ class IncomeModel extends \Core\Model
 
            $stmt = $db->prepare($sql);
 
-           $stmt->bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+           $stmt->bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_STR);
            $stmt->bindValue(':category_name', $this->category, PDO::PARAM_STR);
-           $stmt->bindValue(':amount', $this->amount, PDO::PARAM_INT);
+           $stmt->bindValue(':amount', $incomeAmount, PDO::PARAM_STR);
            $stmt->bindValue(':date', $this->date, PDO::PARAM_STR);
            $stmt->bindValue(':comment', $this->comment, PDO::PARAM_STR);
 
@@ -83,9 +86,13 @@ class IncomeModel extends \Core\Model
             
             if(empty($this -> amount)) {
 
-                $this->errors['errorAmount1'] = 'Amount is required';
+                $this->errors['amounError'] = 'Amount is required.';
             
             }
+            
+            if($this->amount <0 || $this->amount >=1000000) {
+				$this->errors['amountError'] = 'The amount quoted must be between 0 and 1 million.';
+			}
 
         }
 
@@ -101,16 +108,26 @@ class IncomeModel extends \Core\Model
         //Date validation
         if(!isset($this -> date)) {
             
-            $this -> validationErrors['dateError'] = 'Date is required.';
+            $this -> errors['dateError'] = 'Date is required.';
         
         }
+
+        if(isset($this -> date)){
+
+            if($this->date < '2000-01-01' || $this->date > Date::getLastDayOfCurrentMonth())
+                {
+                    $this->errors['dateError'] = 'The date must be between 2000-01-01 and '.Date::getLastDayOfCurrentMonth().'.';
+                }
+
+        }
+
 
 
         //Commment max length 100 characters
         if(isset($this -> comment)) {
 
             if(strlen($this->comment)>100){
-                $this->errors['commentError']= "Comment can contain up to 100 characters";
+                $this->errors['commentError']= "Comment can contain up to 100 characters.";
                 
             }
 

@@ -75,6 +75,36 @@ class Category extends \Core\Model
         return $stmt -> fetchAll();
     }
 
+    public static function getCurrentUserExpenseCategories()
+    {
+        $db = static::getDBConnection();
+
+        $sql = "SELECT eca.id, eca.name
+        FROM  expenses_category_assigned_to_users AS eca
+        WHERE eca.user_id=:userId";
+
+        $stmt = $db -> prepare($sql);
+        $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt -> execute(); 
+
+        return $stmt -> fetchAll();
+    }
+
+    public static function getCurrentUserPaymentMethods()
+    {
+        $db = static::getDBConnection();
+
+        $sql = "SELECT pma.id, pma.name
+        FROM  payment_methods_assigned_to_users AS pma
+        WHERE pma.user_id=:userId";
+
+        $stmt = $db -> prepare($sql);
+        $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt -> execute(); 
+
+        return $stmt -> fetchAll();
+    }
+
 
 
 
