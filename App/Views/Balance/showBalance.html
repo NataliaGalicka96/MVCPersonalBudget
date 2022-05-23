@@ -36,7 +36,8 @@
                             Expense</a>
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-chart-pie me-2"></i>View Balance</a>
+                        <a class="nav-link" href="/Balance/balanceOfCurrentMonth"><i
+                                class="fa-solid fa-chart-pie me-2"></i>View Balance</a>
                     </li>
                     <li class="nav-item px-1">
                         <a class="nav-link" href="#"><i class="fas fa-cog me-2"></i>Settings</a>
@@ -50,96 +51,47 @@
     </nav>
     <div class="container">
 
-        <div class="row ms-4">
-            <select class="custom-select" id="period" name="selectPeriodTime" onchange="location = this.value;">>
-                <option value="balance.php" selected>Current Month</option>
-                <option value="balancePrevious.php">Previous Month</option>
-                <option value="balancePeriod.php">Period of time</option>
-            </select>
-        </div>
-        <div class="row text-center " id="content" name="periodTime">
-            <!--
-                <?php
+        <div class="dropdown-menu bg-transparent border-0 m-0 p-0 dropdown-menu-right">
 
-                    echo '<span id="Date"> Balance from: '.$firstDayOfCurrentDate.' to '.$currentDate.'</span>';
-                ?>-->
+            <a class="dropdown-item" href="/show-balance/current-month">Current Month</a>
+            <a class="dropdown-item" href="#">Last Month</a>
+            <a class="dropdown-item" href="#">Current Year</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#dateModal">Custom</a>
+
+        </div>
+
+        <div class="row text-center " id="content" name="periodTime">
+            <span id="Date">Balance from: {{first_day_of_current_month}} to {{current_date}}.</span>;
         </div>
         <div class="row" id="Table">
             <div class="col-12 col-xl-4 text-center">
-                <!--
-                    <?php
+                <table class="table table-bordered border-warning">
+                    <thead>
+                        <tr id="titleOfTable1">
+                            <th colspan="2">Expenses</th>
+                        </tr>
 
-                    // require_once "database.php";
-
-                        $loggedUserId = $_SESSION['logged_id'];
-
-                        $sql = "SELECT eca.name ,SUM(e.amount) AS sum
-                        FROM expenses e
-                        INNER JOIN expenses_category_assigned_to_users eca
-                        ON e.expense_category_assigned_to_user_id = eca.id
-                        WHERE e.user_id =:userId AND
-                        e.date_of_expense BETWEEN :startDate AND :endDate
-                        GROUP BY eca.name
-                        ORDER BY SUM(e.amount)";
-
-
-                        $expenseCategoryQuery = $db -> prepare($sql);
-                        $expenseCategoryQuery -> bindValue(':userId', $loggedUserId, PDO::PARAM_INT);
-                        $expenseCategoryQuery -> bindValue(':startDate', $firstDayOfCurrentDate, PDO::PARAM_STR);
-                        $expenseCategoryQuery -> bindValue(':endDate', $currentDate, PDO::PARAM_STR);
-                        $expenseCategoryQuery -> execute();
-
-                        $expenseCategoriesOfLoggedUser = $expenseCategoryQuery -> fetchAll();
-
-
-                        //print_r($expenseCategoriesOfLoggedUser);
-
-                        echo<<<END
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr id="titleOfTable1">
-                                    <th colspan="2">Expenses</th>
-                                </tr>
-                                <tr>
-                                    <th> Category </th>
-                                    <th> Total  </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        END;
-
-                        $sumOfAllExpenses = 0;
-                        foreach($expenseCategoriesOfLoggedUser as $category)
-                        {
-                            
-                            echo '<tr>';
-                            echo '<td>'.$category['name'].'</td>';
-                            echo '<td>'. $category['sum'].'</td>';
-                            echo '</tr>' ;
-
-                            $sumOfAllExpenses+=$category['sum'];
-                                
-                        }
-
-                        $sumOfAllExpenses = number_format( $sumOfAllExpenses, 2, '.', '' );
-                        
-                        echo<<<END
-                        
+                    </thead>
+                    <tbody>
                         <tr>
-                                <th>Sum</th>
-                                <td>$sumOfAllExpenses</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <td> Category </th>
+                            <td> Total </th>
+                        </tr>
+                        {% for expense in expenseCategories %}
+                        <tr>
+                            <td>{{ expense.name }}</td>
+                            <td>{{ expense.sum}}</td>
+                        </tr>
+                        {% endfor %}
 
-                        END;
+                        <tr>
+                            <td>TOTAL</td>
+                            <td>{{ sumOfExpenses }} PLN</td>
+                        </tr>
 
-                        $rows_count = $expenseCategoryQuery->rowCount();
+                    </tbody>
+                </table>
 
-                        if($rows_count>0){
-
-                    ?>
--->
                 <!--
                 <script type="text/javascript">
                     google.charts.load("current", { packages: ["corechart"] });
@@ -189,30 +141,10 @@
                 <!--
                 <?php
 
-                    //require_once "database.php";
-
-                    $loggedUserId = $_SESSION['logged_id'];
+                    
 
 
-                    $sql = "SELECT ica.name ,SUM(i.amount) AS sum
-                    FROM incomes i
-                    INNER JOIN incomes_category_assigned_to_users	 ica
-                    ON i.income_category_assigned_to_user_id = ica.id
-                    WHERE i.user_id =:userId AND
-                    i.date_of_income BETWEEN :startDate AND :endDate
-                    GROUP BY ica.name
-                    ORDER BY SUM(i.amount)";
-
-
-                    $incomeCategoryQuery = $db -> prepare($sql);
-                    $incomeCategoryQuery -> bindValue(':userId', $loggedUserId, PDO::PARAM_INT);
-                    $incomeCategoryQuery -> bindValue(':startDate', $firstDayOfCurrentDate, PDO::PARAM_STR);
-                    $incomeCategoryQuery -> bindValue(':endDate', $currentDate, PDO::PARAM_STR);
-                    $incomeCategoryQuery -> execute();
-
-                    $incomeCategoriesOfLoggedUser = $incomeCategoryQuery -> fetchAll();
-
-                    //print_r($incomeCategoriesOfLoggedUser);
+                    
 
                     echo<<<END
                     <table class="table table-bordered">
