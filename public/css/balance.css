@@ -112,17 +112,6 @@ body {
   font-size: 25px;
 }
 
-.table #titleOfTable2 {
-  background-image: linear-gradient(45deg, #FC38AE 0%, #F0D000 100%);
-  color: rgb(23 22 53);
-  font-size: 25px;
-}
-
-.table #titleOfTable3 {
-  background-image: linear-gradient(45deg, #FC38AE 0%, #F0D000 100%);
-  color: rgb(23 22 53);
-  font-size: 25px;
-}
 
 
 #Table {
@@ -132,13 +121,12 @@ body {
 
 }
 
+
 tr {
   color: #FFB300;
 }
 
-td {
-  border: 1px solid #FFB300;
-}
+
 
 #my-pie-chart-container {
   display: flex;
