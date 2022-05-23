@@ -3,19 +3,22 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\BalanceModel;
+
 
 
 class Balance extends Authenticated
 {
 
+public function showBalanceAction()
+{
 
-    /**
-     * Show the balance of current date page
-     * 
-     * @return void
-     */
-    public function balanceOfCurrentMonthAction()
-    {
-        View::renderTemplate('Balance/balanceOfCurrentMonth.html');
-    }
+    View::renderTemplate('Balance/showBalance.html', [
+        /*'incomeCategoriesAmount' => BalanceModel::getGroupedIncomes(),*/	
+		'expenseCategories' => BalanceModel::getGroupedExpenses(), 
+        'sumOfExpenses' => BalanceModel::countExpenses()	
+    ]);
+}
+
+
 }
