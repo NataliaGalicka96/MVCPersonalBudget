@@ -24,19 +24,6 @@ class BalanceModel extends \Core\Model
           };
         }
 
-    private static function getFirstDayOfCurrentMonth()
-    {
-            $startDate = Date::getFirstDayOfCurrentMonth();
-            return $startDate;    
-    }
-
-    private static function getLastDayOfCurrentMonth()
-    {
-            $endDate = Date::getLastDayOfCurrentMonth();
-            return $endDate;    
-    }
-
-
     /**
      * Get data from table of expenses
      * 
@@ -45,9 +32,6 @@ class BalanceModel extends \Core\Model
 
      public static function getGroupedExpenses($startDate, $endDate)
      {
-
-        //$startDate = static::getFirstDayOfCurrentMonth();
-		//$endDate = static::getLastDayOfCurrentMonth();
 
         $sql = "SELECT eca.name ,SUM(e.amount) AS sum
         FROM expenses e
@@ -68,6 +52,7 @@ class BalanceModel extends \Core\Model
         $expenseCategoryQuery -> execute();
 
         return $expenseCategoryQuery -> fetchAll();
+
      }
 
      /**
@@ -97,9 +82,6 @@ class BalanceModel extends \Core\Model
 
      public static function getGroupedIncomes($startDate, $endDate)
      {
-
-       // $startDate = static::getFirstDayOfCurrentMonth();
-		//$endDate = static::getLastDayOfCurrentMonth();
 
 
         $sql = "SELECT ica.name ,SUM(i.amount) AS sum
