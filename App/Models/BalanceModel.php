@@ -114,7 +114,7 @@ class BalanceModel extends \Core\Model
         $db = static::getDBConnection();
 
         $incomeCategoryQuery = $db -> prepare($sql);
-        $incomeCategoryQuery -> bindValue(':userId', $loggedUserId, PDO::PARAM_INT);
+        $incomeCategoryQuery -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
         $incomeCategoryQuery -> bindValue(':startDate', $startDate, PDO::PARAM_STR);
         $incomeCategoryQuery -> bindValue(':endDate', $endDate, PDO::PARAM_STR);
         $incomeCategoryQuery -> execute();
@@ -131,8 +131,8 @@ class BalanceModel extends \Core\Model
           $totalIncomes = 0;
           $incomes = static::getGroupedIncomes();
 
-          for(!empty($incomes)){
-              for($incomes as $income ){
+          if(!empty($incomes)){
+              foreach($incomes as $income){
                   $totalIncomes += $income['sum'];
               }
           }
