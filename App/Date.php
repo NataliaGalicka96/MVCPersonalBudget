@@ -31,5 +31,15 @@ class Date
     {
         return date('Y-m-d', strtotime('last day of last month')); 
     }
+
+    public static function getFirstDayOfCurrentYear()
+    {
+        return date('Y-01-01');
+    }
+
+    public static function getLastDayOfCurrentYear()
+    {
+        return date('Y-01-01');
+    }
     
 }
