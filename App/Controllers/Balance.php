@@ -16,7 +16,9 @@ public function showBalanceAction()
     View::renderTemplate('Balance/showBalance.html', [
         /*'incomeCategoriesAmount' => BalanceModel::getGroupedIncomes(),*/	
 		'expenseCategories' => BalanceModel::getGroupedExpenses(), 
-        'sumOfExpenses' => BalanceModel::countExpenses()	
+        'sumOfExpenses' => BalanceModel::countExpenses(),
+        'incomeCategories'	=> BalanceModel::getGroupedIncomes(),
+        'sumOfIncomes' => 
     ]);
 }
 

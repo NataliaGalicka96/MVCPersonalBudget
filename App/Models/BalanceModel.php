@@ -37,7 +37,6 @@ class BalanceModel extends \Core\Model
     }
 
 
-
     /**
      * Get data from table of expenses
      * 
@@ -71,6 +70,11 @@ class BalanceModel extends \Core\Model
         return $expenseCategoryQuery -> fetchAll();
      }
 
+     /**
+      * Sum of all expenses from table
+      *
+      */
+
      public static function  countExpenses()
      {
          $totalExpense = 0;
@@ -85,14 +89,18 @@ class BalanceModel extends \Core\Model
          return $totalExpense;
      }
 
-    /**
+    /*
      * Get data from table of incomes
      * 
      * 
      */
-/*
-     public static function getAllIncomes()
+
+     public static function getGroupedIncomes()
      {
+
+        $startDate = static::getFirstDayOfCurrentMonth();
+		$endDate = static::getLastDayOfCurrentMonth();
+
 
         $sql = "SELECT ica.name ,SUM(i.amount) AS sum
         FROM incomes i
@@ -101,17 +109,17 @@ class BalanceModel extends \Core\Model
         WHERE i.user_id =:userId AND
         i.date_of_income BETWEEN :startDate AND :endDate
         GROUP BY ica.name
-        ORDER BY SUM(i.amount)";
+        ORDER BY SUM(i.amount) DESC";
 
         $db = static::getDBConnection();
 
         $incomeCategoryQuery = $db -> prepare($sql);
         $incomeCategoryQuery -> bindValue(':userId', $loggedUserId, PDO::PARAM_INT);
-        $incomeCategoryQuery -> bindValue(':startDate', $this -> startDate, PDO::PARAM_STR);
-        $incomeCategoryQuery -> bindValue(':endDate', $this -> endDate, PDO::PARAM_STR);
+        $incomeCategoryQuery -> bindValue(':startDate', $startDate, PDO::PARAM_STR);
+        $incomeCategoryQuery -> bindValue(':endDate', $endDate, PDO::PARAM_STR);
         $incomeCategoryQuery -> execute();
 
         return $incomeCategoryQuery -> fetchAll();
      }
-     */
+     
     }
