@@ -41,7 +41,7 @@ class Expense extends Authenticated
     /**
      * Add new expense
      * 
-     * @return voic
+     * @return void
      */
 
      public function createAction()
