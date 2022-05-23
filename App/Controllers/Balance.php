@@ -48,7 +48,7 @@ public function showBalanceCurrentYearAction()
         'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
         'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate)
 
-    ])
+    ]);
 }
 
 }

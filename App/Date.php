@@ -34,12 +34,12 @@ class Date
 
     public static function getFirstDayOfCurrentYear()
     {
-        return date('Y-01-01');
+        return date('Y-m-d', strtotime('first day of january this year'));
     }
 
     public static function getLastDayOfCurrentYear()
     {
-        return date('Y-01-01');
+        return date('Y-m-d', strtotime('last day of december this year'));
     }
     
 }
