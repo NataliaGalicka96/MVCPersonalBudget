@@ -18,7 +18,7 @@ public function showBalanceAction()
 		'expenseCategories' => BalanceModel::getGroupedExpenses(), 
         'sumOfExpenses' => BalanceModel::countExpenses(),
         'incomeCategories'	=> BalanceModel::getGroupedIncomes(),
-        'sumOfIncomes' => 
+        'sumOfIncomes' => BalanceModel::countIncomes()
     ]);
 }
 

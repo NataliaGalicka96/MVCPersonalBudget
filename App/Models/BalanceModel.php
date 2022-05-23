@@ -71,7 +71,7 @@ class BalanceModel extends \Core\Model
      }
 
      /**
-      * Sum of all expenses from table
+      * Sum of all expenses from database
       *
       */
 
@@ -121,5 +121,23 @@ class BalanceModel extends \Core\Model
 
         return $incomeCategoryQuery -> fetchAll();
      }
+
+     /**
+      * Sum of all incomes from database
+      */
+
+      public static function countIncomes()
+      {
+          $totalIncomes = 0;
+          $incomes = static::getGroupedIncomes();
+
+          for(!empty($incomes)){
+              for($incomes as $income ){
+                  $totalIncomes += $income['sum'];
+              }
+          }
+
+          return $totalIncomes;
+      }
      
     }
