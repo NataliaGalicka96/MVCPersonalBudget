@@ -43,11 +43,11 @@ class BalanceModel extends \Core\Model
      * 
      */
 
-     public static function getGroupedExpenses()
+     public static function getGroupedExpenses($startDate, $endDate)
      {
 
-        $startDate = static::getFirstDayOfCurrentMonth();
-		$endDate = static::getLastDayOfCurrentMonth();
+        //$startDate = static::getFirstDayOfCurrentMonth();
+		//$endDate = static::getLastDayOfCurrentMonth();
 
         $sql = "SELECT eca.name ,SUM(e.amount) AS sum
         FROM expenses e
@@ -75,10 +75,10 @@ class BalanceModel extends \Core\Model
       *
       */
 
-     public static function  countExpenses()
+     public static function  countExpenses($startDate, $endDate)
      {
          $totalExpense = 0;
-         $expenses = static::getGroupedExpenses();
+         $expenses = static::getGroupedExpenses($startDate, $endDate);
 
          if(!empty($expenses)){
              foreach($expenses as $expense){
@@ -95,11 +95,11 @@ class BalanceModel extends \Core\Model
      * 
      */
 
-     public static function getGroupedIncomes()
+     public static function getGroupedIncomes($startDate, $endDate)
      {
 
-        $startDate = static::getFirstDayOfCurrentMonth();
-		$endDate = static::getLastDayOfCurrentMonth();
+       // $startDate = static::getFirstDayOfCurrentMonth();
+		//$endDate = static::getLastDayOfCurrentMonth();
 
 
         $sql = "SELECT ica.name ,SUM(i.amount) AS sum
@@ -126,10 +126,10 @@ class BalanceModel extends \Core\Model
       * Sum of all incomes from database
       */
 
-      public static function countIncomes()
+      public static function countIncomes($startDate, $endDate)
       {
           $totalIncomes = 0;
-          $incomes = static::getGroupedIncomes();
+          $incomes = static::getGroupedIncomes($startDate, $endDate);
 
           if(!empty($incomes)){
               foreach($incomes as $income){
