@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\BalanceModel;
 use \App\Date;
+use \App\Flash;
 
 
 
@@ -22,8 +23,8 @@ public function showBalanceCurrentMonthAction()
         'sumOfExpenses' => BalanceModel::countExpenses($startDate, $endDate),
         'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
         'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
-        'firstDate' => Date::getFirstDayOfCurrentMonth(),
-        'secondDate' => Date::getLastDayOfCurrentMonth()
+        'firstDate' => $startDate,
+        'secondDate' => $endDate
     ]);
 }
 public function showBalancePreviousMonthAction()
@@ -36,8 +37,8 @@ public function showBalancePreviousMonthAction()
         'sumOfExpenses' => BalanceModel::countExpenses($startDate, $endDate),
         'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
         'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
-        'firstDate' => Date::getFirstDayOfPreviousMonth(),
-        'secondDate' => Date::getlastDayOfPreviousMonth()
+        'firstDate' => $startDate,
+        'secondDate' => $endDate
     ]);
 }
 
@@ -52,10 +53,40 @@ public function showBalanceCurrentYearAction()
         'sumOfExpenses' => BalanceModel::countExpenses($startDate, $endDate),
         'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
         'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
-        'firstDate' => Date::getFirstDayOfCurrentYear(),
-        'secondDate' => Date::getLastDayOfCurrentYear()
+        'firstDate' => $startDate,
+        'secondDate' => $endDate
 
     ]);
 }
 
+
+    public function showBalancePeriodTimeAction()
+    {
+        $balance = new BalanceModel($_POST);
+
+        if(!empty($this->date1) && (!empty($this->date2)))
+        {
+            $startDate=$this->date1;
+            $endDate=$this->date2;
+
+            View::renderTemplate('Balance/showBalance.html', [
+                'expenseCategories' => BalanceModel::getGroupedExpenses($startDate, $endDate), 
+                'sumOfExpenses' => BalanceModel::countExpenses($startDate, $endDate),
+                'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
+                'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
+                'firstDate' => $startDate,
+                'secondDate' => $endDate
+        ]);
+        
+        }else{
+           //Flash::addMessage("Choose period of time", Flash::WARNING);
+            View::renderTemplate('Balance/showBalance.html');
+
+
+        }
+
+
+    }
+    
 }
+

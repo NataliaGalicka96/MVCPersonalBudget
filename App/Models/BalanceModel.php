@@ -121,5 +121,6 @@ class BalanceModel extends \Core\Model
 
           return $totalIncomes;
       }
-     
+
+
     }
