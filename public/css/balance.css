@@ -1,0 +1,224 @@
+body {
+  font-family: 'Poppins', sans-serif !important;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5)50%, rgba(0, 0, 0, 0.5)50%), url("20.jpg");
+  background-size: cover;
+  background-position: right;
+  min-height: 100vh;
+}
+
+
+.navbar {
+  height: 75px;
+  margin: auto;
+}
+
+.navbar-dark .navbar-nav {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffd700;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.navbar-dark .navbar-brand {
+  color: #ffd700;
+  font-size: 35px;
+  padding: 0 0;
+  font-family: 'Cookie', cursive;
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-link:hover {
+  font-weight: 600;
+  border-bottom: 1px solid #FC38AE;
+}
+
+.navbar-dark .navbar-toggler {
+  color: #F0D000;
+  border-color: #F0D000;
+}
+
+.dropdown-menu {
+  border: 2px solid #F0D000;
+}
+
+
+.row {
+  color: #F0D000;
+  display: flex;
+  justify-content: center;
+}
+
+.row:nth-of-type(1) {
+  margin-top: 75px;
+}
+
+
+.custom-select {
+  width: 200px;
+  text-align: center;
+  border: 2px solid rgb(23 22 53);
+  background-color: #FFB300;
+  color: rgb(23 22 53);
+  border-radius: 6px;
+  margin-right: auto;
+  margin-bottom: 30px;
+
+}
+
+.custom-select:hover {
+  border-color: rgb(23 22 53);
+  box-shadow: inset 0px 0px 2px 2px rgb(23 22 53);
+}
+
+#Date {
+  background-color: #FFB300;
+  margin: 5px auto 10px auto;
+  width: 75%;
+  border-radius: 6px;
+  text-align: center;
+  color: rgb(23 22 53);
+  font-size: 25px;
+  border-radius: 6px;
+  border: 2px solid rgb(23 22 53);
+  padding: 0px 10px 0 10px;
+
+}
+
+.table {
+  border: 2px solid #FFB300;
+  width: 300px;
+  color: #FFB300;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.table #titleOfTable1 {
+  background-image: linear-gradient(45deg, #FC38AE 0%, #F0D000 100%);
+  color: rgb(23 22 53);
+  font-size: 25px;
+}
+
+
+
+#Table {
+  background: rgb(23 22 53 / 75%);
+  border: 15px solid rgba(92, 91, 141, 0.25);
+
+
+}
+
+
+tr {
+  color: #FFB300;
+}
+
+
+
+#my-pie-chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#my-pie-chart {
+  background: conic-gradient(#f24040 0.00%, #ff833b 0.00% 1.55%, #5252fd 1.55% 5.08%, #32eb32 6.08% 13.68%, rgb(252, 252, 64) 13.68% 23.27%, rgb(255, 13, 235) 23.27% 40.47%, rgb(59, 238, 238) 40.47%);
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+}
+
+#legenda {
+  margin-left: 20px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+}
+
+.entry-color {
+  height: 10px;
+  width: 10px;
+}
+
+.entry-text {
+  margin-left: 5px;
+}
+
+#color-red {
+  background-color: rgb(59, 238, 238);
+}
+
+#color-orange {
+  background-color: rgb(255, 13, 235);
+}
+
+#color-yellow {
+  background-color: rgb(252, 252, 64);
+}
+
+#color-green {
+  background-color: #32eb32;
+}
+
+#color-blue {
+  background-color: #5252fd;
+}
+
+#color-black {
+  background-color: #ff833b;
+}
+
+#color-brown {
+  background-color: #f24040;
+}
+
+@media (max-width: 1000px) {
+
+  #Table {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 780px) {
+
+  #content {
+    margin-top: 25px;
+  }
+}
+
+@media (max-width: 700px) {
+
+  #content {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 440px) {
+
+  #period {
+    margin-top: 140px;
+  }
+
+  #content {
+    margin-top: 25px;
+  }
+}
