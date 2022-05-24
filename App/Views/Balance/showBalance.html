@@ -7,6 +7,9 @@
 
 {% endblock %}
 
+
+
+
 {% block footer %}
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -72,8 +75,7 @@
         </select>
 
 
-        <!--
-        Modal 
+        Modal
         <div class="modal fade" id="periodDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -103,24 +105,19 @@
             </div>
         </div>
 
-
-        <div class="row text-center mt-4" id="content" name="periodTime">
-
-            <div class="mb-3 text-center">
-                <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>;
-            </div>
-
-            <button type="button" class="btn btn-warning mb-5" data-toggle="modal" data-target="#periodDate">You must
-                choose period time which you want to see your balance.</button>
-
-
-        </div>
-
--->
-
-        <div class="mb-3 text-center">
+        <div class="mb-3 text-center" id="content" name="periodTime">
             <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>;
         </div>
+
+
+        <div class="row text-center mt-4" id="content" name="periodTime">
+            {% if firstDate is empty and seconDate is empty %}
+            <button type="button" class="btn btn-warning mb-5" data-toggle="modal" data-target="#periodDate">You must
+                choose period time which you want to see your balance.</button>
+            {% endif %}
+
+        </div>
+
 
 
         <div class="row" id="Table">
@@ -151,7 +148,7 @@
                     </tbody>
                 </table>
 
-                <!--
+
                 <script type="text/javascript">
                     google.charts.load("current", { packages: ["corechart"] });
                     google.charts.setOnLoadCallback(drawChart);
@@ -160,16 +157,9 @@
                     function drawChart() {
                         var data = google.visualization.arrayToDataTable([
                             ['Category', 'Amount'],
-                    <? php
-                        foreach($expenseCategoriesOfLoggedUser as $category){
+                            //miejsce na dane 
 
-                                extract($category);
-
-                            echo  "['$name', $sum],";
-                            }
-
-                                ?>
-                    ]);
+                        ]);
 
                         var options = {
                             is3D: true,
@@ -184,7 +174,7 @@
                     }
                 </script>
 
-                -->
+
 
 
                 <p class="fs-3">Pie chart of expenses</p>
