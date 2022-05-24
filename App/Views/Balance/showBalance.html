@@ -75,7 +75,7 @@
         </select>
 
 
-        Modal
+        <!--Modal-->
         <div class="modal fade" id="periodDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -105,16 +105,17 @@
             </div>
         </div>
 
-        <div class="mb-3 text-center" id="content" name="periodTime">
-            <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>;
-        </div>
+
 
 
         <div class="row text-center mt-4" id="content" name="periodTime">
-            {% if firstDate is empty and seconDate is empty %}
+            {% if firstDate is empty and secondDate is empty %}
             <button type="button" class="btn btn-warning mb-5" data-toggle="modal" data-target="#periodDate">You must
                 choose period time which you want to see your balance.</button>
             {% endif %}
+            <div class="mb-3 text-center" id="content" name="periodTime">
+                <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>
+            </div>
 
         </div>
 

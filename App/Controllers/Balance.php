@@ -62,12 +62,13 @@ public function showBalanceCurrentYearAction()
 
     public function showBalancePeriodTimeAction()
     {
-        $balance = new BalanceModel($_POST);
 
-        if(!empty($this->date1) && (!empty($this->date2)))
+
+
+        if(!empty($_POST['date1']) && (!empty($_POST['date2'])))
         {
-            $startDate=$this->date1;
-            $endDate=$this->date2;
+            $startDate = $_POST['date1'];
+            $endDate = $_POST['date2'];
 
             View::renderTemplate('Balance/showBalance.html', [
                 'expenseCategories' => BalanceModel::getGroupedExpenses($startDate, $endDate), 
@@ -77,16 +78,11 @@ public function showBalanceCurrentYearAction()
                 'firstDate' => $startDate,
                 'secondDate' => $endDate
         ]);
-        
-        }else{
-           //Flash::addMessage("Choose period of time", Flash::WARNING);
-            View::renderTemplate('Balance/showBalance.html');
-
-
-        }
-
-
+    } else {
+        View::renderTemplate('Balance/showBalance.html');
     }
-    
+        
+
+}
 }
 
