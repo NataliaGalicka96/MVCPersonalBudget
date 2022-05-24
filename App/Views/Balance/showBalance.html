@@ -1,0 +1,304 @@
+{% extends "base.html" %}
+
+{% block title %}Balance of current Month{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/balance.css" />
+
+{% endblock %}
+
+{% block footer %}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand"><i class="fa-solid fa-hand-holding-dollar me-2"></i>PERSONAL BUDGET</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item px-1">
+                        <a class="nav-link px-1" aria-current="page" href="/"><i
+                                class="fa-solid fa-house me-2"></i>Home</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Income/newIncome"><i class="fas fa-coins mr me-2"></i>Add Income</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Expense/newExpense"><i
+                                class="fa-solid fa-money-bill-1-wave me-2"></i>Add
+                            Expense</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Balance/showBalanceCurrentMonth"><i
+                                class="fa-solid fa-chart-pie me-2"></i>View
+                            Balance</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="#"><i class="fas fa-cog me-2"></i>Settings</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <select class="custom-select" id="period" name="selectPeriodTime" onchange="location = this.value;">>
+            <option value="" selected disabled>Choose period </option>
+            <option value="/Balance/showBalanceCurrentMonth">Current Month</option>
+            <option value="/Balance/showBalancePreviousMonth">Previous Month</option>
+            <option value="/Balance/showBalanceCurrentYear">Current year</option>
+            <option value="/Balance/showBalancePeriodTime">Custom period</option>
+        </select>
+
+
+        <!--
+        Modal 
+        <div class="modal fade" id="periodDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Choose date</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/balance/showBalancePeriodTime">
+                            <div class="form-group">
+                                <label class="col-form-label">Choose period time from which you want to see the
+                                    balance.</label>
+                                <label>From: <input type="date" class="form-control" name="date1"></label>
+                                <label>To: <input type="date" class="form-control" name="date2"></label>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-modal-ok">Accept</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row text-center mt-4" id="content" name="periodTime">
+
+            <div class="mb-3 text-center">
+                <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>;
+            </div>
+
+            <button type="button" class="btn btn-warning mb-5" data-toggle="modal" data-target="#periodDate">You must
+                choose period time which you want to see your balance.</button>
+
+
+        </div>
+
+-->
+
+        <div class="mb-3 text-center">
+            <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>;
+        </div>
+
+
+        <div class="row" id="Table">
+            <div class="col-12 col-xl-4 text-center">
+                <table id="tableOfExpenses" class="table table-bordered border-warning">
+                    <thead>
+                        <tr id="titleOfTable1">
+                            <th colspan="2">Expenses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> Category </th>
+                            <td> Total </th>
+                        </tr>
+                        {% for expense in expenseCategories %}
+                        <tr>
+                            <td>{{ expense.name }}</td>
+                            <td>{{ expense.sum}}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td>TOTAL</td>
+                            <td>{{ sumOfExpenses }} PLN</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <!--
+                <script type="text/javascript">
+                    google.charts.load("current", { packages: ["corechart"] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Category', 'Amount'],
+                    <? php
+                        foreach($expenseCategoriesOfLoggedUser as $category){
+
+                                extract($category);
+
+                            echo  "['$name', $sum],";
+                            }
+
+                                ?>
+                    ]);
+
+                        var options = {
+                            is3D: true,
+                            legend: {
+                                textStyle: { color: 'white' }
+                            },
+                            backgroundColor: 'transparent',
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                        chart.draw(data, options);
+                    }
+                </script>
+
+                -->
+
+
+                <p class="fs-3">Pie chart of expenses</p>
+
+                <div class="d-flex justify-content-center" id="piechart_3d"></div>
+
+            </div>
+            <div class="col-12 col-xl-4 text-center">
+                <table class="table table-bordered border-warning">
+                    <thead>
+                        <tr id="titleOfTable1">
+                            <th colspan="2">Incomes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th> Category </th>
+                            <th> Total </th>
+                        </tr>
+                        {% for incomes in incomeCategories %}
+                        <tr>
+                            <td>{{incomes.name}}</td>
+                            <td>{{incomes.sum}}</td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td>TOTAL</td>
+                            <td>{{ sumOfIncomes }} PLN</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!--
+
+                <script type="text/javascript">
+                    google.charts.load("current", { packages: ["corechart"] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Category', 'Amount'],
+                            <? php
+                                foreach($incomeCategoriesOfLoggedUser as $category){
+
+                                extract($category);
+        
+                                    echo  "['$name', $sum],";
+                            }
+
+                                ?>
+                            ]);
+
+                        var options = {
+                            is3D: true,
+                            legend: {
+                                textStyle: { color: 'white' }
+                            },
+                            backgroundColor: 'transparent',
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart_incomes'));
+                        chart.draw(data, options);
+                    }
+                </script>
+
+-->
+                <p class="fs-3">Pie chart of incomes</p>
+
+                <div class="d-flex justify-content-center" id="piechart_incomes"></div>
+
+
+            </div>
+            <div class="col-12 col-xl-4 text-center">
+
+
+                <table class="table table-bordered border-warning">
+                    <thead>
+                        <tr id="titleOfTable1">
+                            <th colspan="3">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th> Incomes </th>
+                            <th> Expenses </th>
+                            <th> Balance </th>
+                        </tr>
+                        <tr>
+                            <td>{{sumOfIncomes}}</td>
+                            <td>{{sumOfExpenses}}</td>
+                            <td>{{sumOfIncomes-sumOfExpenses}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                {% if sumOfIncomes-sumOfExpenses > 0 %}
+                <div class="alert alert-success" role="alert">
+                    Congratulations! You manage your finances great!
+                </div>
+                {% endif %}
+
+                {% if sumOfIncomes-sumOfExpenses < 0 %} <div class="alert alert-danger" role="alert">
+                    Ups! You are getting into Debt! Try to plan your expenses better!
+            </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+{% endblock %}
