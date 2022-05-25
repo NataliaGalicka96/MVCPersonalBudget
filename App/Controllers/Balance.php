@@ -63,12 +63,22 @@ public function showBalanceCurrentYearAction()
     public function showBalancePeriodTimeAction()
     {
 
-
-
         if(!empty($_POST['date1']) && (!empty($_POST['date2'])))
         {
             $startDate = $_POST['date1'];
             $endDate = $_POST['date2'];
+
+            //$startDate = date("Ymd", strtotime($firstDate));
+            //$endDate = date("Ymd", strtotime($secondDate));
+
+            if($startDate > $endDate){
+                $pom = $startDate;
+                $startDate=$endDate;
+                $endDate=$pom;
+            } else if ($startDate < $endDate){
+                $startDate = $startDate;
+                $endDate = $endDate;
+            }
 
             View::renderTemplate('Balance/showBalance.html', [
                 'expenseCategories' => BalanceModel::getGroupedExpenses($startDate, $endDate), 
