@@ -7,12 +7,19 @@
 
 {% endblock %}
 
-
-
-
 {% block footer %}
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script>
+    /* Load expense sums by twig to piechart.js.  */
+    var expensesJSON = '{{expenseCategories|json_encode|raw}}';
+    var expenses = JSON.parse(expensesJSON);
+
+    var incomesJSON = '{{incomeCategories|json_encode|raw}}';
+    var incomes = JSON.parse(incomesJSON);
+</script>
+
+<script src="/js/drawPieChart.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -75,7 +82,7 @@
         </select>
 
 
-        Modal
+        <!--Modal-->
         <div class="modal fade" id="periodDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -105,16 +112,17 @@
             </div>
         </div>
 
-        <div class="mb-3 text-center" id="content" name="periodTime">
-            <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>;
-        </div>
+
 
 
         <div class="row text-center mt-4" id="content" name="periodTime">
-            {% if firstDate is empty and seconDate is empty %}
-            <button type="button" class="btn btn-warning mb-5" data-toggle="modal" data-target="#periodDate">You must
+            {% if firstDate is empty and secondDate is empty %}
+            <button type="button" class="btn btn-warning mb-5" data-toggle="modal" data-target="#periodDate">You can
                 choose period time which you want to see your balance.</button>
             {% endif %}
+            <div class="mb-3 text-center" id="content" name="periodTime">
+                <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>
+            </div>
 
         </div>
 
@@ -142,39 +150,11 @@
 
                         <tr>
                             <td>TOTAL</td>
-                            <td>{{ sumOfExpenses }} PLN</td>
+                            <td>{{ sumOfExpenses|number_format(2, '.', '') }} PLN</td>
                         </tr>
 
                     </tbody>
                 </table>
-
-
-                <script type="text/javascript">
-                    google.charts.load("current", { packages: ["corechart"] });
-                    google.charts.setOnLoadCallback(drawChart);
-
-
-                    function drawChart() {
-                        var data = google.visualization.arrayToDataTable([
-                            ['Category', 'Amount'],
-                            //miejsce na dane 
-
-                        ]);
-
-                        var options = {
-                            is3D: true,
-                            legend: {
-                                textStyle: { color: 'white' }
-                            },
-                            backgroundColor: 'transparent',
-                        };
-
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-                        chart.draw(data, options);
-                    }
-                </script>
-
-
 
 
                 <p class="fs-3">Pie chart of expenses</p>
@@ -203,46 +183,11 @@
 
                         <tr>
                             <td>TOTAL</td>
-                            <td>{{ sumOfIncomes }} PLN</td>
+                            <td>{{ sumOfIncomes|number_format(2, '.', '') }} PLN</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!--
-
-                <script type="text/javascript">
-                    google.charts.load("current", { packages: ["corechart"] });
-                    google.charts.setOnLoadCallback(drawChart);
-
-
-                    function drawChart() {
-                        var data = google.visualization.arrayToDataTable([
-                            ['Category', 'Amount'],
-                            <? php
-                                foreach($incomeCategoriesOfLoggedUser as $category){
-
-                                extract($category);
-        
-                                    echo  "['$name', $sum],";
-                            }
-
-                                ?>
-                            ]);
-
-                        var options = {
-                            is3D: true,
-                            legend: {
-                                textStyle: { color: 'white' }
-                            },
-                            backgroundColor: 'transparent',
-                        };
-
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart_incomes'));
-                        chart.draw(data, options);
-                    }
-                </script>
-
--->
                 <p class="fs-3">Pie chart of incomes</p>
 
                 <div class="d-flex justify-content-center" id="piechart_incomes"></div>
@@ -265,9 +210,10 @@
                             <th> Balance </th>
                         </tr>
                         <tr>
-                            <td>{{sumOfIncomes}}</td>
-                            <td>{{sumOfExpenses}}</td>
-                            <td>{{sumOfIncomes-sumOfExpenses}}</td>
+                            <td>{{sumOfIncomes|number_format(2, '.', '')}}</td>
+                            <td>{{sumOfExpenses|number_format(2, '.', '')}}</td>
+                            <td>{{(sumOfIncomes-sumOfExpenses)|number_format(2, '.', '') }} PLN</td>
+
                         </tr>
                     </tbody>
                 </table>
