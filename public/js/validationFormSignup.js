@@ -72,6 +72,19 @@ function validateSignForm() {
                 username: {
                     remote: 'Username already taken!'
                 }
+            },
+            errorPlacement: function (error, element) {
+
+                if (element.attr('name') == 'username') {
+                    error.appendTo('.nameError');
+                }
+                if (element.attr('name') == 'email') {
+                    error.appendTo('.emailError');
+                }
+                if (element.attr('name') == 'password') {
+                    error.appendTo('.passwordError');
+                }
+
             }
         });
 

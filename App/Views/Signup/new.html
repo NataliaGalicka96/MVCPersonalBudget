@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
 <script src="/js/haslo.js"></script>
-<script src="/js/validation.js"></script>
+<script src="/js/validationFormSignup.js"></script>
 
 
 {% endblock %}
@@ -57,7 +57,7 @@
                                     value="{{user.username}}" required>
                             </div>
 
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                            <ul class="text-danger text-center mt-1 error nameError" style="list-style-type:none;">
                                 {% if user.errors['usernameError1'] is defined %}
                                 <li>{{ user.errors['usernameError1'] }}</li>
                                 {% endif %}
@@ -83,7 +83,7 @@
                                 <input type="email" class="form-control" id="exampleInputEmail1" name="email"
                                     placeholder="Email address" required value="{{user.email}}">
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                            <ul class="text-danger text-center mt-1 error emailError" style="list-style-type:none;">
 
                                 {% if user.errors['emailError1'] is defined %}
                                 <li>{{ user.errors['emailError1'] }}</li>
@@ -101,7 +101,7 @@
                                 <input type="password" class="form-control" id="password" name="password"
                                     placeholder="Password" required>
                             </div>
-                            <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                            <ul class="text-danger text-center mt-1 error passwordError" style="list-style-type:none;">
 
                                 {% if user.errors['errorPassword1'] is defined %}
                                 <li>{{ user.errors['errorPassword1'] }}</li>
