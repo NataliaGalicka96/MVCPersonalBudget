@@ -35,9 +35,9 @@ use \App\Models\User;
      *
      * @return void
      */
-    public function validateUserNameAction()
+    public function validateUsernameAction()
     {
-        $is_valid = ! User::usernameExists($_GET['email'], $_GET['ignore_id'] ?? null);
+        $is_valid = ! User::usernameExists($_GET['username'], $_GET['ignore_id'] ?? null);
  
         header('Content-Type: application/json');
         echo json_encode($is_valid);
