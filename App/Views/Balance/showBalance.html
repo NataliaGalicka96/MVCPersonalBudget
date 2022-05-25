@@ -7,12 +7,19 @@
 
 {% endblock %}
 
-
-
-
 {% block footer %}
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script>
+    /* Load expense sums by twig to piechart.js.  */
+    var expensesJSON = '{{expenseCategories|json_encode|raw}}';
+    var expenses = JSON.parse(expensesJSON);
+
+    var incomesJSON = '{{incomeCategories|json_encode|raw}}';
+    var incomes = JSON.parse(incomesJSON);
+</script>
+
+<script src="/js/drawPieChart.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -149,17 +156,93 @@
                     </tbody>
                 </table>
 
+                <!--
 
                 <script type="text/javascript">
                     google.charts.load("current", { packages: ["corechart"] });
                     google.charts.setOnLoadCallback(drawChart);
 
 
+                    let expensesJSON = '{{expenseCategories|json_encode|raw}}';
+
+                    let expenses = JSON.parse(expensesJSON);
+
+                    const expenseArray = [];
+
+                    for (let i = 0; i < expenses.length; i++) {
+
+                        const singleExpense = {};
+                        singleExpense.name = (expenses[i][0]);
+                        singleExpense.sum = (expenses[i][1]);
+
+                        expenseArray.push(singleExpense);
+
+                    }
+                    console.log(expenseArray);
+
+
+                    function drawChart() {
+
+                        var condArray = [['Category', 'Amount']];
+
+                        for (let i = 0; i < expenseArray.length; i++) {
+                            condArray.push([expenseArray[i].name, parseFloat(expenseArray[i].sum)]);
+                        }
+
+                        console.log(condArray);
+
+                        var options = {
+                            is3D: true,
+                            legend: {
+                                textStyle: { color: 'white' }
+                            },
+                            backgroundColor: 'transparent',
+                        };
+
+                        var data = google.visualization.arrayToDataTable(condArray)
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                        chart.draw(data, options);
+                    }
+                </script>
+
+-->
+                <!--
+                <script type="text/javascript">
+                    google.charts.load("current", { packages: ["corechart"] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                 
+                    let expensesJSON = '{{expenseCategories|json_encode|raw}}';
+
+                    let expenses = JSON.parse(expensesJSON);
+
+                    const expenseArray = [];
+
+                    for (let i = 0; i < expenses.length; i++) {
+
+                        const singleExpense = {};
+                        singleExpense.name = (expenses[i][0]);
+                        singleExpense.sum = (expenses[i][1]);
+
+                        expenseArray.push(singleExpense);
+
+                        console.log(expenseArray[i]['name']);
+                        console.log(expenseArray[i]['sum'])
+
+                    }
+                    console.log(expenseArray);
+
+
                     function drawChart() {
                         var data = google.visualization.arrayToDataTable([
                             ['Category', 'Amount'],
-                            //miejsce na dane 
-
+                            ['Task', 'Hours per Day'],
+                            ['Work', 11],
+                            ['Eat', 2],
+                            ['Commute', 2],
+                            ['Watch TV', 2],
+                            ['Sleep', 7]
                         ]);
 
                         var options = {
@@ -174,7 +257,7 @@
                         chart.draw(data, options);
                     }
                 </script>
-
+-->
 
 
 
