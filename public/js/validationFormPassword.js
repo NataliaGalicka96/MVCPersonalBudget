@@ -43,6 +43,13 @@ function validatePasswordForm() {
                     validPassword: true
                 }
 
+            },
+            errorPlacement: function (error, element) {
+
+                if (element.attr('name') == 'password') {
+                    error.appendTo('.passwordError');
+                }
+
             }
         });
 
