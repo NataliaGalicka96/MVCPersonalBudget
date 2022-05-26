@@ -8,6 +8,18 @@
 {% endblock %}
 
 {% block footer %}
+<script>
+    var lastDayJSON = '{{last_day_of_current_month|json_encode|raw}}';
+    var lastDayOfCurrentMonth = JSON.parse(lastDayJSON);
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+
+<script src="/js/data.js"></script>
+<script src="/js/validationExpenseIncomeForm.js"></script>
+
 
 {% endblock %}
 
@@ -55,14 +67,17 @@
             <div class="col-10 col-md-8 col-lg-6 col-xl-5">
                 <div class="expense">
                     <div class="title"><span>Add Expense</span></div>
-                    <form method="post" action="/expense/create">
+
+                    <form id="data" method="post" action="/expense/create">
+
                         <div class="row mb-2">
                             <div class="input-group">
                                 <label for="amount" class="form-label">Amount</label>
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
                                     aria-label="default input example" name="amount" required value={{expense.amount}}>
                             </div>
-                            <span class="error text-center">{{expense.errors.amountError}}</span>
+                            <span class="text-danger text-center error"
+                                id="amountError">{{expense.errors.amountError}}</span>
 
                         </div>
 
@@ -72,7 +87,8 @@
                                 <input id="date" class="form-control" type="date" aria-label="default input example"
                                     name="date" required value="{{expense.date ? expense.date : current_date}}">
                             </div>
-                            <span class="error text-center">{{expense.errors.dateError}}</span>
+                            <span class="text-danger text-center error"
+                                id="dateError">{{expense.errors.dateError}}</span>
 
                         </div>
 
@@ -97,7 +113,8 @@
                                 </select>
 
                             </div>
-                            <span class="error text-center">{{expense.errors.paymentError}}</span>
+                            <span class="text-danger text-center error"
+                                id="paymentError">{{expense.errors.paymentError}}</span>
                         </div>
 
                         <div class="row mb-2">
@@ -121,7 +138,8 @@
 
                                 </select>
                             </div>
-                            <span class="error text-center">{{expense.errors.categoryError}}</span>
+                            <span class="text-danger text-center error"
+                                id="categoryError">{{expense.errors.categoryError}}</span>
                         </div>
 
                         <div class="row mb-2">
@@ -130,7 +148,8 @@
                                 <input id="area" class="form-control" type="text" name="comment"
                                     aria-label="default input example" value="{{expense.comment}}">
                             </div>
-                            <span class="error text-center">{{expense.errors.commentError}}</span>
+                            <span class="text-danger text-center error"
+                                id="commentError">{{expense.errors.commentError}}</span>
 
                         </div>
                         <div class="button">

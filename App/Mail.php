@@ -18,42 +18,37 @@ class Mail
      *
      * @return mixed
      */
+
     public static function send($to, $subject, $text, $html)
     {
 
-        $mail = new PHPMailer;
-        $mail->CharSet = "UTF-8";
-        $mail->IsSMTP();
-        $mail->Host = "smtp.gmail.com";
-        $mail->SMTPAuth = true; # Enable SMTP authentication 
-        
+      $mail = new PHPMailer;
+      $mail->CharSet = "UTF-8";
+      $mail->IsSMTP();
+      $mail->Host = "smtp.gmail.com";
+      $mail->SMTPAuth = true; # Enable SMTP authentication 
+      
+      $mail->SMTPSecure = "tls";
+      $mail->Port       = 587;
+      
+      $mail->Username   = 'natalia.nauka96@gmail.com';                     //SMTP username
+      $mail->Password   = 'Nauka2022';     
 
+            //Recipients
+            $mail->setFrom('from@gmail.com', 'Mailer');
+            //Add a recipient
+            $mail->addAddress($to);  
+            $mail->Subject = $subject;
+            $content = $html;
 
-        $mail->SMTPSecure = "tls";
-        $mail->Port       = 587;
-        
-        $mail->Username   = 'natalia.nauka96@gmail.com';                     //SMTP username
-        $mail->Password   = 'Nauka2022';     
+            $mail->MsgHTML($content);
 
-              //Recipients
-              $mail->setFrom('from@gmail.com', 'Mailer');
-              //Add a recipient
-              $mail->addAddress($to);  
-              $mail->Subject = $subject;
-              $content = $html;
-
-              $mail->MsgHTML($content);
-
-              if(!$mail->Send()) {
-                echo "Error while sending Email.";
-                var_dump($mail);
-              } else {
-                echo "Email sent successfully";
-              }
-
-
-
- 
+            if(!$mail->Send()) {
+              echo "Error while sending Email.";
+              var_dump($mail);
+            } else {
+              echo "Email sent successfully";
+            }
     }
 }
  

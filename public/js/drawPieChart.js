@@ -6,7 +6,11 @@ function drawPieChartOfExpenses() {
 
 
     google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawChart);
+
+
+    if (Array.isArray(expenses) && expenses.length) {
+        google.charts.setOnLoadCallback(drawChart);
+    }
 
 
     const expenseArray = [];
@@ -52,7 +56,10 @@ function drawPieChartOfIncomes() {
 
 
     google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawChart);
+    //google.charts.setOnLoadCallback(drawChart);
+    if (Array.isArray(incomes) && incomes.length) {
+        google.charts.setOnLoadCallback(drawChart);
+    }
 
 
     const incomeArray = [];
