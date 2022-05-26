@@ -196,29 +196,28 @@ tr {
   #Table {
     margin-top: 30px;
   }
+
+  #content {
+    margin-top: 150px;
+  }
 }
 
 @media (max-width: 780px) {
 
   #content {
-    margin-top: 25px;
+    margin-top: 180px;
   }
 }
 
-@media (max-width: 700px) {
 
-  #content {
-    margin-top: 80px;
-  }
-}
 
-@media (max-width: 440px) {
+@media (max-width: 420px) {
 
   #period {
     margin-top: 140px;
   }
 
   #content {
-    margin-top: 25px;
+    margin-top: 60px;
   }
 }
