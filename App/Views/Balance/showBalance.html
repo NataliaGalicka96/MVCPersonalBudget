@@ -156,10 +156,11 @@
                     </tbody>
                 </table>
 
-
+                {% if expenseCategories is not empty %}
                 <p class="fs-3">Pie chart of expenses</p>
 
                 <div class="d-flex justify-content-center" id="piechart_3d"></div>
+                {% endif %}
 
             </div>
             <div class="col-12 col-xl-4 text-center">
@@ -188,9 +189,11 @@
                     </tbody>
                 </table>
 
+                {% if incomeCategories is not empty %}
                 <p class="fs-3">Pie chart of incomes</p>
 
                 <div class="d-flex justify-content-center" id="piechart_incomes"></div>
+                {% endif %}
 
 
             </div>
