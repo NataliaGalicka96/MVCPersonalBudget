@@ -8,7 +8,10 @@
 
 
 {% block footer %}
-
+<script>
+    var lastDayJSON = '{{last_day_of_current_month|json_encode|raw}}';
+    var lastDayOfCurrentMonth = JSON.parse(lastDayJSON);
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>

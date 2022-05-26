@@ -64,7 +64,7 @@ class View
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('current_date', \App\Date::getCurrentDate());
             $twig->addGlobal('first_day_of_current_month', \App\Date::getFirstDayOfCurrentMonth());
-            $twig->addGlobal('first_day_of_current_month', \App\Date::getFirstDayOfCurrentMonth());
+            $twig->addGlobal('last_day_of_current_month', \App\Date::getLastDayOfCurrentMonth());
         }
  
         return $twig->render($template, $args);
