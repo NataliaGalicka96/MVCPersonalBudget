@@ -6,10 +6,10 @@ function validateDataForm() {
     /**
      * Add jQuery Validation plugin method for a valid date
      *
-     * Valida date must be between 2000-01-01 and last day of current month
+     * Validate date must be between 2000-01-01 and last day of current month
      */
 
-    console.log(first);
+
 
     $.validator.addMethod('validDate',
         function (value, element, param) {
@@ -19,7 +19,7 @@ function validateDataForm() {
             }
             return true;
         },
-        'Date must be between 2000-01-01 and last day of current month.'
+        "Date must be between 2000-01-01 and " + lastDayOfCurrentMonth + "."
     );
 
 
@@ -37,7 +37,7 @@ function validateDataForm() {
                 date: {
                     required: true,
                     date: true,
-                    validate: true
+                    validDate: true
 
                 },
                 category: {
