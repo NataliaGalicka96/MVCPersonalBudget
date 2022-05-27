@@ -4,6 +4,7 @@ namespace App;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use App\Config;
 //use PHPMailer\PHPMailer\Exception;
 
 class Mail
@@ -31,8 +32,8 @@ class Mail
       $mail->SMTPSecure = "tls";
       $mail->Port       = 587;
       
-      $mail->Username   = 'natalia.nauka96@gmail.com';                     //SMTP username
-      $mail->Password   = 'Nauka2022';     
+      $mail->Username   = Config::SMTP_USERNAME;                     //SMTP username
+      $mail->Password   = Config::SMTP_PASSWORD;     
 
             //Recipients
             $mail->setFrom('from@gmail.com', 'Mailer');
