@@ -46,4 +46,19 @@ class Config
      */
     const SECRET_KEY ='kC8NB1Jv2lcjwjEoBhFAxS1bOcN8E7yz';
 
+    /**
+     * Email (SMTP username)
+     * @var string
+     *
+     */
+
+     const SMTP_USERNAME = 'natalia.nauka96@gmail.com'; 
+
+
+    /**
+     * Password (SMTP password)
+     * @var string
+     */
+
+    const SMTP_PASSWORD = 'Nauka2022';     
 }
