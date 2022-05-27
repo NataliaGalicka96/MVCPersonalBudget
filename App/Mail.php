@@ -43,12 +43,17 @@ class Mail
 
             $mail->MsgHTML($content);
 
+            $mail->Send();
+
+            /*
             if(!$mail->Send()) {
               echo "Error while sending Email.";
               var_dump($mail);
             } else {
               echo "Email sent successfully";
             }
+            */
     }
+
 }
  
