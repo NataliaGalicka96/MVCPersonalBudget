@@ -21,6 +21,7 @@
 </script>
 
 <script src="/js/drawPieChart.js"></script>
+<script src="/js/showModalWindowToChooseCustomPeriod.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -73,15 +74,31 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <select class="custom-select" id="period" name="selectPeriodTime" onchange="location = this.value;">>
-            <option value="" selected disabled>Choose period </option>
-            <option value="/Balance/showBalanceCurrentMonth">Current Month</option>
-            <option value="/Balance/showBalancePreviousMonth">Previous Month</option>
-            <option value="/Balance/showBalanceCurrentYear">Current year</option>
-            <option value="/Balance/showBalancePeriodTime">Custom period</option>
-        </select>
 
+
+
+
+    <div class="container">
+
+        <div class="btn-group m-2 mr-4 dateButton" id="period">
+
+            <button type="button" class="btn"> Choose Date</button>
+
+            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Expand the list</span>
+            </button>
+
+            <div class="dropdown-menu bg-transparent border-0 m-0 p-0 dropdown-menu-right">
+
+                <a class="dropdown-item" href="/Balance/showBalanceCurrentMonth">Current Month</a>
+                <a class="dropdown-item" href="/Balance/showBalancePreviousMonth">Previous Month</a>
+                <a class="dropdown-item" href="/Balance/showBalanceCurrentYear">Current Year</a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#periodDate">Custom period</a>
+
+            </div>
+
+        </div>
 
         <!--Modal-->
         <div class="modal fade" id="periodDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -114,20 +131,9 @@
         </div>
 
 
-
-
-        <div class="row text-center mt-4" id="content" name="periodTime">
-            {% if firstDate is empty and secondDate is empty %}
-            <button type="button" class="btn btn-warning mb-5" data-toggle="modal" data-target="#periodDate">You can
-                choose period time which you want to see your balance.</button>
-            {% endif %}
-            <div class="mb-3 text-center" id="content" name="periodTime">
-                <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>
-            </div>
-
+        <div class="mb-3 text-center" id="content" name="periodTime">
+            <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>
         </div>
-
-
 
         <div class="row" id="Table">
             <div class="col-12 col-xl-4 text-center">
@@ -238,7 +244,7 @@
     </div>
 
 </div>
-</div>
+
 
 
 {% endblock %}
