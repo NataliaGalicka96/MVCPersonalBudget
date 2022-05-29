@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/balance.css" />
+
+{% endblock %}
+
+{% block footer %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand"><i class="fa-solid fa-hand-holding-dollar me-2"></i>PERSONAL BUDGET</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item px-1">
+                        <a class="nav-link px-1" aria-current="page" href="/"><i
+                                class="fa-solid fa-house me-2"></i>Home</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Income/newIncome"><i class="fas fa-coins mr me-2"></i>Add Income</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Expense/newExpense"><i
+                                class="fa-solid fa-money-bill-1-wave me-2"></i>Add
+                            Expense</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Balance/showBalanceCurrentMonth"><i
+                                class="fa-solid fa-chart-pie me-2"></i>View
+                            Balance</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Settings/show"><i class="fas fa-cog me-2"></i>Settings</a>
+                        <div class="dropdown-menu bg-transparent border-0 m-0 p-0">
+
+                            <h6 class="dropdown-header">Profile settings</h6>
+                            <a class="dropdown-item" href="#">User</a>
+
+                            <h6 class="dropdown-header">Category settings</h6>
+                            <a class="dropdown-item" href="#">Income</a>
+                            <a class="dropdown-item" href="#">Expense</a>
+                            <a class="dropdown-item" href="#">Payment Methods</a>
+
+                        </div>
+                    </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+    <div class="container">
+
+
+
+
+
+        <div class="row" id="Table">
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
