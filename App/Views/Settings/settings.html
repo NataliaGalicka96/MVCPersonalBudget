@@ -3,7 +3,7 @@
 {% block title %}Settings{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="/css/balance.css" />
+<link rel="stylesheet" href="/css/settings.css" />
 
 {% endblock %}
 
@@ -33,38 +33,49 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 col-lg-2 mr-1">
                         <a class="nav-link px-1" aria-current="page" href="/"><i
                                 class="fa-solid fa-house me-2"></i>Home</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 col-lg-2 mr-1">
                         <a class="nav-link" href="/Income/newIncome"><i class="fas fa-coins mr me-2"></i>Add Income</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 col-lg-2 mr-1">
                         <a class="nav-link" href="/Expense/newExpense"><i
                                 class="fa-solid fa-money-bill-1-wave me-2"></i>Add
                             Expense</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 col-lg-2 mr-1">
                         <a class="nav-link" href="/Balance/showBalanceCurrentMonth"><i
                                 class="fa-solid fa-chart-pie me-2"></i>View
                             Balance</a>
                     </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link" href="/Settings/show"><i class="fas fa-cog me-2"></i>Settings</a>
-                        <div class="dropdown-menu bg-transparent border-0 m-0 p-0">
+                    <li class="nav-item px-1 dropdown col-lg-2 mr-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="fas fa-cog me-2"></i>
+                            Settings
+                        </a>
 
-                            <h6 class="dropdown-header">Profile settings</h6>
-                            <a class="dropdown-item" href="#">User</a>
-
-                            <h6 class="dropdown-header">Category settings</h6>
-                            <a class="dropdown-item" href="#">Income</a>
-                            <a class="dropdown-item" href="#">Expense</a>
-                            <a class="dropdown-item" href="#">Payment Methods</a>
-
-                        </div>
+                        <ul class="dropdown-menu bg-transparent border-0 m-0 p-0" aria-labelledby="dropdownMenuLink">
+                            <li>
+                                <span class="dropdown-header mt-2">Profile settings</span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/Settings/show">User</a></li>
+                            <li>
+                                <span class="dropdown-header mt-2">Category settings</span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Income</a></li>
+                            <li><a class="dropdown-item" href="#">Expense</a></li>
+                            <li><a class="dropdown-item" href="#">Payment methods</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 col-lg-2 mr-1">
                         <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a>
                     </li>
                 </ul>
@@ -73,24 +84,74 @@
     </nav>
 
 
+    <div class="container-fluid my-4 py-3">
+
+        <div class="row no-gutters" id="Table">
+
+            <div class="col-md-2 mx-0">
+
+                <ul class="nav flex-column px-1 py-2 side text-center">
+
+                    <h6 class="py-2">Profile Settings</h6>
+                    <li class="nav-item disabled">
+                        <a class="nav-link" href="#">User</a>
+                    </li>
+
+                    <h6 class="py-2">Category Settings</h6>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Income</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Expense</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Payment Methods</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-md-10  text-center mb-auto mt-auto">
+
+                <div class="row mb-3">
+                    <div class="input-group">
+                        <label for="currentName" class="form-label">Name</label>
+                        <input id="currentName" class="form-control" type="text" name="username"
+                            value="{{current_user.username}}" disabled>
+                        <button class="btn" type="button" id="editButton" data-toggle="modal"
+                            data-target="#editNameModal"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="input-group">
+                        <label for="currentEmail" class="form-label">Email</label>
+                        <input id="currentEmail" class="form-control" type="email" value="{{current_user.email}}"
+                            disabled>
+                        <button class="btn" type="button" id="editButton" data-toggle="modal"
+                            data-target="#editEmailModal"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="input-group">
+                        <label for="currentPassword" class="form-label">Name</label>
+                        <input id="currentPssword" type="password" class="form-control" name="username" value="••••••••"
+                            disabled>
+                        <button class="btn" type="button" id="editButton" data-toggle="modal"
+                            data-target="#editPasswordModal"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
 
 
 
-    <div class="container">
 
 
-
-
-
-        <div class="row" id="Table">
-
-
+                </div>
+            </div>
 
         </div>
-    </div>
-
-</div>
 
 
 
-{% endblock %}
+        {% endblock %}
