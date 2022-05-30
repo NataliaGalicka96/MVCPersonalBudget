@@ -489,23 +489,54 @@ class User extends \Core\Model
 
             $user = static::findUserByID($_SESSION['user_id']);
 
-            if (empty($this->errors)) {
+            if($user){
 
-                $sql = 'UPDATE users
-                        SET username = :newUsername
-                        WHERE id = :id';
+                if (empty($this->errors)) {
 
-                $db = static::getDBConnection();
+                    $sql = 'UPDATE users
+                            SET username = :newUsername
+                            WHERE id = :id';
 
-                $stmt = $db->prepare($sql);
+                    $db = static::getDBConnection();
 
-                $stmt->bindValue(':newUsername', $this->username, PDO::PARAM_STR);
-                $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+                    $stmt = $db->prepare($sql);
 
-                return $stmt->execute();
-            }
+                    $stmt->bindValue(':newUsername', $this->username, PDO::PARAM_STR);
+                    $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+                    return $stmt->execute();
+                }
+        }
 
             return false;
+        }
+
+
+        public function editEmail()
+        {
+            $this->validate();
+
+            $user = static::findUserByID($_SESSION['user_id']);
+
+            if($user) {
+
+                if (empty($this->errors)) {
+
+                    $sql = 'UPDATE users
+                            SET email = :email
+                            WHERE id = :id';
+
+                    $db = static::getDBConnection();
+
+                    $stmt = $db->prepare($sql);
+
+                    $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+                    $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+                    return $stmt->execute();
+                }
+
+            }
         }
 
 

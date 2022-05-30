@@ -36,7 +36,7 @@ class Settings extends Authenticated
     }
 
     /**
-     * Update the profile
+     * Edit username
      *
      * @return void
      */
@@ -48,6 +48,32 @@ class Settings extends Authenticated
         if ($user->editUsername()) {
 
             Flash::addMessage('Name has been successfully edited.');
+
+            $this->redirect('/Settings/showUserSettings');
+
+        } else {
+
+            View::renderTemplate('/Settings/userSettings.html', [
+                'user' => $this->user
+            ]);
+
+        }
+        
+    }
+
+    /**
+     * Edit email
+     *
+     * @return void
+     */
+    
+    public function editEmailAction()
+    {
+        $user = new User($_POST);
+       
+        if ($user->editEmail()) {
+
+            Flash::addMessage('Email has been successfully edited.');
 
             $this->redirect('/Settings/showUserSettings');
 
