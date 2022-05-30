@@ -86,4 +86,30 @@ class Settings extends Authenticated
         }
         
     }
+
+    /**
+     * Edit password
+     *
+     * @return void
+     */
+    
+    public function editPasswordAction()
+    {
+        $user = new User($_POST);
+       
+        if ($user->editPassword()) {
+
+            Flash::addMessage('Password has been successfully edited.');
+
+            $this->redirect('/Settings/showUserSettings');
+
+        } else {
+
+            View::renderTemplate('/Settings/userSettings.html', [
+                'user' => $this->user
+            ]);
+
+        }
+        
+    }
 }

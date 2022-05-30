@@ -86,11 +86,13 @@ body {
   height: 100%;
 }
 
+/*
 .input-group {
   width: 100% !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
+*/
 
 #editButton {
   background-color: #FFB300;

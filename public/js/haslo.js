@@ -1,6 +1,6 @@
 const input = document.querySelector('#password');
 
-const checkbox = document.querySelector('#checkbox');
+const checkbox = document.querySelector('#checbox');
 
 const h1 = document.querySelector('h1');
 
