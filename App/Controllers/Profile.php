@@ -55,9 +55,9 @@ class Profile extends Authenticated
      *
      * @return void
      */
-    public function updateAction()
+    public function editUserNameAction()
     {
-        if ($this->user->updateProfile($_POST)) {
+        if ($this->user->editUserName()) {
 
             Flash::addMessage('Changes saved');
 

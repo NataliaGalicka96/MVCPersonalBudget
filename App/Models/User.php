@@ -481,6 +481,36 @@ class User extends \Core\Model
             $stmt->execute();                
         }
 
+
+
+        public function editUsername(){
+
+            $this->validate();
+
+            $user = static::findUserByID($_SESSION['user_id']);
+
+            if (empty($this->errors)) {
+
+                $sql = 'UPDATE users
+                        SET username = :newUsername
+                        WHERE id = :id';
+
+                $db = static::getDBConnection();
+
+                $stmt = $db->prepare($sql);
+
+                $stmt->bindValue(':newUsername', $this->username, PDO::PARAM_STR);
+                $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+                return $stmt->execute();
+            }
+
+            return false;
+        }
+
+
+        
+
     /**
      * Update the user's profile
      *

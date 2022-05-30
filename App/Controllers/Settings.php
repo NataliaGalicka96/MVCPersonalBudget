@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \App\Auth;
 use \Core\View;
 use \App\Models\User;
+use \App\Flash;
 
 class Settings extends Authenticated
 {
@@ -40,23 +41,23 @@ class Settings extends Authenticated
      * @return void
      */
     
-     public function updateAction()
+     public function editUsernameAction()
     {
         $user = new User($_POST);
-        /*
-        if ($this->user->updateProfile($_POST)) {
+       
+        if ($user->editUsername()) {
 
-            Flash::addMessage('Changes saved');
+            Flash::addMessage('Name has been successfully edited.');
 
-            $this->redirect('/profile/show');
+            $this->redirect('/Settings/showUserSettings');
 
         } else {
 
-            View::renderTemplate('Profile/edit.html', [
+            View::renderTemplate('/Settings/userSettings.html', [
                 'user' => $this->user
             ]);
 
         }
-        */
+        
     }
 }
