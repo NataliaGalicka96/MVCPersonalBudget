@@ -26,9 +26,9 @@ class Settings extends Authenticated
      * @return void
      */
 
-    public function showAction()
+    public function showUserSettingsAction()
     {
-        View::renderTemplate('Settings/settings.html', [
+        View::renderTemplate('Settings/userSettings.html', [
             'user' => $this->user
         ]);
     }

@@ -9,16 +9,10 @@
 
 {% block footer %}
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-
 {% endblock %}
 
 {% block body %}
@@ -33,29 +27,32 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item px-1 col-lg-2 mr-1">
+                    <li class="nav-item px-1">
                         <a class="nav-link px-1" aria-current="page" href="/"><i
                                 class="fa-solid fa-house me-2"></i>Home</a>
                     </li>
-                    <li class="nav-item px-1 col-lg-2 mr-1">
+                    <li class="nav-item px-1">
                         <a class="nav-link" href="/Income/newIncome"><i class="fas fa-coins mr me-2"></i>Add Income</a>
                     </li>
-                    <li class="nav-item px-1 col-lg-2 mr-1">
+                    <li class="nav-item px-1">
                         <a class="nav-link" href="/Expense/newExpense"><i
                                 class="fa-solid fa-money-bill-1-wave me-2"></i>Add
                             Expense</a>
                     </li>
-                    <li class="nav-item px-1 col-lg-2 mr-1">
+                    <li class="nav-item px-1">
                         <a class="nav-link" href="/Balance/showBalanceCurrentMonth"><i
                                 class="fa-solid fa-chart-pie me-2"></i>View
                             Balance</a>
                     </li>
-                    <li class="nav-item px-1 dropdown col-lg-2 mr-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/Settings/showUserSettings"><i
+                                class="fas fa-cog me-2"></i>Settings</a>
+
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
                             aria-expanded="false"><i class="fas fa-cog me-2"></i>
                             Settings
                         </a>
-
+                       
                         <ul class="dropdown-menu bg-transparent border-0 m-0 p-0" aria-labelledby="dropdownMenuLink">
                             <li>
                                 <span class="dropdown-header mt-2">Profile settings</span>
@@ -73,7 +70,7 @@
                             <li><a class="dropdown-item" href="#">Income</a></li>
                             <li><a class="dropdown-item" href="#">Expense</a></li>
                             <li><a class="dropdown-item" href="#">Payment methods</a></li>
-                        </ul>
+                        </ul>-->
                     </li>
                     <li class="nav-item px-1 col-lg-2 mr-1">
                         <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a>
@@ -84,11 +81,11 @@
     </nav>
 
 
-    <div class="container-fluid my-4 py-3">
+    <div class="container-fluid">
 
         <div class="row no-gutters" id="Table">
 
-            <div class="col-md-2 mx-0">
+            <div class="col-md-2 mr-2">
 
                 <ul class="nav flex-column px-1 py-2 side text-center">
 
@@ -136,22 +133,102 @@
 
                 <div class="row mb-3">
                     <div class="input-group">
-                        <label for="currentPassword" class="form-label">Name</label>
+                        <label for="currentPassword" class="form-label">Password</label>
                         <input id="currentPssword" type="password" class="form-control" name="username" value="••••••••"
                             disabled>
                         <button class="btn" type="button" id="editButton" data-toggle="modal"
                             data-target="#editPasswordModal"><i class="fa-solid fa-pen-to-square"></i></button>
                     </div>
-
-
-
-
-
                 </div>
             </div>
 
+            <!--Modal window-->
+            <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editing Username</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="input-group">
+                                    <label for="currentName" class="form-label">Name</label>
+                                    <input id="currentName" class="form-control" type="text" name="username"
+                                        placeholder="{{current_user.username}}">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Modal window-->
+            <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editing Email</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="input-group">
+                                    <label for="currentEmail" class="form-label">Email</label>
+                                    <input id="currentEmail" class="form-control" type="email"
+                                        placeholder="{{current_user.email}}">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Modal window-->
+            <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editing Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="input-group">
+                                    <label for="currentPassword" class="form-label">Password</label>
+                                    <input id="currentPssword" type="password" class="form-control" name="username"
+                                        placeholder="••••••••">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-
-
-
-        {% endblock %}
+    </div>
+</div>
+{% endblock %}
