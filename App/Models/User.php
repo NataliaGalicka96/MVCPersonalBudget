@@ -540,6 +540,39 @@ class User extends \Core\Model
         }
 
 
+    /**
+     * Authenticate a user by password.
+     *
+     * @param string $email email address
+     * @param string $password password
+     *
+     * @return mixed  The user object or false if authentication fails
+     */
+
+    public static function authenticatePassword($password)
+    {
+        $user = static::findUserById($_SESSION['user_id']);
+
+        if ($user) {
+            if (password_verify($password, $user->password_hash)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+        public function editPassword()
+        {
+            $this->validate();
+
+            $user = static::findUserById($_SESSION['user_id']);
+
+            if
+        }
+
+
         
 
     /**
