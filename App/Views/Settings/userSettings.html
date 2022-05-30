@@ -10,9 +10,18 @@
 {% block footer %}
 
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script src="/js/haslo.js"></script>
+<script src="/js/validationFormSignup.js"></script>
+<script src="/js/validationFormPassword.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -85,7 +94,7 @@
 
         <div class="row no-gutters" id="Table">
 
-            <div class="col-md-2 mr-2">
+            <div class="col-sm-12 col-md-4 mr-3">
 
                 <ul class="nav flex-column px-1 py-2 side text-center">
 
@@ -109,7 +118,7 @@
 
             </div>
 
-            <div class="col-md-10  text-center mb-auto mt-auto">
+            <div class="col-sm-12 col-md-8   text-center mb-auto mt-auto">
 
                 <div class="row mb-3">
                     <div class="input-group">
@@ -134,101 +143,156 @@
                 <div class="row mb-3">
                     <div class="input-group">
                         <label for="currentPassword" class="form-label">Password</label>
-                        <input id="currentPssword" type="password" class="form-control" name="username" value="••••••••"
-                            disabled>
+                        <input id="currentPassword" type="password" class="form-control" name="username"
+                            value="••••••••" disabled>
                         <button class="btn" type="button" id="editButton" data-toggle="modal"
                             data-target="#editPasswordModal"><i class="fa-solid fa-pen-to-square"></i></button>
                     </div>
                 </div>
             </div>
 
-            <!--Modal window-->
-            <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editing Username</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="input-group">
-                                    <label for="currentName" class="form-label">Name</label>
-                                    <input id="currentName" class="form-control" type="text" name="username"
-                                        placeholder="{{current_user.username}}">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!--Modal window-->
-            <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editing Email</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="input-group">
-                                    <label for="currentEmail" class="form-label">Email</label>
-                                    <input id="currentEmail" class="form-control" type="email"
-                                        placeholder="{{current_user.email}}">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--Modal window-->
-            <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editing Password</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="input-group">
-                                    <label for="currentPassword" class="form-label">Password</label>
-                                    <input id="currentPssword" type="password" class="form-control" name="username"
-                                        placeholder="••••••••">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
         </div>
     </div>
-</div>
-{% endblock %}
+    <!--Modal window-->
+    <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editing Username</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Settings/update" id="formSignup">
+                        <div class="row mb-3">
+                            <div class="input-group justify-self-center">
+                                <label for="username" class="form-label">Name</label>
+                                <input id="username" class="form-control" type="text" name="username"
+                                    placeholder="{{current_user.username}}">
+                            </div>
+                        </div>
+
+                        <ul class="text-danger text-center mt-1 error nameError" style="list-style-type:none;">
+                            {% if user.errors['usernameError1'] is defined %}
+                            <li>{{ user.errors['usernameError1'] }}</li>
+                            {% endif %}
+
+                            {% if user.errors['usernameError2'] is defined %}
+                            <li>{{ user.errors['usernameError2'] }}</li>
+                            {% endif %}
+
+                            {% if user.errors['usernameError3'] is defined %}
+                            <li>{{ user.errors['usernameError3'] }}</li>
+                            {% endif %}
+
+                            {% if user.errors['usernameError4'] is defined %}
+                            <li>{{ user.errors['usernameError4'] }}</li>
+                            {% endif %}
+
+                        </ul>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal window-->
+    <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editing Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Settings/update" id="formEmail">
+                        <div class=" row mb-3">
+                            <div class="input-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input id="email" class="form-control" type="email" name="email"
+                                    placeholder="{{current_user.email}}">
+                            </div>
+                        </div>
+                        <ul class="text-danger text-center mt-1 error emailError" style="list-style-type:none;">
+
+                            {% if user.errors['emailError1'] is defined %}
+                            <li>{{ user.errors['emailError1'] }}</li>
+                            {% endif %}
+
+                            {% if user.errors['emailError2'] is defined %}
+                            <li>{{ user.errors['emailError2'] }}</li>
+                            {% endif %}
+
+                        </ul>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Modal window-->
+    <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editing Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Settings/update" id="formPassword">
+                        <div class=" row mb-3">
+                            <div class="input-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input id="password" type="password" class="form-control" name="password"
+                                    placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <ul class="text-danger text-center mt-1 error passwordError" style="list-style-type:none;">
+
+                            {% if user.errors['errorPassword1'] is defined %}
+                            <li>{{ user.errors['errorPassword1'] }}</li>
+                            {% endif %}
+
+                            {% if user.errors['errorPassword2'] is defined %}
+                            <li>{{ user.errors['errorPassword2'] }}</li>
+                            {% endif %}
+
+                            {% if user.errors['errorPassword3'] is defined %}
+                            <li>{{user.errors['errorPassword3']}}</li>
+                            {% endif %}
+                        </ul>
+                        <div>
+                            <input type="checkbox" id="checkbox" name="checkbox" onclick="showPassword()">
+                            <label for="checkbox">Show password</label>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

@@ -159,20 +159,18 @@ h6 {
 
 
 
-@media (max-width: 990px) {
-
-
+@media (max-width: 997px) {
 
   #Table {
-    margin-top: 200px;
+    margin-top: 240px;
   }
 
 }
 
 @media (max-width: 780px) {
 
-  #content {
-    margin-top: 180px;
+  #Table {
+    margin-top: 220px;
   }
 }
 
@@ -180,8 +178,8 @@ h6 {
 
 @media (max-width: 420px) {
 
-  #period {
-    margin-top: 140px;
+  #Table {
+    margin-top: 250px;
   }
 
   #content {

@@ -23,7 +23,7 @@ class Profile extends Authenticated
     {
         parent::before();
 
-        $this->user = Auth::getUser();
+        $this->user = Auth::getLoggedUser();
     }
 
     /**
