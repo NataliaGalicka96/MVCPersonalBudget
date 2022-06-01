@@ -101,6 +101,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: rgb(23 22 53);
+  height: -webkit-fill-available;
+}
+
+#deleteButton {
+  background-color: #FFB300;
+  width: 47px;
+  border: 2px solid rgb(23 22 53);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 0 6px 6px 0;
   color: rgb(23 22 53);
   height: -webkit-fill-available;
@@ -159,6 +170,15 @@ h6 {
 
 }
 
+#Title {
+  color: #ffd700;
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 20px;
+
+}
 
 
 @media (max-width: 997px) {
@@ -171,8 +191,8 @@ h6 {
 
 @media (max-width: 780px) {
 
-  #Table {
-    margin-top: 220px;
+  #Menu {
+    margin-bottom: 35px;
   }
 }
 

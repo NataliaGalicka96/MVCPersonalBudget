@@ -6,9 +6,15 @@ use \App\Auth;
 use \Core\View;
 use \App\Models\User;
 use \App\Flash;
+use \App\Models\Category;
 
 class Settings extends Authenticated
 {
+
+    protected $incomeCategories;
+    protected $expenseCategories;
+    protected $paymentCategories;
+
     /**
      * Before filter - called before each action method
      *
@@ -20,6 +26,9 @@ class Settings extends Authenticated
         parent::before();
 
         $this->user = Auth::getLoggedUser();
+        $this->incomeCategories = Category::getCurrentUserIncomeCategories(); 
+        $this->expenseCategories = Category::getCurrentUserExpenseCategories();
+        $this->paymentMethods = Category::getCurrentUserPaymentMethods();
     }
 
     /**
@@ -112,4 +121,16 @@ class Settings extends Authenticated
         }
         
     }
+
+    /**
+     * 
+     * Show income categories page
+     */
+
+     public function showIncomeCategorySettingsAction()
+     {
+        View::renderTemplate('Settings/incomeSettings.html', [
+            'incomeCategories' => $this->incomeCategories
+        ]);
+     }
 }

@@ -8,17 +8,22 @@
 {% endblock %}
 
 {% block footer %}
+<script>
+    /* Load expense sums by twig to piechart.js.  */
+    var expensesJSON = '{{expenseCategories|json_encode|raw}}';
+    var expenses = JSON.parse(expensesJSON);
 
+    var incomesJSON = '{{incomeCategories|json_encode|raw}}';
+    var incomes = JSON.parse(incomesJSON);
+
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
-<script src="/js/haslo.js"></script>
-<script src="/js/validationFormSignup.js"></script>
-<script src="/js/validationFormPassword.js"></script>
-
+<script src="/js/manageModal.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
@@ -94,9 +99,9 @@
 
     <div class="container-fluid">
 
-        <div class="row no-gutters" id="Table">
+        <div class="row" id="Table">
 
-            <div class="col-sm-12 col-md-4 mr-3">
+            <div class="col-sm-12 col-md-4 mr-3" id="Menu">
 
                 <ul class="nav flex-column px-1 py-2 side text-center">
 
@@ -120,63 +125,49 @@
 
             </div>
 
-            <div class="col-sm-12 col-md-8   text-center mb-auto mt-auto">
+            <div class="col-sm-12 col-md-8   text-center ">
 
+                <span id="Title">Your categories of income</span>
 
+                {% for category in incomeCategories %}
 
-                <div class="row mb-3">
-                    <div class=" col-lg-6 input-group">
-                        <label for="currentName" class="form-label">Name</label>
-                        <input id="currentName" class="form-control" type="text" name="username"
-                            value="{{current_user.username}}" disabled>
-                        <button class="btn" type="button" id="editButton" data-toggle="modal"
-                            data-target="#editNameModal"><i class="fa-solid fa-pen-to-square"></i></button>
+                <div class="row mt-3 mb-3">
+                    <div class="col-lg-6 input-group">
+                        <input class="form-control" type="text" value="{{category.name}}" disabled>
+                        <button class="btn" type="button" id="editButton" data-category-id="{{ category.id }}"
+                            data-category-name="{{ category.name }}" data-toggle="modal"
+                            data-target="#editCategoryName"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn" type="button" id="deleteButton" data-category-id="{{ category.id }}"
+                            data-toggle="modal" data-target="#deleteCategory"><i
+                                class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
+                {% endfor %}
 
-                <div class="row mb-3">
-                    <div class="input-group">
-                        <label for="currentEmail" class="form-label">Email</label>
-                        <input id="currentEmail" class="form-control" type="email" value="{{current_user.email}}"
-                            disabled>
-                        <button class="btn" type="button" id="editButton" data-toggle="modal"
-                            data-target="#editEmailModal"><i class="fa-solid fa-pen-to-square"></i></button>
-                    </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="input-group">
-                        <label for="currentPassword" class="form-label">Password</label>
-                        <input id="currentPassword" type="password" class="form-control" name="username"
-                            value="••••••••" disabled>
-                        <button class="btn" type="button" id="editButton" data-toggle="modal"
-                            data-target="#editPasswordModal"><i class="fa-solid fa-pen-to-square"></i></button>
-                    </div>
-                </div>
             </div>
-
-
-
 
         </div>
     </div>
-    <!--Modal window-->
-    <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--Modal window to editing category-->
+    <div class="modal fade" id="editCategoryName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editing Username</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editing Income Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/Settings/editUsername" id="formSignup">
+                    <form method="post" action="/Settings/editIncomeCategories" id="formCategory">
+                        <p class="text-muted">Please enter new name for the selected category.</p>
                         <div class="row mb-3">
                             <div class="input-group justify-self-center">
-                                <label for="username" class="form-label">Name</label>
-                                <input id="username" class="form-control" type="text" name="username"
-                                    placeholder="{{current_user.username}}" required>
+                                <label for="category" class="form-label text-center">Category name</label>
+                                <input id="category" class="form-control" type="text" name="newCategoryName"
+                                    data-category-type="income" required>
+                                <input type="hidden" name="categoryOldId">
                             </div>
                         </div>
 
@@ -209,106 +200,29 @@
         </div>
     </div>
 
-    <!--Modal window-->
-    <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--Modal window to deleting categories-->
+    <div class="modal fade" id="deleteCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editing Email</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Deleting Income Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/Settings/editEmail" id="formEmail">
-                        <div class=" row mb-3">
-                            <div class="input-group">
-                                <label for="email" class="form-label">Email</label>
-                                <input id="email" class="form-control" type="email" name="email"
-                                    placeholder="{{current_user.email}}" required>
+                    <form method="post" action="/Settings/deleteIncomeCategories" id="formCategory">
+                        <span class="text-danger text-center">WARNING!</span>
+                        <p class="text-danger">If you delete the
+                            category all
+                            of your incomes assigned to this category will be automatically deleted.</p>
+                        <p class="mt-2">Are you sure you want to delete the category?</p>
+                        <div class="row mb-3">
+                            <div class="input-group justify-self-center">
+                                <input type="hidden" name="categoryOldId">
                             </div>
                         </div>
-                        <ul class="text-danger text-center mt-1 error emailError" style="list-style-type:none;">
-
-                            {% if user.errors['emailError1'] is defined %}
-                            <li>{{ user.errors['emailError1'] }}</li>
-                            {% endif %}
-
-                            {% if user.errors['emailError2'] is defined %}
-                            <li>{{ user.errors['emailError2'] }}</li>
-                            {% endif %}
-
-                        </ul>
-
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Save</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <!--Modal window-->
-    <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editing Password</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="/Settings/editPassword" id="formPassword">
-                        <div class=" row mb-3">
-                            <div class="input-group">
-                                <label for="oldPassword" class="form-label">Old Password</label>
-                                <input id="oldPassword" type="password" class="form-control" name="oldPassword"
-                                    placeholder="••••••••" required>
-                            </div>
-                        </div>
-                        <ul class="text-danger text-center mt-1 error passwordError" style="list-style-type:none;">
-
-                            {% if user.errors['errorConfirmPassword'] is defined %}
-                            <li>{{ user.errors['errorConfirmPassword'] }}</li>
-                            {% endif %}
-
-
-                        </ul>
-
-                        <div class=" row mb-3">
-                            <div class="input-group">
-                                <label for="password" class="form-label">Password</label>
-                                <input id="password" type="password" class="form-control" name="password"
-                                    placeholder="••••••••" required>
-                            </div>
-                        </div>
-
-                        <ul class="text-danger text-center mt-1 error passwordError" style="list-style-type:none;">
-
-                            {% if user.errors['errorPassword1'] is defined %}
-                            <li>{{ user.errors['errorPassword1'] }}</li>
-                            {% endif %}
-
-                            {% if user.errors['errorPassword2'] is defined %}
-                            <li>{{ user.errors['errorPassword2'] }}</li>
-                            {% endif %}
-
-                            {% if user.errors['errorPassword3'] is defined %}
-                            <li>{{user.errors['errorPassword3']}}</li>
-                            {% endif %}
-                        </ul>
-                        <div>
-                            <input type="checkbox" id="checkbox" name="checkbox" onclick="showPassword();">
-                            <label for="checkbox">Show password</label>
-                        </div>
-
-
-                </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success">Save</button>
@@ -318,5 +232,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock %}
