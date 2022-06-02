@@ -5,8 +5,10 @@ namespace App\Controllers;
 use \App\Auth;
 use \Core\View;
 use \App\Models\User;
-use \App\Flash;
 use \App\Models\Category;
+use \App\Models\IncomeCategory;
+use \App\Flash;
+
 
 class Settings extends Authenticated
 {
@@ -133,4 +135,32 @@ class Settings extends Authenticated
             'incomeCategories' => $this->incomeCategories
         ]);
      }
+
+     /**
+     * Edit email
+     *
+     * @return void
+     */
+    
+    public function editIncomeCategoriesAction()
+    {
+        $category = new IncomeCategory($_POST);
+        
+        var_dump($_POST);
+       
+        if ($category->editIncomeCategory()) {
+
+            Flash::addMessage('Your category has been successfully edited.');
+            $this -> redirect('/Settings/showIncomeCategorySettings');
+
+        } else {
+
+            View::renderTemplate('Settings/incomeSettings.html', [
+                'incomeCategories' => $this->incomeCategories
+            ]);
+
+        }
+        
+    }
+     
 }
