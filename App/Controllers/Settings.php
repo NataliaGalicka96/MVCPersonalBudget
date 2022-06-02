@@ -137,20 +137,47 @@ class Settings extends Authenticated
      }
 
      /**
-     * Edit email
+     * Edit name of category
      *
      * @return void
      */
     
-    public function editIncomeCategoriesAction()
+    public function editIncomeCategoryAction()
     {
         $category = new IncomeCategory($_POST);
         
-        var_dump($_POST);
+        //var_dump($_POST);
        
-        if ($category->editIncomeCategory()) {
+        if ($category->editCategory()) {
 
             Flash::addMessage('Your category has been successfully edited.');
+            $this -> redirect('/Settings/showIncomeCategorySettings');
+
+        } else {
+
+            View::renderTemplate('Settings/incomeSettings.html', [
+                'incomeCategories' => $this->incomeCategories
+            ]);
+
+        }
+        
+    }
+
+    /**
+     * Deleting the category and incomes related to that category
+     *
+     * @return void
+     */
+    
+    public function deleteIncomeCategoryAction()
+    {
+        $category = new IncomeCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->deleteCategory()) {
+
+            Flash::addMessage('Your category has been successfully deleted.');
             $this -> redirect('/Settings/showIncomeCategorySettings');
 
         } else {

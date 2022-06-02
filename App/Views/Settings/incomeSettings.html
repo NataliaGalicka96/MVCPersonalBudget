@@ -143,6 +143,8 @@
                     </div>
                 </div>
                 {% endfor %}
+                <button class="btn" type="button" id="addButton" data-toggle="modal" data-target="#addCategoryModal">Add
+                    New Category</button>
 
 
             </div>
@@ -160,7 +162,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/Settings/editIncomeCategories" id="formCategory">
+                    <form method="post" action="/Settings/editIncomeCategory" id="formCategory">
                         <p class="text-muted">Please enter new name for the selected category.</p>
                         <div class="row mb-3">
                             <div class="input-group justify-self-center">
@@ -171,23 +173,10 @@
                             </div>
                         </div>
 
-                        <ul class="text-danger text-center mt-1 error nameError" style="list-style-type:none;">
-                            {% if user.errors['usernameError1'] is defined %}
-                            <li>{{ user.errors['usernameError1'] }}</li>
+                        <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                            {% if category.errors['categoryName'] is defined %}
+                            <li>{{ category.errors.categoryName}}</li>
                             {% endif %}
-
-                            {% if user.errors['usernameError2'] is defined %}
-                            <li>{{ user.errors['usernameError2'] }}</li>
-                            {% endif %}
-
-                            {% if user.errors['usernameError3'] is defined %}
-                            <li>{{ user.errors['usernameError3'] }}</li>
-                            {% endif %}
-
-                            {% if user.errors['usernameError4'] is defined %}
-                            <li>{{ user.errors['usernameError4'] }}</li>
-                            {% endif %}
-
                         </ul>
 
                 </div>
@@ -211,7 +200,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/Settings/deleteIncomeCategories" id="formCategory">
+                    <form method="post" action="/Settings/deleteIncomeCategory" id="formCategory">
                         <span class="text-danger text-center">WARNING!</span>
                         <p class="text-danger">If you delete the
                             category all
@@ -222,6 +211,44 @@
                                 <input type="hidden" name="categoryOldId">
                             </div>
                         </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal window to adding new category-->
+    <div class="modal fade" id="editCategoryName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editing Income Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Settings/editIncomeCategory" id="formCategory">
+                        <p class="text-muted">Please enter new name for the selected category.</p>
+                        <div class="row mb-3">
+                            <div class="input-group justify-self-center">
+                                <label for="category" class="form-label text-center">Category name</label>
+                                <input id="category" class="form-control" type="text" name="newCategoryName"
+                                    data-category-type="income" required>
+                                <input type="hidden" name="categoryOldId">
+                            </div>
+                        </div>
+
+                        <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                            {% if category.errors['categoryName'] is defined %}
+                            <li>{{ category.errors.categoryName}}</li>
+                            {% endif %}
+                        </ul>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

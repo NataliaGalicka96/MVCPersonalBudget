@@ -4,7 +4,7 @@ namespace App\Models;
 
 use PDO;
 
-class IncomeCategory extends Category
+class IncomeCategory extends \Core\Model
 {
 
     /**
@@ -36,15 +36,6 @@ class IncomeCategory extends Category
             $this->errors['categoryName'] = 'Name of category needs to be between 3 to 40 characters.';;
         }
 
-    }
-    
-}
-
-    public function editIncomeCategory()
-    {
-        $this->validateCategoryName();
-
-
         $sql = "SELECT * FROM incomes_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
 		
 		$db = static::getDBConnection();
@@ -61,7 +52,16 @@ class IncomeCategory extends Category
 		$this->errors['categoryName'] = "Category already exists.";	
 		}
 
-        if (empty($this->errors)) {
+
+    }
+    
+}
+
+    public function editCategory()
+    {
+        $this->validateCategoryName();
+
+        if(empty($this->errors)) {
 			$sql = "UPDATE incomes_category_assigned_to_users SET name = :name WHERE id = :id";
 			
 			$db = static::getDBConnection();
@@ -75,4 +75,25 @@ class IncomeCategory extends Category
 		return false;
 	}
 
+    
+    public function deleteCategory()
+    {
+        $this->validateCategoryName();
+
+        if(empty($this->errors)) {
+            $sql='DELETE FROM incomes_category_assigned_to_users
+            WHERE id=:id';
+
+            $db = static::getDBConnection();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
+
+            return $stmt->execute();
+		}
+		return false;
+	}
+
+
 }
+
