@@ -481,6 +481,124 @@ class User extends \Core\Model
             $stmt->execute();                
         }
 
+
+
+        public function editUsername(){
+
+            $this->validate();
+
+            $user = static::findUserByID($_SESSION['user_id']);
+
+            if($user){
+
+                if (empty($this->errors)) {
+
+                    $sql = 'UPDATE users
+                            SET username = :newUsername
+                            WHERE id = :id';
+
+                    $db = static::getDBConnection();
+
+                    $stmt = $db->prepare($sql);
+
+                    $stmt->bindValue(':newUsername', $this->username, PDO::PARAM_STR);
+                    $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+                    return $stmt->execute();
+                }
+        }
+
+            return false;
+        }
+
+
+        public function editEmail()
+        {
+            $this->validate();
+
+            $user = static::findUserByID($_SESSION['user_id']);
+
+            if($user) {
+
+                if (empty($this->errors)) {
+
+                    $sql = 'UPDATE users
+                            SET email = :email
+                            WHERE id = :id';
+
+                    $db = static::getDBConnection();
+
+                    $stmt = $db->prepare($sql);
+
+                    $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+                    $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+                    return $stmt->execute();
+                }
+
+            }
+        }
+
+
+    /**
+     * Authenticate a user by password.
+     *
+     * @param string $email email address
+     * @param string $password password
+     *
+     * @return mixed  The user object or false if authentication fails
+     */
+
+    public static function authenticatePassword($password, $userId)
+    {
+        $user = static::findUserById($_SESSION['user_id']);
+
+        if ($user && $user->is_active) {
+            if (password_verify($password, $user->password_hash)) {
+                return true;
+            }
+        }else{
+            $this->errors['errorConfirmPassword'] = 'Enter the correct current password';
+        }
+
+        
+    }
+
+    
+
+        public function editPassword()
+        {
+            $this->validate();
+
+
+            $is_valid = static::authenticatePassword($this->oldPassword, $_SESSION['user_id'] );
+            
+            if(empty($this->errors) && $is_valid){
+
+                $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+    
+                $sql = 'UPDATE users
+                        SET password_hash = :password_hash,
+                            password_reset_hash = NULL,
+                            password_reset_expires_at = NULL
+                        WHERE id = :id';
+    
+                $db = static::getDBConnection();
+                $stmt = $db->prepare($sql);
+    
+                $stmt->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+                $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+    
+                return $stmt->execute();
+            }
+    
+            return false;
+        }
+
+
+
+        
+
     /**
      * Update the user's profile
      *

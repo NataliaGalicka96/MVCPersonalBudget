@@ -7,6 +7,13 @@ use PDO;
 class Category extends \Core\Model
 {
 
+    /**
+     * Error messages
+     * @var array
+     */
+
+    public $errors = [];
+
     public function __construct($data = [])
     {
         foreach($data as $key => $value) {
@@ -107,16 +114,23 @@ class Category extends \Core\Model
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

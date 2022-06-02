@@ -86,7 +86,7 @@ class IncomeModel extends \Core\Model
             
             if(empty($this -> amount)) {
 
-                $this->errors['amounError'] = 'Amount is required.';
+                $this->errors['amountError'] = 'Amount is required.';
             
             }
             
@@ -134,6 +134,9 @@ class IncomeModel extends \Core\Model
         }
 
      }
+
+
+
 
 
 }

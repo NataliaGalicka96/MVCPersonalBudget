@@ -1,0 +1,217 @@
+body {
+  font-family: 'Poppins', sans-serif !important;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5)50%, rgba(0, 0, 0, 0.5)50%), url("20.jpg");
+  background-size: cover;
+  background-position: right;
+  min-height: 100vh;
+}
+
+
+.navbar {
+  height: 75px;
+  margin: auto;
+}
+
+.navbar-dark .navbar-nav {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffd700;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.navbar-dark .navbar-brand {
+  color: #ffd700;
+  font-size: 35px;
+  padding: 0 0;
+  font-family: 'Cookie', cursive;
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-link:hover {
+  font-weight: 600;
+  border-bottom: 1px solid #FC38AE;
+}
+
+.navbar-dark .navbar-toggler {
+  color: #F0D000;
+  border-color: #F0D000;
+}
+
+
+
+
+#Table {
+  background: rgb(23 22 53 / 75%);
+  border: 15px solid rgba(92, 91, 141, 0.25);
+  margin-top: 160px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
+
+}
+
+.row input {
+
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  width: 300px;
+  height: 100%;
+
+}
+
+.row label {
+  background-color: #FFB300;
+  width: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px 0 0 6px;
+  color: rgb(23 22 53);
+  height: 100%;
+  margin-right: 3px;
+}
+
+/*
+.input-group {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+*/
+
+#editButton {
+  background-color: #FFB300;
+  width: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(23 22 53);
+  height: -webkit-fill-available;
+  margin-left: 2px;
+}
+
+#deleteButton {
+  background-color: #FFB300;
+  width: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 6px 6px 0;
+  color: rgb(23 22 53);
+  height: -webkit-fill-available;
+  margin-left: 2px;
+}
+
+
+h6 {
+  color: #ffd700;
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dropdown-header {
+  color: #ffd700;
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0 !important;
+  text-align: center;
+  font-size: 18px !important;
+}
+
+.dropdown-divider {
+  font-weight: 600;
+  border-bottom: 1px solid #FC38AE;
+  padding: 0 !important;
+  text-align: center;
+
+}
+
+.dropdown-item {
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffd700;
+  font-weight: 500;
+  display: inline-block;
+  padding: 0 !important;
+  text-align: center !important;
+
+}
+
+
+.nav-link {
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffd700;
+  font-weight: 500;
+  display: inline-block;
+
+}
+
+#Title {
+  color: #ffd700;
+  background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
+  background: linear-gradient(to top, #FC38AE 0%, #F0D000 0%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 20px;
+
+}
+
+#addButton {
+  background-color: #FFB300;
+  color: rgb(23 22 53);
+  margin-bottom: 10px;
+
+}
+
+
+@media (max-width: 997px) {
+
+  #Table {
+    margin-top: 240px;
+  }
+
+}
+
+@media (max-width: 780px) {
+
+  #Menu {
+    margin-bottom: 35px;
+  }
+}
+
+
+
+@media (max-width: 420px) {
+
+  #Table {
+    margin-top: 250px;
+  }
+
+  #content {
+    margin-top: 60px;
+  }
+}
