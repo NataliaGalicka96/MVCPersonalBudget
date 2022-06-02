@@ -8,6 +8,7 @@ use \App\Models\User;
 use \App\Models\Category;
 use \App\Models\IncomeCategory;
 use \App\Models\ExpenseCategory;
+use \App\Models\PaymentCategory;
 use \App\Flash;
 
 
@@ -35,7 +36,7 @@ class Settings extends Authenticated
     }
 
     /**
-     * Show settings page
+     * Show user settings page 
      *
      * @return void
      */
@@ -311,6 +312,99 @@ class Settings extends Authenticated
         
     }
 
+
+    /**
+     * Show payment method settings page 
+     *
+     * @return void
+     */
+
+    public function showPaymentMethodSettingsAction()
+    {
+        View::renderTemplate('Settings/paymentSettings.html', [
+            'paymentMethods' => $this->paymentMethods
+        ]);
+    }
+
+        /**
+     * Edit name category  of PaymentMethod
+     *
+     * @return void
+     */
+    
+    public function editPaymentMethodCategoryAction()
+    {
+        $category = new PaymentCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->editCategory()) {
+
+            Flash::addMessage('Your category has been successfully edited.');
+            $this -> redirect('/Settings/showPaymentMethodSettings');
+
+        } else {
+
+            View::renderTemplate('Settings/paymentSettings.html', [
+                'paymentMethods' => $this->paymentMethods
+            ]);
+
+        }
+        
+    }
+
+    /**
+     * Deleting the PaymentMethod category and expenses related to that category
+     *
+     * @return void
+     */
+    
+    public function deletePaymentMethodCategoryAction()
+    {
+        $category = new PaymentCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->deleteCategory()) {
+
+            Flash::addMessage('Your category has been successfully deleted.');
+            $this -> redirect('/Settings/showPaymentMethodSettings');
+
+        } else {
+
+            View::renderTemplate('Settings/paymentSettings.html', [
+                'paymentMethods' => $this->paymentMethods
+            ]);
+
+        }
+        
+    }
+
+     /**
+     * Adding the new category of paymentMethod
+     *
+     * @return void
+     */
+    
+    public function addPaymentMethodCategoryAction()
+    {
+        $category = new PaymentCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->addCategory()) {
+
+            Flash::addMessage('Your category has been successfully added.');
+            $this -> redirect('/Settings/showPaymentMethodSettings');
+
+        } else {
+
+            View::renderTemplate('Settings/paymentSettings.html', [
+                'paymentMethods' => $this->paymentMethods
+            ]);
+        }
+        
+    }
 
 
      
