@@ -66,7 +66,7 @@ body {
 }
 
 .row input {
-  border: 2px solid rgb(23 22 53);
+
   border-radius: 6px;
   transition: all 0.3s ease;
   width: 300px;
@@ -77,13 +77,13 @@ body {
 .row label {
   background-color: #FFB300;
   width: 125px;
-  border: 2px solid rgb(23 22 53);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px 0 0 6px;
   color: rgb(23 22 53);
   height: 100%;
+  margin-right: 3px;
 }
 
 /*
@@ -97,24 +97,24 @@ body {
 #editButton {
   background-color: #FFB300;
   width: 47px;
-  border: 2px solid rgb(23 22 53);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgb(23 22 53);
   height: -webkit-fill-available;
+  margin-left: 2px;
 }
 
 #deleteButton {
   background-color: #FFB300;
   width: 47px;
-  border: 2px solid rgb(23 22 53);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 0 6px 6px 0;
   color: rgb(23 22 53);
   height: -webkit-fill-available;
+  margin-left: 2px;
 }
 
 
@@ -177,6 +177,13 @@ h6 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 20px;
+
+}
+
+#addButton {
+  background-color: #FFB300;
+  color: rgb(23 22 53);
+  margin-bottom: 10px;
 
 }
 

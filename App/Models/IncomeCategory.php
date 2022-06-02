@@ -94,6 +94,25 @@ class IncomeCategory extends \Core\Model
 		return false;
 	}
 
+    public function addCategory()
+    {
+        $this->validateCategoryName();
+
+        if(empty($this->errors)) {
+			$sql = "INSERT INTO incomes_category_assigned_to_users 
+            VALUES(NULL, :user_id, :name)";
+			
+			$db = static::getDBConnection();
+            $stmt = $db->prepare($sql);
+			
+			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+
+            return $stmt->execute();
+		}
+		return false;
+	}
+
 
 }
 

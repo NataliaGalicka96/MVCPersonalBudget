@@ -189,5 +189,32 @@ class Settings extends Authenticated
         }
         
     }
+
+     /**
+     * Adding the new category
+     *
+     * @return void
+     */
+    
+    public function addIncomeCategoryAction()
+    {
+        $category = new IncomeCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->addCategory()) {
+
+            Flash::addMessage('Your category has been successfully added.');
+            $this -> redirect('/Settings/showIncomeCategorySettings');
+
+        } else {
+
+            View::renderTemplate('Settings/incomeSettings.html', [
+                'incomeCategories' => $this->incomeCategories
+            ]);
+
+        }
+        
+    }
      
 }
