@@ -7,6 +7,7 @@ use \Core\View;
 use \App\Models\User;
 use \App\Models\Category;
 use \App\Models\IncomeCategory;
+use \App\Models\ExpenseCategory;
 use \App\Flash;
 
 
@@ -126,7 +127,7 @@ class Settings extends Authenticated
 
     /**
      * 
-     * Show income categories page
+     * Show income category page
      */
 
      public function showIncomeCategorySettingsAction()
@@ -137,7 +138,7 @@ class Settings extends Authenticated
      }
 
      /**
-     * Edit name of category
+     * Edit name category  of income
      *
      * @return void
      */
@@ -191,7 +192,7 @@ class Settings extends Authenticated
     }
 
      /**
-     * Adding the new category
+     * Adding the new category of income
      *
      * @return void
      */
@@ -216,5 +217,101 @@ class Settings extends Authenticated
         }
         
     }
+
+    /**
+     * 
+     * Show expense category page
+     */
+
+    public function showExpenseCategorySettingsAction()
+    {
+       View::renderTemplate('Settings/expenseSettings.html', [
+           'expenseCategories' => $this->expenseCategories
+       ]);
+    }
+
+    /**
+     * Edit name category  of expense
+     *
+     * @return void
+     */
+    
+    public function editExpenseCategoryAction()
+    {
+        $category = new ExpenseCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->editCategory()) {
+
+            Flash::addMessage('Your category has been successfully edited.');
+            $this -> redirect('/Settings/showExpenseCategorySettings');
+
+        } else {
+
+            View::renderTemplate('Settings/expenseSettings.html', [
+                'expenseCategories' => $this->expenseCategories
+            ]);
+
+        }
+        
+    }
+
+    /**
+     * Deleting the category and expenses related to that category
+     *
+     * @return void
+     */
+    
+    public function deleteExpenseCategoryAction()
+    {
+        $category = new ExpenseCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->deleteCategory()) {
+
+            Flash::addMessage('Your category has been successfully deleted.');
+            $this -> redirect('/Settings/showExpenseCategorySettings');
+
+        } else {
+
+            View::renderTemplate('Settings/expenseSettings.html', [
+                'expenseCategories' => $this->expenseCategories
+            ]);
+
+        }
+        
+    }
+
+     /**
+     * Adding the new category of expense
+     *
+     * @return void
+     */
+    
+    public function addExpenseCategoryAction()
+    {
+        $category = new ExpenseCategory($_POST);
+        
+        //var_dump($_POST);
+       
+        if ($category->addCategory()) {
+
+            Flash::addMessage('Your category has been successfully added.');
+            $this -> redirect('/Settings/showExpenseCategorySettings');
+
+        } else {
+
+            View::renderTemplate('Settings/expenseSettings.html', [
+                'expenseCategories' => $this->expenseCategories
+            ]);
+
+        }
+        
+    }
+
+
+
      
 }
