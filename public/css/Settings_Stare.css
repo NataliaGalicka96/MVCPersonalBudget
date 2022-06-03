@@ -10,25 +10,27 @@ body {
 }
 
 
-.navbar-light .navbar-nav {
-  text-align: center;
+.navbar {
+  height: 75px;
+  margin: auto;
+}
+
+.navbar-dark .navbar-nav {
+  text-align: right;
   margin-right: 20px;
 }
 
-
-.navbar-light .navbar-nav .nav-link {
+.navbar-dark .navbar-nav .nav-link {
   background: -moz-linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
   background: linear-gradient(to top, #FC38AE 0%, #F0D000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: #ffd700;
   font-weight: 500;
-  margin-left: 1em;
-  margin-right: 1em;
+  display: inline-block;
 }
 
-
-.navbar-brand {
+.navbar-dark .navbar-brand {
   color: #ffd700;
   font-size: 35px;
   padding: 0 0;
@@ -44,16 +46,9 @@ body {
   border-bottom: 1px solid #FC38AE;
 }
 
-.navbar-light .navbar-toggler {
+.navbar-dark .navbar-toggler {
+  color: #F0D000;
   border-color: #F0D000;
-}
-
-.navbar-toggler {
-  background-color: #FFB300 !important;
-}
-
-#navbarNavDropdown {
-  justify-content: end;
 }
 
 
@@ -62,8 +57,7 @@ body {
 #Table {
   background: rgb(23 22 53 / 75%);
   border: 15px solid rgba(92, 91, 141, 0.25);
-  margin-top: 100px;
-  margin-bottom: 80px;
+  margin-top: 160px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -92,10 +86,16 @@ body {
   margin-right: 3px;
 }
 
+/*
+.input-group {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+*/
 
 #editButton {
   background-color: #FFB300;
-  border-color: #FFB300;
   width: 47px;
   display: flex;
   align-items: center;
@@ -187,7 +187,7 @@ h6 {
 
 }
 
-/*
+
 @media (max-width: 997px) {
 
   #Table {
@@ -215,4 +215,3 @@ h6 {
     margin-top: 60px;
   }
 }
-*/
