@@ -63,6 +63,7 @@ body {
     border: 15px solid rgba(92, 91, 141, 0.25);
     color: #F0D000;
     margin-top: 75px;
+    margin-bottom: 75px;
     padding: 20px 25px 25px 25px;
 
 }
@@ -98,8 +99,6 @@ form .row input {
     border-radius: 6px;
     transition: all 0.3s ease;
 }
-
-
 
 
 form .row input:focus {
