@@ -88,6 +88,16 @@ form .row input {
 
 }
 
+form .row input:focus {
+    border-color: #6c7673;
+    box-shadow: inset 0px 0px 2px 2px #ffd700;
+}
+
+form .row select:focus {
+    border-color: #6c7673;
+    box-shadow: inset 0px 0px 2px 2px #ffd700;
+}
+
 form .row select {
     border: 2px solid rgb(23 22 53);
     border-radius: 6px;
@@ -125,19 +135,6 @@ form .row label {
     border-radius: 0 6px 6px 0;
 }
 
-@media (max-width: 1000px) {
-
-    #content {
-        margin-top: 100px;
-    }
-}
-
-@media (max-width: 850px) {
-
-    #content {
-        margin-top: 210px;
-    }
-}
 
 .error {
     margin-bottom: 0px;

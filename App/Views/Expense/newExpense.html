@@ -66,7 +66,7 @@
     </nav>
     <div class="container-fluid" id="content">
         <div class="row justify-content-center mt-5">
-            <div class="col-10 col-md-8 col-lg-6 col-xl-5">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="expense">
                     <div class="title"><span>Add Expense</span></div>
 
@@ -156,8 +156,8 @@
                         </div>
                         <div class="button">
                             <button type="submit" class="btn btn-success me-3">Save</button>
-                            <button type="button" class="btn btn-danger ms-3" data-toggle="modal"
-                                data-target="#cancelExpenseModal">Cancel</button>
+                            <button type="button" class="btn btn-danger ms-3" data-bs-toggle="modal"
+                                data-bs-target="#cancelExpenseModal">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -165,21 +165,19 @@
         </div>
     </div>
     <!--Modal window to cancel add expense-->
-    <div class="modal fade" id="cancelExpenseModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="cancelExpenseModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cancel the entry of expense</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="staticBackdropLabel">Cancel the entry of expense</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Data you have entered into the form will be canceled.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
                     <a href="/Expense/newExpense" class="btn btn-success">Yes</a>
                 </div>
             </div>
