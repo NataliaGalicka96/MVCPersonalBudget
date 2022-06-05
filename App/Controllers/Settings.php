@@ -406,6 +406,23 @@ class Settings extends Authenticated
         
     }
 
+    /*
+    public function validateCategoryAction(){
+
+        if(isset($_POST['categoryType']) &&  $_POST['categoryType'] == 'expense') {
+            
+  
+		$categoryExists = !($stmt->fetchAll());
+		
+        }
+
+        header('Content-Type: application/json; charset=utf-8');
+        
+        echo json_encode($categoryExists);
+    }
+    */
+
+
 
      
 }

@@ -78,6 +78,7 @@ function validateSignForm() {
                 if (element.attr('name') == 'username') {
                     error.appendTo('.nameError');
                 }
+
                 if (element.attr('name') == 'email') {
                     error.appendTo('.emailError');
                 }
@@ -89,36 +90,6 @@ function validateSignForm() {
         });
 
     });
-
-    $(document).ready(function () {
-
-        $('#formEmail').validate({
-            rules: {
-
-                email: {
-                    required: true,
-                    email: true,
-                    remote: '/account/validate-email'
-                }
-            },
-            messages: {
-                email: {
-                    remote: 'Email already taken!'
-                }
-
-            },
-            errorPlacement: function (error, element) {
-
-                if (element.attr('name') == 'email') {
-                    error.appendTo('.emailError');
-                }
-
-
-            }
-        });
-
-    });
-
 
 
 }

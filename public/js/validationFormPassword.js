@@ -4,8 +4,6 @@ window.onload = validatePasswordForm();
 
 function validatePasswordForm() {
 
-
-
     /**
      * Add jQuery Validation plugin method for a valid password
      *
@@ -36,7 +34,6 @@ function validatePasswordForm() {
          */
         $('#formPassword').validate({
             rules: {
-
                 password: {
                     required: true,
                     minlength: 6,

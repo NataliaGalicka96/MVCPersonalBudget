@@ -62,6 +62,7 @@ body {
     color: #F0D000;
     height: auto;
     margin-top: 75px;
+    margin-bottom: 75px;
     padding: 30px 25px 25px 25px;
     text-align: center;
 
@@ -86,6 +87,7 @@ body {
     background-color: #FFB300;
     color: rgb(23 22 53);
     font-weight: 500;
+    font-size: 16px;
 }
 
 
@@ -93,4 +95,9 @@ body {
 #HomePage {
     margin-top: 225px;
     width: 50%;
+}
+
+.row {
+    margin-left: 25px;
+    margin-right: 25px;
 }

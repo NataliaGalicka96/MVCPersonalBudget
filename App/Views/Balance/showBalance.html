@@ -18,16 +18,28 @@
     var incomesJSON = '{{incomeCategories|json_encode|raw}}';
     var incomes = JSON.parse(incomesJSON);
 
+
+    var lastDayJSON = '{{last_day_of_current_month|json_encode|raw}}';
+    var lastDayOfCurrentMonth = JSON.parse(lastDayJSON);
 </script>
 
-<script src="/js/drawPieChart.js"></script>
 
+
+
+<!--
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+
+<script src="/js/drawPieChart.js"></script>
+<script src="/js/validationDateInModalWindow.js"></script>
 
 
 {% endblock %}
@@ -114,13 +126,17 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="/balance/showBalancePeriodTime">
+                        <form method="post" action="/balance/showBalancePeriodTime" id="DateForm">
                             <div class="form-group">
                                 <label class="col-form-label">Choose period time from which you want to see the
                                     balance.</label>
                                 <label>From: <input type="date" class="form-control" name="date1"></label>
                                 <label>To: <input type="date" class="form-control" name="date2"></label>
                             </div>
+
+
+                            <span class="text-danger text-center error"
+                                id="dateError">{{expense.errors.dateError}}</span>
 
                     </div>
                     <div class="modal-footer">

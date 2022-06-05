@@ -15,7 +15,10 @@
 
 <script src="/js/haslo.js"></script>
 <script src="/js/validationFormSignup.js"></script>
+
 <script src="/js/validationFormPassword.js"></script>
+
+<script src="/js/validationEmailForm.js"></script>
 
 
 {% endblock %}
@@ -238,12 +241,11 @@
                                 placeholder="••••••••" required>
                         </div>
                     </div>
-                    <ul class="text-danger text-center mt-1 error passwordError" style="list-style-type:none;">
+                    <ul class="text-danger text-center mt-1 error oldPasswordError" style="list-style-type:none;">
 
                         {% if user.errors['errorConfirmPassword'] is defined %}
                         <li>{{ user.errors['errorConfirmPassword'] }}</li>
                         {% endif %}
-
 
                     </ul>
 
