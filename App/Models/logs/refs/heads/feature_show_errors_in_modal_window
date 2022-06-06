@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 cb65cb29ca73a373e00a610135e8744d59dde1e2 Natalia Galicka <natalia.galicka.programista@gmail.com> 1654260055 +0200	branch: Created from master
+cb65cb29ca73a373e00a610135e8744d59dde1e2 2b9c563d6009594c86519e90d33bcd844516fe6b Natalia Galicka <natalia.galicka.programista@gmail.com> 1654403402 +0200	commit: Trying add validation to new category name
+2b9c563d6009594c86519e90d33bcd844516fe6b f7a6637fc1d602b41fd1433a8b3f3c66748af8b8 Natalia Galicka <natalia.galicka.programista@gmail.com> 1654404138 +0200	commit: Add small change in styles to signup, login pages
+f7a6637fc1d602b41fd1433a8b3f3c66748af8b8 7d31a63df51176c79889d61327997b19abf272c8 Natalia Galicka <natalia.galicka.programista@gmail.com> 1654406569 +0200	commit: Add small change in styles to addExpense and addIncome pages
+7d31a63df51176c79889d61327997b19abf272c8 c2bca83f3eef9be0df08e19ba2851633a20813c7 Natalia Galicka <natalia.galicka.programista@gmail.com> 1654408604 +0200	commit: Add small change in styles to showBalance page
+c2bca83f3eef9be0df08e19ba2851633a20813c7 5d59565d6ea74b3ede56f5ae8d7f63fdb14a394d Natalia Galicka <natalia.galicka.programista@gmail.com> 1654495750 +0200	commit: Try to fix error in validate category
