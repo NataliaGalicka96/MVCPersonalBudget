@@ -17,7 +17,6 @@
     var incomes = JSON.parse(incomesJSON);
 
 
-
 </script>
 
 
@@ -25,10 +24,13 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
+
+
 <script src="/js/manageModal.js"></script>
+
+<!--
 <script src="/js/validationCategory.js"></script>
-
-
+-->
 
 {% endblock %}
 
@@ -131,6 +133,8 @@
 
         </div>
     </div>
+
+
     <!--Modal window to editing category-->
     <div class="modal fade" id="editCategoryName" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -153,9 +157,9 @@
                         </div>
 
                         <ul class="text-danger text-center mt-1 error categoryNameError" style="list-style-type:none;">
-                            <!-- {% if category.errors['categoryName'] is defined %}
+                            {% if category.errors['categoryName'] is defined %}
                             <li>{{ category.errors.categoryName}}</li>
-                            {% endif %}-->
+                            {% endif %}
                         </ul>
 
                 </div>
@@ -174,11 +178,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Editing Income Category</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Deleting Income Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/Settings/deleteIncomeCategory" id="formCategory">
+                    <form method="post" action="/Settings/deleteIncomeCategory">
                         <span class="text-danger text-center">WARNING!</span>
                         <p class="text-danger">If you delete the
                             category all
@@ -205,11 +209,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Editing Income Category</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Adding Income Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/Settings/addIncomeCategory" id="formCategory">
+                    <form method="post" action="/Settings/addIncomeCategory" id="formCategory2">
                         <p class="text-muted">Please enter a new category name.</p>
                         <div class="row mb-3">
                             <div class="input-group justify-self-center">
@@ -220,7 +224,7 @@
                             </div>
                         </div>
 
-                        <ul class="text-danger text-center mt-1" style="list-style-type:none;">
+                        <ul class="text-danger text-center mt-1 error categoryNameError2" style="list-style-type:none;">
                             {% if category.errors['categoryName'] is defined %}
                             <li>{{ category.errors.categoryName}}</li>
                             {% endif %}

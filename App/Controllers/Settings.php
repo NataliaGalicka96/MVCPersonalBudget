@@ -33,6 +33,7 @@ class Settings extends Authenticated
         $this->incomeCategories = Category::getCurrentUserIncomeCategories(); 
         $this->expenseCategories = Category::getCurrentUserExpenseCategories();
         $this->paymentMethods = Category::getCurrentUserPaymentMethods();
+        
     }
 
     /**
@@ -57,6 +58,7 @@ class Settings extends Authenticated
      public function editUsernameAction()
     {
         $user = new User($_POST);
+        var_dump($_POST);
        
         if ($user->editUsername()) {
 
@@ -83,6 +85,8 @@ class Settings extends Authenticated
     public function editEmailAction()
     {
         $user = new User($_POST);
+
+        var_dump($_POST);
        
         if ($user->editEmail()) {
 
@@ -148,7 +152,7 @@ class Settings extends Authenticated
     {
         $category = new IncomeCategory($_POST);
         
-        //var_dump($_POST);
+        var_dump($_POST);
        
         if ($category->editCategory()) {
 
@@ -405,22 +409,6 @@ class Settings extends Authenticated
         }
         
     }
-
-    /*
-    public function validateCategoryAction(){
-
-        if(isset($_POST['categoryType']) &&  $_POST['categoryType'] == 'expense') {
-            
-  
-		$categoryExists = !($stmt->fetchAll());
-		
-        }
-
-        header('Content-Type: application/json; charset=utf-8');
-        
-        echo json_encode($categoryExists);
-    }
-    */
 
 
 
