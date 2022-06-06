@@ -17,4 +17,5 @@ function manageModal() {
         console.log($(this).attr('data-bs-category-id'));
 
     });
+
 }

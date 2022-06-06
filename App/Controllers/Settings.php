@@ -18,6 +18,8 @@ class Settings extends Authenticated
     protected $incomeCategories;
     protected $expenseCategories;
     protected $paymentCategories;
+    protected $user;
+    protected $allUsers;
 
     /**
      * Before filter - called before each action method
@@ -33,6 +35,7 @@ class Settings extends Authenticated
         $this->incomeCategories = Category::getCurrentUserIncomeCategories(); 
         $this->expenseCategories = Category::getCurrentUserExpenseCategories();
         $this->paymentMethods = Category::getCurrentUserPaymentMethods();
+        $this->allUsers = User::getAllUsersFromTable();
         
     }
 
@@ -45,7 +48,8 @@ class Settings extends Authenticated
     public function showUserSettingsAction()
     {
         View::renderTemplate('Settings/userSettings.html', [
-            'user' => $this->user
+            'user' => $this->user,
+            'allUsers' => $this->allUsers
         ]);
     }
 
@@ -57,7 +61,10 @@ class Settings extends Authenticated
     
      public function editUsernameAction()
     {
+   
+
         $user = new User($_POST);
+        
         var_dump($_POST);
        
         if ($user->editUsername()) {
@@ -69,12 +76,14 @@ class Settings extends Authenticated
         } else {
 
             View::renderTemplate('/Settings/userSettings.html', [
-                'user' => $this->user
+                'user' => $this->user,
+            'allUsers' => $this->allUsers
             ]);
 
         }
         
-    }
+    
+}
 
     /**
      * Edit email
@@ -97,7 +106,8 @@ class Settings extends Authenticated
         } else {
 
             View::renderTemplate('/Settings/userSettings.html', [
-                'user' => $this->user
+                'user' => $this->user,
+            'allUsers' => $this->allUsers
             ]);
 
         }
@@ -123,7 +133,8 @@ class Settings extends Authenticated
         } else {
 
             View::renderTemplate('/Settings/userSettings.html', [
-                'user' => $this->user
+                'user' => $this->user,
+            'allUsers' => $this->allUsers
             ]);
 
         }
@@ -153,9 +164,12 @@ class Settings extends Authenticated
         $category = new IncomeCategory($_POST);
         
         var_dump($_POST);
+
+        
        
         if ($category->editCategory()) {
 
+    
             Flash::addMessage('Your category has been successfully edited.');
             $this -> redirect('/Settings/showIncomeCategorySettings');
 

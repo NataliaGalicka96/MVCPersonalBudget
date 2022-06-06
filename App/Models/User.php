@@ -143,12 +143,12 @@ class User extends \Core\Model
      */
 
 
-    public static function emailExists($email, $existing_user_id = NULL)
+    public static function emailExists($email, $ignore_id = null)
     {
         $user = static::findUserByEmail($email);
 
         if ($user) {
-            if ($user->id != $existing_user_id) {
+            if ($user->id != $ignore_id) {
                 return true;
             }
         }
@@ -363,7 +363,7 @@ class User extends \Core\Model
     
         protected function sendPasswordResetEmail(){
 
-            $url = 'https://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->password_reset_token;
+            $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->password_reset_token;
     
             $text = View::getTemplate('Password/reset_email.txt', ['url' => $url]);
             $html = View::getTemplate('Password/reset_email.html', ['url' => $url]);
@@ -452,7 +452,7 @@ class User extends \Core\Model
 
         public function sendActivationEmail()
         {
-            $url = 'https://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
+            $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
     
             $text = View::getTemplate('Signup/activation_email.txt', ['url' => $url]);
             $html = View::getTemplate('Signup/activation_email.html', ['url' => $url]);
@@ -492,9 +492,9 @@ class User extends \Core\Model
 
             $this->validate();
 
-            $user = static::findUserByID($_SESSION['user_id']);
+          //  $user = static::findUserByID($_SESSION['user_id']);
 
-            if($user){
+           // if($user){
 
                 if (empty($this->errors)) {
 
@@ -511,7 +511,7 @@ class User extends \Core\Model
 
                     return $stmt->execute();
                 }
-        }
+      //  }
 
             return false;
         }
@@ -521,9 +521,9 @@ class User extends \Core\Model
         {
             $this->validate();
 
-            $user = static::findUserByID($_SESSION['user_id']);
+           // $user = static::findUserByID($_SESSION['user_id']);
 
-            if($user) {
+          //  if($user) {
 
                 if (empty($this->errors)) {
 
@@ -540,8 +540,8 @@ class User extends \Core\Model
 
                     return $stmt->execute();
                 }
-
-            }
+                return false;
+          //  }
         }
 
 
@@ -577,9 +577,9 @@ class User extends \Core\Model
             $this->validate();
 
 
-            $is_valid = static::authenticatePassword($this->oldPassword, $_SESSION['user_id'] );
+          //  $is_valid = static::authenticatePassword($this->oldPassword, $_SESSION['user_id'] );
             
-            if(empty($this->errors) && $is_valid){
+            if(empty($this->errors) /*&& $is_valid*/){
 
                 $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
     
@@ -655,6 +655,19 @@ class User extends \Core\Model
             }
 
             return false;
+        }
+
+        public static function getAllUsersFromTable(){
+            
+            $sql = "SELECT * FROM users";
+
+            $db = static::getDBConnection();
+            $stmt = $db->prepare($sql);
+
+         $stmt->execute();
+
+         return $stmt->fetchAll();
+
         }
      
 
