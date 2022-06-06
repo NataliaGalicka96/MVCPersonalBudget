@@ -53,20 +53,27 @@ class User extends \Core\Model
                 if(!preg_match('/^[A-Za-z]+$/', $this->username)){
                     $this->errors['usernameError3'] = "Username must contain letters only. Special characters are not allowed.";
                 }
-
+/*
                 if(static::usernameExists($this->username, $this-> id ?? NULL)){
                     $this->errors['usernameError4'] = 'Username already taken.';
                 }
+                */
+                if(static::usernameExists($this->username)){
+                    $this->errors['usernameError4'] = 'Username already taken.';
+                }
+
             }
             //email address
 
             if(isset($this->email)){
 
+                
                 if(!filter_var($this->email, FILTER_VALIDATE_EMAIL) || filter_var($this -> email, FILTER_SANITIZE_EMAIL) != $this -> email){
                     $this->errors['emailError1'] = 'Please enter a valid e-mail address.';
                 }
 
-                if (static::emailExists($this->email, $this->id ?? null)) {
+
+                if(static::emailExists($this->email, $this -> id ?? NULL)){
                     $this->errors['emailError2'] = 'Email already taken.';
                 }
              
@@ -136,18 +143,18 @@ class User extends \Core\Model
      */
 
 
-        public static function emailExists($email, $existing_user_id = null)
-        {
-            $user = static::findUserByEmail($email);
-    
-            if ($user) {
-                if ($user->id != $existing_user_id) {
-                    return true;
-                }
+    public static function emailExists($email, $existing_user_id = NULL)
+    {
+        $user = static::findUserByEmail($email);
+
+        if ($user) {
+            if ($user->id != $existing_user_id) {
+                return true;
             }
-    
-            return false;
         }
+
+        return false;
+    }
 
     /**
      * See if a user record already exists with the specified username
@@ -182,18 +189,16 @@ class User extends \Core\Model
 
         public static function findUserByEmail($email)
         {
-            $sql = 'SELECT * FROM users 
-            WHERE email = :email';
-    
-            $db = static::getDBConnection();
+            $sql = 'SELECT * FROM users WHERE email = :email';
 
+            $db = static::getDBConnection();
             $stmt = $db->prepare($sql);
             $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    
+
             $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
             $stmt->execute();
-    
+
             return $stmt->fetch();
         }
     
@@ -557,9 +562,10 @@ class User extends \Core\Model
             if (password_verify($password, $user->password_hash)) {
                 return true;
             }
-        }else{
-            $this->errors['errorConfirmPassword'] = 'Enter the correct current password';
         }
+        
+        $this->errors['errorConfirmPassword'] = 'Enter the correct current password';
+        return false;
 
         
     }
@@ -650,6 +656,7 @@ class User extends \Core\Model
 
             return false;
         }
+     
 
   }
 

@@ -14,8 +14,13 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
 <script src="/js/haslo.js"></script>
+
+
 <script src="/js/validationFormSignup.js"></script>
+
 <script src="/js/validationFormPassword.js"></script>
+
+<script src="/js/validationEmailForm.js"></script>
 
 
 {% endblock %}
@@ -115,6 +120,7 @@
 
                 <div class="row mb-3">
                     <div class="input-group col-lg-6">
+
                         <label for="currentPassword" class="form-label">Password</label>
                         <input id="currentPassword" type="password" class="form-control" name="username"
                             value="••••••••" disabled>
@@ -231,22 +237,22 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="/Settings/editPassword" id="formPassword">
-                    <div class=" row mb-3">
+                    <!--                    <div class=" row mb-3">
+                        
                         <div class="input-group">
                             <label for="oldPassword" class="form-label">Old Password</label>
                             <input id="oldPassword" type="password" class="form-control" name="oldPassword"
                                 placeholder="••••••••" required>
                         </div>
                     </div>
-                    <ul class="text-danger text-center mt-1 error passwordError" style="list-style-type:none;">
+                    <ul class="text-danger text-center mt-1 error oldPasswordError" style="list-style-type:none;">
 
                         {% if user.errors['errorConfirmPassword'] is defined %}
                         <li>{{ user.errors['errorConfirmPassword'] }}</li>
                         {% endif %}
 
-
                     </ul>
-
+-->
                     <div class=" row mb-3">
                         <div class="input-group">
                             <label for="password" class="form-label">Password</label>

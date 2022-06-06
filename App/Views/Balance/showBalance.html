@@ -18,16 +18,25 @@
     var incomesJSON = '{{incomeCategories|json_encode|raw}}';
     var incomes = JSON.parse(incomesJSON);
 
+
+    var lastDayJSON = '{{last_day_of_current_month|json_encode|raw}}';
+    var lastDayOfCurrentMonth = JSON.parse(lastDayJSON);
 </script>
 
-<script src="/js/drawPieChart.js"></script>
-
+<!--
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+
+<script src="/js/drawPieChart.js"></script>
+<script src="/js/validationDateInModalWindow.js"></script>
 
 
 {% endblock %}
@@ -46,17 +55,12 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/"><i
+                        <a class="nav-link active" aria-current="page" href="#"><i
                                 class="fa-solid fa-house me-2"></i>Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Income/newIncome"><i class="fas fa-coins mr me-2"></i>Add
                             Income</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Expense/newExpense"><i
-                                class="fa-solid fa-money-bill-1-wave me-2"></i>Add
-                            Expense</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Expense/newExpense"><i
@@ -81,63 +85,38 @@
         </div>
     </nav>
 
-    <div class="container-fluid">
-
-
-        <div class="btn-group m-2 mr-4 dateButton" id="period">
-
-            <button type="button" class="btn"> Choose Date</button>
-
-            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Expand the list</span>
-            </button>
-
-            <div class="dropdown-menu bg-transparent border-0 m-0 p-0 dropdown-menu-end">
-
-                <a class="dropdown-item" href="/Balance/showBalanceCurrentMonth">Current Month</a>
-                <a class="dropdown-item" href="/Balance/showBalancePreviousMonth">Previous Month</a>
-                <a class="dropdown-item" href="/Balance/showBalanceCurrentYear">Current Year</a>
-                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#periodDate">Custom period</a>
-
-            </div>
-
-        </div>
-
-        <!--Modal-->
-        <div class="modal fade" id="periodDate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Choose date</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" action="/balance/showBalancePeriodTime">
-                            <div class="form-group">
-                                <label class="col-form-label">Choose period time from which you want to see the
-                                    balance.</label>
-                                <label>From: <input type="date" class="form-control" name="date1"></label>
-                                <label>To: <input type="date" class="form-control" name="date2"></label>
-                            </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Save</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="mb-3 text-center" id="content" name="periodTime">
-            <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>
-        </div>
-
+    <div class="container-fluid" id="content">
         <div class="row" id="Table">
+            <h2 class="text-center">View your balance</h2>
+
+            <div class="btn-group dateButton mb-4" id="period">
+
+                <button type="button" class="btn">Choose Date</button>
+
+                <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Expand the list</span>
+                </button>
+
+                <div class="dropdown-menu bg-transparent border-0 m-0 p-0 dropdown-menu-end">
+
+                    <a class="dropdown-item" href="/Balance/showBalanceCurrentMonth">Current Month</a>
+                    <a class="dropdown-item" href="/Balance/showBalancePreviousMonth">Previous Month</a>
+                    <a class="dropdown-item" href="/Balance/showBalanceCurrentYear">Current Year</a>
+                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#periodDate">Custom
+                        period</a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="mb-3 text-center" id="content" name="periodTime">
+                <span id="Date">Balance from: {{firstDate}} to {{secondDate}}</span>
+            </div>
+
+
             <div class="col-12 col-xl-4 text-center">
                 <table id="tableOfExpenses" class="table table-bordered border-warning">
                     <thead>
@@ -246,6 +225,37 @@
     </div>
 
 </div>
+<!--Modal-->
+<div class="modal fade" id="periodDate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Choose date</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/balance/showBalancePeriodTime" id="DateForm">
+                    <div class="form-group">
+                        <label class="col-form-label">Choose period time from which you want to see the
+                            balance.</label>
+                        <label>From: <input type="date" class="form-control" name="date1"></label>
+                        <label>To: <input type="date" class="form-control" name="date2"></label>
+                    </div>
+
+
+                    <span class="text-danger text-center error" id="dateError">{{expense.errors.dateError}}</span>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 

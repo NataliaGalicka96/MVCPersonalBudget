@@ -23,6 +23,25 @@ class ExpenseCategory extends \Core\Model
         };
     }
 
+    /*
+    public static function expenseCategoryAssignedToUser($categoryName, $categoryOldId)
+    {
+        $db = static::getDBConnection();
+        
+        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name AND id=:idCategory";
+        
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':name', $categoryName, PDO::PARAM_STR);
+        $stmt->bindValue(':idCategory', $categoryOldId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+    */
+
     public function validateCategoryName()
     {
 
@@ -36,6 +55,7 @@ class ExpenseCategory extends \Core\Model
             $this->errors['categoryName'] = 'Name of category needs to be between 3 to 40 characters.';;
         }
 
+        
         $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
 		
 		$db = static::getDBConnection();
@@ -51,11 +71,10 @@ class ExpenseCategory extends \Core\Model
 		if(count($result)==1){
 		$this->errors['categoryName'] = "Category already exists.";	
 		}
-
-
+        
     }
     
-}
+    }
 
     public function editCategory()
     {
@@ -73,8 +92,8 @@ class ExpenseCategory extends \Core\Model
             return $stmt->execute();
 		}
 		return false;
+        
 	}
-
     
     public function deleteCategory()
     {
