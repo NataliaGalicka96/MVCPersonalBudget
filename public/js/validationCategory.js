@@ -10,22 +10,46 @@ $.validator.addMethod('validCategoryName',
         let categoryNameToEdit = document.querySelector('input[name="newCategoryName"]');
         let categoryNameToAdd = document.querySelector('input[name="newCategoryName2"]');
 
-        for (let i = 0; i < incomes.length; i++) {
-            if ((incomes[i].name == categoryNameToEdit.value) || (incomes[i].name == categoryNameToAdd.value)) {
-                console.log('Exists!');
-                return false;
+        if (incomes) {
+            for (let i = 0; i < incomes.length; i++) {
+                if ((incomes[i].name == categoryNameToEdit.value) || (incomes[i].name == categoryNameToAdd.value)) {
+
+                    return false;
+                }
+
             }
+            return true;
+        }
+
+        if (expenses) {
+            for (let i = 0; i < expenses.length; i++) {
+                if ((expenses[i].name == categoryNameToEdit.value) || (expenses[i].name == categoryNameToAdd.value)) {
+
+                    return false;
+                }
+
+            }
+            return true;
 
         }
-        return true;
+
+        if (payment) {
+            for (let i = 0; i < payment.length; i++) {
+                if ((payment[i].name == categoryNameToEdit.value) || (payment[i].name == categoryNameToAdd.value)) {
+
+                    return false;
+                }
+
+            }
+            return true;
+
+        }
+
     },
     "Name of category already taken! Please enter a different name."
 );
 
 function validateCategoryForm() {
-
-    console.log(expenses);
-    console.log(incomes);
 
 
     $(document).ready(function () {
@@ -61,9 +85,6 @@ function validateCategoryForm() {
 }
 
 function validateCategoryForm2() {
-
-    console.log(expenses);
-    console.log(incomes);
 
 
     $(document).ready(function () {
