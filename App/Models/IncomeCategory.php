@@ -39,12 +39,16 @@ class IncomeCategory extends \Core\Model
 
         $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt->bindValue(':name', $newCategoryName, PDO::PARAM_STR);
-
+        /*
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
         $stmt->execute();
 
         return $stmt->fetch();
+        */
+        $stmt -> execute();
+        
+        return $stmt -> fetchAll();
     }
 
 
@@ -87,9 +91,11 @@ class IncomeCategory extends \Core\Model
                 $this->errors['categoryName'] = 'Name already taken.';
             }
 */
+
             if (static::findCategoryAssignedToUser($this->newCategoryName)) {
                 $this->errors['categoryName'] = 'Name already taken.';
             }
+            
 
         }
 
@@ -100,6 +106,7 @@ class IncomeCategory extends \Core\Model
     public function editCategory()
     {
         $this->validateCategoryName();
+
 
         if(empty($this->errors)) {
 			
@@ -147,7 +154,7 @@ class IncomeCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+            $stmt->bindValue(':name', $this->newCategoryName2, PDO::PARAM_STR);
 
             return $stmt->execute();
 		}

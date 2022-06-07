@@ -2,6 +2,26 @@ window.onload = validateCategoryForm();
 window.onload = validateCategoryForm2();
 
 
+
+$.validator.addMethod('validCategoryName',
+    function (value, element, param) {
+
+
+        let categoryNameToEdit = document.querySelector('input[name="newCategoryName"]');
+        let categoryNameToAdd = document.querySelector('input[name="newCategoryName2"]');
+
+        for (let i = 0; i < incomes.length; i++) {
+            if ((incomes[i].name == categoryNameToEdit.value) || (incomes[i].name == categoryNameToAdd.value)) {
+                console.log('Exists!');
+                return false;
+            }
+
+        }
+        return true;
+    },
+    "Name of category already taken! Please enter a different name."
+);
+
 function validateCategoryForm() {
 
     console.log(expenses);
@@ -16,8 +36,7 @@ function validateCategoryForm() {
                     required: true,
                     minlength: 3,
                     maxlength: 40,
-                    // remote: '/account/validate-category'
-
+                    validCategoryName: true
 
                 }
             },
@@ -26,7 +45,7 @@ function validateCategoryForm() {
                     required: 'Name of category is required.',
                     minlength: 'Name of category needs to be between 3 to 40 characters.',
                     maxlength: 'Name of category needs to be between 3 to 40 characters.',
-                    //remote: 'Name already exists.'
+
                 }
             },
             errorPlacement: function (error, element) {
@@ -51,26 +70,24 @@ function validateCategoryForm2() {
         $('#formCategory2').validate({
             errorElement: 'li',
             rules: {
-                newCategoryName: {
+                newCategoryName2: {
                     required: true,
                     minlength: 3,
                     maxlength: 40,
-                    // remote: '/account/validate-category'
-
-
+                    validCategoryName: true
                 }
             },
             messages: {
-                newCategoryName: {
+                newCategoryName2: {
                     required: 'Name of category is required.',
                     minlength: 'Name of category needs to be between 3 to 40 characters.',
                     maxlength: 'Name of category needs to be between 3 to 40 characters.',
-                    //  remote: 'Name already exists.'
+
                 }
             },
             errorPlacement: function (error, element) {
 
-                if (element.attr('name') == 'newCategoryName') {
+                if (element.attr('name') == 'newCategoryName2') {
                     error.appendTo('.categoryNameError2');
                 }
 

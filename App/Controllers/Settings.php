@@ -424,7 +424,17 @@ class Settings extends Authenticated
         
     }
 
+    public function validateCategoryAction()
+    {
+        if(isset($_POST['categoryType']) &&  $_POST['categoryType'] == 'income') {
+            
+            $categoryExists = !IncomeCategory::findCategoryAssignedToUser($_POST['categoryNewName']);
+        }
+  
 
+    header('Content-Type: application/json; charset=utf-8');
+        
+    echo json_encode($categoryExists);
 
-     
+       }
 }
