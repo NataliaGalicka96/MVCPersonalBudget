@@ -125,7 +125,7 @@ class ExpenseCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+            $stmt->bindValue(':name', $this->newCategoryName2, PDO::PARAM_STR);
 
             return $stmt->execute();
 		}

@@ -16,7 +16,6 @@
     var incomesJSON = '{{incomeCategories|json_encode|raw}}';
     var incomes = JSON.parse(incomesJSON);
 
-
 </script>
 
 
@@ -24,13 +23,9 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
-
-
 <script src="/js/manageModal.js"></script>
 
-<!--
 <script src="/js/validationCategory.js"></script>
--->
 
 {% endblock %}
 
@@ -218,7 +213,7 @@
                         <div class="row mb-3">
                             <div class="input-group justify-self-center">
                                 <label for="category" class="form-label text-center">Category name</label>
-                                <input id="category" class="form-control" type="text" name="newCategoryName"
+                                <input id="category" class="form-control" type="text" name="newCategoryName2"
                                     data-bs-category-type="income" required>
                                 <input type="hidden" name="categoryOldId">
                             </div>

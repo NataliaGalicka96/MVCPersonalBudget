@@ -24,9 +24,9 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
 <script src="/js/manageModal.js"></script>
-<!--
+
 <script src="/js/validationCategory.js"></script>
--->
+
 
 {% endblock %}
 
@@ -150,12 +150,10 @@
                         </div>
 
 
-                        <ul class="text-danger text-left pl-1 mt-2 error categoryNameError">
-
-                            {% if expenseCategory.errors['categoryName'] is defined %}
-                            <li>{{ expenseCategory.errors['categoryName'] }}</li>
+                        <ul class="text-danger text-center mt-1 error categoryNameError" style="list-style-type:none;">
+                            {% if category.errors['categoryName'] is defined %}
+                            <li>{{ category.errors.categoryName}}</li>
                             {% endif %}
-
                         </ul>
 
                 </div>
@@ -210,23 +208,23 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-body">
-                        <form method="post" action="/Settings/addExpenseCategory" id="formCategory">
+                        <form method="post" action="/Settings/addExpenseCategory" id="formCategory2">
                             <p class="text-muted">Please enter a new category name.</p>
                             <div class="row mb-3">
                                 <div class="input-group justify-self-center">
                                     <label for="category" class="form-label text-center">Category name</label>
-                                    <input id="category" class="form-control" type="text" name="newCategoryName"
+                                    <input id="category" class="form-control" type="text" name="newCategoryName2"
                                         data-category-type="expense" required>
                                     <input type="hidden" name="categoryOldId">
                                 </div>
                             </div>
-                            <!--
-                        <ul class="text-danger text-center mt-1" style="list-style-type:none;">
-                            {% if category.errors['categoryName'] is defined %}
-                            <li>{{ category.errors.categoryName}}</li>
-                            {% endif %}
-                        </ul>
-                        -->
+
+                            <ul class="text-danger text-center mt-1 error categoryNameError2"
+                                style="list-style-type:none;">
+                                {% if category.errors['categoryName'] is defined %}
+                                <li>{{ category.errors.categoryName}}</li>
+                                {% endif %}
+                            </ul>
 
                     </div>
                     <div class="modal-footer">

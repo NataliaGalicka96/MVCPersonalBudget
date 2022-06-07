@@ -43,7 +43,7 @@ use \App\Models\User;
         echo json_encode($is_valid);
     }
 
-
+/*
     public function validateCategoryAction()
     {
         $is_valid = ! IncomeCategory::categoryExists($_GET['newCategoryName'], $_GET['ignore_id'] ?? null);
@@ -51,8 +51,7 @@ use \App\Models\User;
         header('Content-Type: application/json');
         echo json_encode($is_valid);
     }
-
-
+*/
 
 
  }

@@ -9,9 +9,18 @@
 
 {% block footer %}
 
+<script>
+    var userJSON = '{{user|json_encode|raw}}';
+    var user = JSON.parse(userJSON);
+
+    var allUsersJSON = '{{allUsers|json_encode|raw}}';
+    var allUsers = JSON.parse(allUsersJSON);
+</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
 
 <script src="/js/haslo.js"></script>
 
@@ -154,7 +163,7 @@
                         </div>
                     </div>
 
-                    <ul class="text-danger text-center mt-1 error nameError" style="list-style-type:none;">
+                    <ul class="text-danger text-center mt-1 error nameError" id="error" style="list-style-type:none;">
                         {% if user.errors['usernameError1'] is defined %}
                         <li>{{ user.errors['usernameError1'] }}</li>
                         {% endif %}
@@ -170,13 +179,14 @@
                         {% if user.errors['usernameError4'] is defined %}
                         <li>{{ user.errors['usernameError4'] }}</li>
                         {% endif %}
-
                     </ul>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-success">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -237,7 +247,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="/Settings/editPassword" id="formPassword">
-                    <!--                    <div class=" row mb-3">
+                    <!--<div class=" row mb-3">
                         
                         <div class="input-group">
                             <label for="oldPassword" class="form-label">Old Password</label>
