@@ -1,4 +1,15 @@
+/*let button = document.getElementById('menu');
+let dateSpan = document.getElementById('Date');
 
+
+button.onclick = function () {
+    dateSpan.classList.add("mt-5");
+
+}
+
+
+
+/*
 let details = document.getElementById('details');
 let categoryName = document.getElementById('categoryNameOfIncome');
 
