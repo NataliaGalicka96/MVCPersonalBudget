@@ -18,9 +18,16 @@
     var incomesJSON = '{{incomeCategories|json_encode|raw}}';
     var incomes = JSON.parse(incomesJSON);
 
-
     var lastDayJSON = '{{last_day_of_current_month|json_encode|raw}}';
     var lastDayOfCurrentMonth = JSON.parse(lastDayJSON);
+
+
+    var detailsOfIncomeJSON = '{{detailsOfIncome|json_encode|raw}}';
+    var detailsOfIncome = JSON.parse(detailsOfIncomeJSON);
+
+    var detailsOfExpenseJSON = '{{detailsOfExpense|json_encode|raw}}';
+    var detailsOfExpense = JSON.parse(detailsOfExpenseJSON);
+
 </script>
 
 <!--
@@ -132,7 +139,7 @@
                         {% for expense in expenseCategories %}
                         <tr>
                             <td>{{ expense.name }}</td>
-                            <td>{{ expense.sum}}</td>
+                            <td>{{ expense.sum}} </td>
                         </tr>
                         {% endfor %}
 
@@ -143,6 +150,11 @@
 
                     </tbody>
                 </table>
+
+
+                <button data-bs-toggle="modal" data-bs-target="#detailsExpense" type="button"
+                    class="btn btn-danger mt-2 mb-4">Show expense details</button>
+
 
                 {% if expenseCategories is not empty %}
                 <p class="fs-3">Pie chart of expenses</p>
@@ -164,6 +176,7 @@
                             <th> Total </th>
                         </tr>
                         {% for incomes in incomeCategories %}
+
                         <tr>
                             <td>{{incomes.name}}</td>
                             <td>{{incomes.sum}}</td>
@@ -176,6 +189,10 @@
                         </tr>
                     </tbody>
                 </table>
+
+
+                <button data-bs-toggle="modal" data-bs-target="#detailsIncome" type="button"
+                    class="btn btn-danger mt-2 mb-4">Show income details</button>
 
                 {% if incomeCategories is not empty %}
                 <p class="fs-3">Pie chart of incomes</p>
@@ -257,6 +274,109 @@
 </div>
 
 
+<div class="modal fade" id="detailsIncome" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Details of your incomes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="detail">
+                <form method="post" action="/balance/showBalancePeriodTime" id="detailOfIncome">
+                    <div class="table-responsive">
+
+                        {%if detailsOfIncome is not empty %}
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th id="titleOfColumn"> Category </th>
+                                    <th id="titleOfColumn"> Amount </th>
+                                    <th id="titleOfColumn"> Date </th>
+                                    <th id="titleOfColumn"> Comment </th>
+                                </tr>
+                                {% for detail in detailsOfIncome %}
+                                <tr>
+
+                                    <td id="name">{{detail.name}}</td>
+                                    <td id="amount">{{detail.amount}}</td>
+                                    <td id="date">{{detail.date_of_income}}</td>
+                                    <td id="comment">{{detail.comment}}</td>
+
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                        {% else %}
+
+
+                        <p class="text-danger mb-2 mt-2">You have no income for the selected period!</p>
+
+                        {% endif %}
+
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailsExpense" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Details of your expenses</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="detail">
+                <form method="post" action="/balance/showBalancePeriodTime" id="detailOfExpense">
+                    <div class="col-12 col-xl-4 text-center">
+
+                        {%if detailsOfExpense is not empty %}
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th id="titleOfColumn"> Category </th>
+                                    <th id="titleOfColumn"> Amount </th>
+                                    <th id="titleOfColumn"> Payment Method </th>
+                                    <th id="titleOfColumn"> Date </th>
+                                    <th id="titleOfColumn"> Comment </th>
+                                </tr>
+                                {% for detail in detailsOfExpense %}
+                                <tr>
+
+                                    <td id="name">{{detail.name}}</td>
+                                    <td id="amount">{{detail.amount}}</td>
+                                    <td id="payment">{{detail.amount}}</td>
+                                    <td id="date" class="ml-2 mr-2">{{detail.date_of_expense}}</td>
+                                    <td id="comment">{{detail.comment}}</td>
+
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                        {% else %}
+
+
+                        <p class="text-danger mb-2 mt-2">You have no expense for the selected period!</p>
+
+                        {% endif %}
+
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

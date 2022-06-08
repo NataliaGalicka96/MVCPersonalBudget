@@ -152,3 +152,28 @@ h2 {
   flex-direction: column;
   align-items: center;
 }
+
+.modal-body {
+  background: rgb(23 22 53);
+
+}
+
+.modal-header {
+  background: rgb(23 22 53);
+  color: #FFB300;
+  font-size: 1.5em;
+
+}
+
+.btn-close {
+  color: #FFB300;
+}
+
+#titleOfColumn {
+  background-image: linear-gradient(0deg, #FC38AE 0%, #F0D000 100%);
+  color: rgb(23 22 53);
+}
+
+.modal-content {
+  background-color: transparent;
+}
