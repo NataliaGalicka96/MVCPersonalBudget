@@ -24,7 +24,9 @@ public function showBalanceCurrentMonthAction()
         'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
         'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
         'firstDate' => $startDate,
-        'secondDate' => $endDate
+        'secondDate' => $endDate,
+        'detailsOfIncome' => BalanceModel::getIncomeDetails($startDate, $endDate),
+        'detailsOfExpense' => BalanceModel::getExpenseDetails($startDate, $endDate)
     ]);
 }
 public function showBalancePreviousMonthAction()
@@ -38,7 +40,9 @@ public function showBalancePreviousMonthAction()
         'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
         'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
         'firstDate' => $startDate,
-        'secondDate' => $endDate
+        'secondDate' => $endDate,
+        'detailsOfIncome' => BalanceModel::getIncomeDetails($startDate, $endDate),
+        'detailsOfExpense' => BalanceModel::getExpenseDetails($startDate, $endDate)
     ]);
 }
 
@@ -54,7 +58,9 @@ public function showBalanceCurrentYearAction()
         'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
         'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
         'firstDate' => $startDate,
-        'secondDate' => $endDate
+        'secondDate' => $endDate,
+        'detailsOfIncome' => BalanceModel::getIncomeDetails($startDate, $endDate),
+        'detailsOfExpense' => BalanceModel::getExpenseDetails($startDate, $endDate)
 
     ]);
 }
@@ -68,8 +74,6 @@ public function showBalanceCurrentYearAction()
             $startDate = $_POST['date1'];
             $endDate = $_POST['date2'];
 
-            //$startDate = date("Ymd", strtotime($firstDate));
-            //$endDate = date("Ymd", strtotime($secondDate));
 
             if($startDate > $endDate){
                 $pom = $startDate;
@@ -86,13 +90,15 @@ public function showBalanceCurrentYearAction()
                 'incomeCategories'	=> BalanceModel::getGroupedIncomes($startDate, $endDate),
                 'sumOfIncomes' => BalanceModel::countIncomes($startDate, $endDate),
                 'firstDate' => $startDate,
-                'secondDate' => $endDate
+                'secondDate' => $endDate,
+                'detailsOfIncome' => BalanceModel::getIncomeDetails($startDate, $endDate),
+                'detailsOfExpense' => BalanceModel::getExpenseDetails($startDate, $endDate)
         ]);
     } else {
         View::renderTemplate('Balance/showBalance.html');
     }
         
 
-}
+    }
 }
 

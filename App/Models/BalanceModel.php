@@ -122,5 +122,58 @@ class BalanceModel extends \Core\Model
           return $totalIncomes;
       }
 
+      /**
+       * Get details of incomes
+       * 
+       */
+
+       public static function getIncomeDetails($startDate, $endDate)
+       {
+           $sql = "SELECT ica.name, i.amount, i.date_of_income, i.income_comment 
+           FROM incomes i
+           INNER JOIN incomes_category_assigned_to_users ica
+            ON i.income_category_assigned_to_user_id = ica.id
+            WHERE i.user_id =:userId AND
+            i.date_of_income BETWEEN :startDate AND :endDate
+            ORDER BY ica.name";
+
+            $db = static::getDBConnection();
+
+            $stmt = $db -> prepare($sql);
+            $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt -> bindValue(':startDate', $startDate, PDO::PARAM_STR);
+            $stmt -> bindValue(':endDate', $endDate, PDO::PARAM_STR);
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+       }
+
+       /**
+       * Get details of expenses
+       * 
+       */
+
+      public static function getExpenseDetails($startDate, $endDate)
+      {
+          $sql = "SELECT eca.name, e.amount, e.date_of_expense, e.expense_comment 
+          FROM expenses e
+          INNER JOIN expenses_category_assigned_to_users eca
+            ON e.expense_category_assigned_to_user_id = eca.id
+            INNER JOIN Payment_methods_assigned_to_users pma
+            ON e.payment_method_assigned_to_user_id = pma.id
+           WHERE e.user_id =:userId AND
+           e.date_of_expense BETWEEN :startDate AND :endDate
+           ORDER BY eca.name";
+
+           $db = static::getDBConnection();
+
+           $stmt = $db -> prepare($sql);
+           $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+           $stmt -> bindValue(':startDate', $startDate, PDO::PARAM_STR);
+           $stmt -> bindValue(':endDate', $endDate, PDO::PARAM_STR);
+           $stmt -> execute();
+
+           return $stmt -> fetchAll();
+      }
 
     }
