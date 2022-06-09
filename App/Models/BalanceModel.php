@@ -176,5 +176,4 @@ class BalanceModel extends \Core\Model
            return $stmt -> fetchAll();
       }
 
-
     }

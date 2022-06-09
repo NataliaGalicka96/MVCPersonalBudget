@@ -95,15 +95,16 @@
 
     <div class="container-fluid" id="content">
         <div class="row" id="Table">
+
             <h2 class="text-center">View your balance</h2>
 
-            <div class="btn-group dateButton " id="period">
+
+            <div class="btn-group dateButton" id="period">
 
                 <button type="button" class="btn">Choose Date</button>
 
                 <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" id="menu">
-                    <span class="sr-only">Expand the list</span>
                 </button>
 
                 <div class="dropdown-menu bg-transparent border-0 m-0 p-0 dropdown-menu-end">
@@ -294,7 +295,12 @@
                                     <th id="titleOfColumn"> Category </th>
                                     <th id="titleOfColumn"> Amount </th>
                                     <th id="titleOfColumn"> Date </th>
-                                    <th id="titleOfColumn" style="width:40%"> Comment </th>
+                                    <th id="titleOfColumn"> Comment </th>
+
+
+
+
+
                                 </tr>
                                 {% for detail in detailsOfIncome %}
                                 <tr>
@@ -302,7 +308,9 @@
                                     <td id="name">{{detail.name}}</td>
                                     <td id="amount">{{detail.amount}}</td>
                                     <td id="date">{{detail.date_of_income}}</td>
-                                    <td id="comment">{{detail.comment}}</td>
+                                    <td id="comment">{{detail.income_comment}} </td>
+
+
 
                                 </tr>
                                 {% endfor %}
@@ -354,7 +362,7 @@
                                     <td id="amount">{{detail.amount}}</td>
                                     <td id="payment">{{detail.amount}}</td>
                                     <td id="date" class="ml-2 mr-2">{{detail.date_of_expense}}</td>
-                                    <td id="comment">{{detail.comment}}</td>
+                                    <td id="comment">{{detail.expense_comment}}</td>
 
                                 </tr>
                                 {% endfor %}
@@ -378,6 +386,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 {% endblock %}
