@@ -65,7 +65,6 @@ class Settings extends Authenticated
 
         $user = new User($_POST);
         
-        var_dump($_POST);
        
         if ($user->editUsername()) {
 
@@ -95,7 +94,6 @@ class Settings extends Authenticated
     {
         $user = new User($_POST);
 
-        var_dump($_POST);
        
         if ($user->editEmail()) {
 
@@ -163,7 +161,7 @@ class Settings extends Authenticated
     {
         $category = new IncomeCategory($_POST);
         
-        var_dump($_POST);
+       
 
         
        

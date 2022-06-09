@@ -159,7 +159,7 @@ class BalanceModel extends \Core\Model
           FROM expenses e
           INNER JOIN expenses_category_assigned_to_users eca
             ON e.expense_category_assigned_to_user_id = eca.id
-            INNER JOIN Payment_methods_assigned_to_users pma
+            INNER JOIN payment_methods_assigned_to_users pma
             ON e.payment_method_assigned_to_user_id = pma.id
            WHERE e.user_id =:userId AND
            e.date_of_expense BETWEEN :startDate AND :endDate

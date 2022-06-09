@@ -14,25 +14,25 @@ class Config
      * Database host
      * @var string
      */
-    const DB_HOST = 'localhost';
+    const DB_HOST = 'budget.natalia-galicka.profesjonalnyprogramista.pl.mysql.dhosting.pl';
 
     /**
      * Database name
      * @var string
      */
-    const DB_NAME = 'mvcpersonalbudget';
+    const DB_NAME = 'foo4sh_budgetna';
 
     /**
      * Database user
      * @var string
      */
-    const DB_USER = 'Natalia';
+    const DB_USER = 'aija3s_budgetna';
 
     /**
      * Database password
      * @var string
      */
-    const DB_PASSWORD = 'qwerty123';
+    const DB_PASSWORD = 'eShoo9vaiCoo';
 
     /**
      * Show or hide error messages on screen
