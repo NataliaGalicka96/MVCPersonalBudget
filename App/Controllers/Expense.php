@@ -68,4 +68,11 @@ class Expense extends Authenticated
             ]);
         }
      }
+
+
+
+     public function expensesAction()
+     {
+        echo json_encode($this->expenseCategories, JSON_UNESCAPED_UNICODE);
+     }
 }

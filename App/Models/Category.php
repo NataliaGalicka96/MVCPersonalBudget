@@ -79,7 +79,7 @@ class Category extends \Core\Model
         $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt -> execute();
 
-        return $stmt -> fetchAll();
+        return $stmt -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getCurrentUserExpenseCategories()
@@ -94,7 +94,7 @@ class Category extends \Core\Model
         $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt -> execute(); 
 
-        return $stmt -> fetchAll();
+        return $stmt -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getCurrentUserPaymentMethods()
@@ -109,7 +109,7 @@ class Category extends \Core\Model
         $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
         $stmt -> execute(); 
 
-        return $stmt -> fetchAll();
+        return $stmt -> fetchAll(PDO::FETCH_ASSOC);
     }
 
 
