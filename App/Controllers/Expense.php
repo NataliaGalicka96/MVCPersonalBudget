@@ -75,4 +75,9 @@ class Expense extends Authenticated
      {
         echo json_encode($this->expenseCategories, JSON_UNESCAPED_UNICODE);
      }
+
+     public function getLimitAction()
+     {
+        
+     }
 }
