@@ -11,6 +11,9 @@
 <script>
     var lastDayJSON = '{{last_day_of_current_month|json_encode|raw}}';
     var lastDayOfCurrentMonth = JSON.parse(lastDayJSON);
+
+    var firstDayJSON = '{{first_day_of_current_month|json_encode|raw}}';
+    var firstDayOfCurrentMonth = JSON.parse(firstDayJSON);
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -81,6 +84,12 @@
                             </div>
                             <span class="text-danger text-center error"
                                 id="amountError">{{expense.errors.amountError}}</span>
+                            <div id="limit" class="alert alert-danger" role="alert" hidden>
+                                <span>Monthly limit: </span>
+                                <span>
+                                    Amount already spent on this category:</span>
+                                <span>Remaining amount: </span>
+                            </div>
 
                         </div>
 

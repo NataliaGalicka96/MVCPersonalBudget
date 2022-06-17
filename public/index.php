@@ -41,7 +41,5 @@ $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'ac
 $router->add('{controller}/{action}');
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 
-$router->add('/api/expenses', ['controller' => 'Expense', 'action' => 'expenses']);
-
 $router->dispatch($_SERVER['QUERY_STRING']);
 
