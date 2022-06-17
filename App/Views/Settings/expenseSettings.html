@@ -149,9 +149,15 @@
                             </div>
                         </div>
 
+                        <ul class="text-danger text-center mt-1 error categoryNameError" style="list-style-type:none;">
+                            {% if category.errors['categoryName'] is defined %}
+                            <li>{{ category.errors.categoryName}}</li>
+                            {% endif %}
+                        </ul>
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                onclick="showInputToSetLimit();">
+                                onclick="showInputToSetLimit();" name="categoryLimit">
                             <label class="form-check-label" for="defaultCheck1">
                                 Set an expense limit for this category
                             </label>
@@ -166,17 +172,14 @@
                             </div>
                         </div>
 
-
-
-
-
-
-
-                        <ul class="text-danger text-center mt-1 error categoryNameError" style="list-style-type:none;">
-                            {% if category.errors['categoryName'] is defined %}
-                            <li>{{ category.errors.categoryName}}</li>
+                        <ul class="text-danger text-center mt-1 error limitError" style="list-style-type:none;">
+                            {% if category.errors['limitError'] is defined %}
+                            <li>{{ category.errors.limitError}}</li>
                             {% endif %}
                         </ul>
+
+
+
 
                 </div>
                 <div class="modal-footer">

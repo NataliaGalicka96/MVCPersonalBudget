@@ -1,6 +1,4 @@
 
-let checkbox1 = document.getElementById('defaultCheck1');
-let label1 = document.getElementById('limit');
 
 function showInputToSetLimit() {
     let checkbox = document.getElementById('defaultCheck1');
