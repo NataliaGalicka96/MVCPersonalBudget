@@ -82,13 +82,16 @@
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
                                     aria-label="default input example" name="amount" required value={{expense.amount}}>
                             </div>
+
                             <span class="text-danger text-center error"
                                 id="amountError">{{expense.errors.amountError}}</span>
-                            <div id="limit" class="alert alert-danger" role="alert" hidden>
-                                <span>Monthly limit: </span>
-                                <span>
-                                    Amount already spent on this category:</span>
-                                <span>Remaining amount: </span>
+
+
+                            <div id="limit" class="alert alert-danger mt-3" role="alert">
+                                <p id="monthlyLimit">Monthly limit: </p>
+                                <p>
+                                    Amount already spent on this category:</p>
+                                <p>Remaining amount: </p>
                             </div>
 
                         </div>
@@ -133,8 +136,8 @@
                             <div class="input-group">
 
                                 <label for="exampleDataList" class="form-label">Category</label>
-                                <select class="form-control userInput labeledInput" name="category" id="exampleDataList"
-                                    required value={{expense.category}}>
+                                <select class="form-control userInput labeledInput categorySelect" name="category"
+                                    id="exampleDataList" required value={{expense.category}}>
 
                                     <option value="" disabled selected hidden>- select category -</option>
 
@@ -149,6 +152,9 @@
                                     {% endfor %}
 
                                 </select>
+
+
+
                             </div>
                             <span class="text-danger text-center error"
                                 id="categoryError">{{expense.errors.categoryError}}</span>

@@ -86,7 +86,7 @@ class Category extends \Core\Model
     {
         $db = static::getDBConnection();
 
-        $sql = "SELECT eca.id, eca.name
+        $sql = "SELECT eca.id, eca.name, eca.categoryLimit
         FROM  expenses_category_assigned_to_users AS eca
         WHERE eca.user_id=:userId";
 
@@ -112,7 +112,21 @@ class Category extends \Core\Model
         return $stmt -> fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getLimit()
+    {
+        $db = static::getDBConnection();
 
+        $sql = "SELECT eca.name, SUM(eca.categoryLimit) as sum
+        FROM  expenses_category_assigned_to_users AS eca
+        WHERE eca.user_id=:userId
+        GROUP BY eca.name";
+
+        $stmt = $db -> prepare($sql);
+        $stmt -> bindValue(':userId', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt -> execute(); 
+
+        return $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 

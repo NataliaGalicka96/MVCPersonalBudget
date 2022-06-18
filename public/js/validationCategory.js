@@ -112,6 +112,14 @@ function validateCategoryForm2() {
                     minlength: 3,
                     maxlength: 40,
                     validCategoryName: true
+                },
+                categoryLimit2: {
+
+                    number: true,
+                    min: 0,
+                    max: 9999.99,
+                    step: 0.01
+
                 }
             },
             messages: {
@@ -120,12 +128,20 @@ function validateCategoryForm2() {
                     minlength: 'Name of category needs to be between 3 to 40 characters.',
                     maxlength: 'Name of category needs to be between 3 to 40 characters.',
 
+                },
+                categoryLimit2: {
+
+                    min: 'The amount quoted must be between 0 and 1 thousand.',
+                    max: 'The amount quoted must be between 0 and 1 thousand.'
                 }
             },
             errorPlacement: function (error, element) {
 
                 if (element.attr('name') == 'newCategoryName2') {
                     error.appendTo('.categoryNameError2');
+                }
+                if (element.attr('name') == 'categoryLimit2') {
+                    error.appendTo('.limitError2');
                 }
 
             }

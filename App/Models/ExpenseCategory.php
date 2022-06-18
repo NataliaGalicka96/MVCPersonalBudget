@@ -156,19 +156,38 @@ class ExpenseCategory extends \Core\Model
 
         if(empty($this->errors)) {
 			$sql = "INSERT INTO expenses_category_assigned_to_users 
-            VALUES(NULL, :user_id, :name)";
+            VALUES(NULL, :user_id, :name, :categoryLimit2)";
 			
 			$db = static::getDBConnection();
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
             $stmt->bindValue(':name', $this->newCategoryName2, PDO::PARAM_STR);
+            $stmt->bindValue(':categoryLimit2', $this->categoryLimit2, PDO::PARAM_INT);
 
             return $stmt->execute();
 		}
 		return false;
 	}
 
+
+    public static function getLimit()
+    {
+        $db = static::getDBConnection();
+        
+        $sql = "SELECT categoryLimit
+        FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name AND id=:idCategory";
+        
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':name', $categoryName, PDO::PARAM_STR);
+       
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 
 }
 

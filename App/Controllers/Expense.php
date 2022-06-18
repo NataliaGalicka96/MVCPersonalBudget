@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\ExpenseModel;
 use \App\Models\Category;
+use \App\Models\ExpenseCategory;
 use App\Flash;
 
 class Expense extends Authenticated
@@ -20,7 +21,6 @@ class Expense extends Authenticated
         $this->expenseCategories = Category::getCurrentUserExpenseCategories();
 
         $this->paymentMethods = Category::getCurrentUserPaymentMethods();
-
 
     }
 
@@ -71,13 +71,13 @@ class Expense extends Authenticated
 
 
 
-     public function showDataOfExpensesJSONAction()
+     public function getExpensesAction()
      {
         echo json_encode($this->expenseCategories, JSON_UNESCAPED_UNICODE);
      }
 
      public function getLimitAction()
      {
-        
+        echo json_encode(Category::getLimit(), JSON_UNESCAPED_UNICODE);
      }
 }
