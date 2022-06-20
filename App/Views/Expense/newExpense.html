@@ -22,7 +22,8 @@
 
 <script src="/js/data.js"></script>
 <script src="/js/validationExpenseIncomeForm.js"></script>
-<script src="/js/limit.js"></script>
+<!--<script src="/js/limit.js"></script>-->
+<script src="/js/limit2.js"></script>
 
 {% endblock %}
 
@@ -74,6 +75,36 @@
                 <div class="expense">
                     <div class="title"><span>Add Expense</span></div>
 
+                    <div id="showLimit" class="me-sm-4 rounded bg-success text-white fs-5 mb-3 p-2 d d-none ">
+                        <h2 class="text-start fw-light fs-4">Information about limit </h2>
+                        <div class="text-start">
+                            <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+                                <span class="fw-light">Category: </span>
+                                <span id="category-name"></span>
+                            </div>
+                            <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+                                <span class="fw-light">Limit: </span>
+                                <span id="category-limit"></span>
+                                <span>zł</span>
+                            </div>
+                            <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+                                <span class="fw-light">Already spent: </span>
+                                <span id="category-spent"></span>
+                                <span>zł</span>
+                            </div>
+                            <div class="p-2 bg-white bg-opacity-25 rounded w-100">
+                                <span id="heading-remainded" class="fw-light"> Remaining: </span>
+                                <span id="category-remainded"></span>
+                                <span>zł</span>
+                            </div>
+                        </div>
+                        <div id="show-info-after-expense" class="mt-2 p-2 bg-white bg-opacity-25 rounded w-100 d-none ">
+                            <span id="info-after-expense-heading" class="fw-light"></span>
+                            <span id="info-after-expense-amount"></span>
+                            <span>zł</span>
+                        </div>
+                    </div>
+
                     <form id="data" method="post" action="/expense/create">
 
                         <div class="row mb-2">
@@ -86,13 +117,13 @@
                             <span class="text-danger text-center error"
                                 id="amountError">{{expense.errors.amountError}}</span>
 
-
+                            <!--
                             <div id="limit" class="alert alert-danger mt-3" role="alert">
                                 <p id="monthlyLimit">Monthly limit: </p>
-                                <p>
+                                <p id="alreadySpent">
                                     Amount already spent on this category:</p>
-                                <p>Remaining amount: </p>
-                            </div>
+                                <p id="remaining">Remaining amount: </p>
+                            </div>-->
 
                         </div>
 
