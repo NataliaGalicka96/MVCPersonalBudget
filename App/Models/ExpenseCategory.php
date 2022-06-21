@@ -170,18 +170,17 @@ class ExpenseCategory extends \Core\Model
 		return false;
 	}
 
-/*
-    public static function getLimit($categoryId)
+
+    public static function getLimitWithId($categoryId)
     {
-        $db = static::getDBConnection($categoryId);
+        $db = static::getDBConnection();
         
         $sql = "SELECT categoryLimit
-        FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND id=:idCategory";
+        FROM expenses_category_assigned_to_users 
+        WHERE  id=:idCategory";
         
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $query->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
-
+        $stmt->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
 
         $stmt->execute();
 
@@ -191,7 +190,7 @@ class ExpenseCategory extends \Core\Model
 
 
     }
-    
-*/
+
+
 }
 

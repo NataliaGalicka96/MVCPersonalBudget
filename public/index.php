@@ -38,14 +38,19 @@ $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 
+$router->add('api/getExpenses', ['controller' => 'Expense', 'action' => 'getExpenses']);
 $router->add('api/expenses', ['controller' => 'Expense', 'action' => 'expenses']);
-
-$router->add('api/getLimitWithId/{id:[\d]+}', ['controller' => 'Expense', 'action' => 'getLimitWithId']);
-$router->add('api/getExpenses/{id:[\d]+}', ['controller' => 'Expense', 'action' => 'getExpenses']);
 $router->add('api/getLimit', ['controller' => 'Expense', 'action' => 'getLimit']);
+
+
+
 
 $router->add('{controller}/{action}');
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
+
+
+$router->add('api/getLimitWithId/{id:[\d]+}', ['controller' => 'Expense', 'action' => 'getLimitNew']);
+
 
 $router->dispatch($_SERVER['QUERY_STRING']);
 

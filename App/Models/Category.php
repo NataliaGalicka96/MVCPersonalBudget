@@ -86,7 +86,7 @@ class Category extends \Core\Model
     {
         $db = static::getDBConnection();
 
-        $sql = "SELECT eca.id, eca.name
+        $sql = "SELECT eca.id, eca.name, eca.categoryLimit
         FROM  expenses_category_assigned_to_users AS eca
         WHERE eca.user_id=:userId";
 

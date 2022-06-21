@@ -24,6 +24,7 @@ class Expense extends Authenticated
 
         $this->paymentMethods = Category::getCurrentUserPaymentMethods();
 
+        
     }
 
     /**
@@ -88,6 +89,7 @@ class Expense extends Authenticated
 
         echo json_encode( BalanceModel::getGroupedExpenses($startDate, $endDate), JSON_UNESCAPED_UNICODE);
         
+   
         //echo json_encode(['success'=>true]);
         //exit();
     }
@@ -99,15 +101,17 @@ class Expense extends Authenticated
 
     }
 
-    public function getLimitWithIdAction()
-    {
-           
-        echo json_encode(ExpenseCategory::getLimit($this->route_params['id']), JSON_UNESCAPED_UNICODE);
-
-   }
 
     public function expensesAction()
     {
         echo json_encode(Category::getCurrentUserExpenseCategories(), JSON_UNESCAPED_UNICODE);
     }
+
+
+    public function getLimitWithIdAction()
+    {
+        
+        echo json_encode(ExpenseCategory::getLimitNew($this->route_params['id']), JSON_UNESCAPED_UNICODE);
+    }
+    
 }
