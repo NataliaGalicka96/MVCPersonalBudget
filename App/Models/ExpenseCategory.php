@@ -179,8 +179,9 @@ class ExpenseCategory extends \Core\Model
         FROM expenses_category_assigned_to_users 
         WHERE  id=:idCategory";
         
+        $db = static::getDBConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+        $stmt->bindValue(':categoryId', $categoryId, PDO::PARAM_STR);
 
         $stmt->execute();
 
