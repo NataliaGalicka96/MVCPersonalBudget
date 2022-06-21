@@ -5,7 +5,10 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\ExpenseModel;
 use \App\Models\Category;
+use \App\Models\ExpenseCategory;
 use App\Flash;
+use \App\Models\BalanceModel;
+use \App\Date;
 
 class Expense extends Authenticated
 {
@@ -21,7 +24,7 @@ class Expense extends Authenticated
 
         $this->paymentMethods = Category::getCurrentUserPaymentMethods();
 
-
+        
     }
 
     /**
@@ -68,4 +71,47 @@ class Expense extends Authenticated
             ]);
         }
      }
+
+
+
+     public function getExpensesAction()
+     {
+
+        $content = trim(file_get_contents("php://input"));
+
+        $_arr = json_decode($content, true);
+
+        $startDate = $_arr["start"];
+	    $endDate = $_arr["end"];
+       
+        //$startDate = Date::getFirstDayOfCurrentMonth();
+	   // $endDate = Date::getLastDayOfCurrentMonth();
+
+        echo json_encode( BalanceModel::getGroupedExpenses($startDate, $endDate), JSON_UNESCAPED_UNICODE);
+        
+   
+        //echo json_encode(['success'=>true]);
+        //exit();
+    }
+
+     public function getLimitAction()
+     {
+            
+      echo json_encode(Category::getLimit(), JSON_UNESCAPED_UNICODE);
+
+    }
+
+
+    public function expensesAction()
+    {
+        echo json_encode(Category::getCurrentUserExpenseCategories(), JSON_UNESCAPED_UNICODE);
+    }
+
+
+    public function getLimitWithIdAction()
+    {
+        
+        echo json_encode(ExpenseCategory::getLimitNew($this->route_params['id']), JSON_UNESCAPED_UNICODE);
+    }
+    
 }

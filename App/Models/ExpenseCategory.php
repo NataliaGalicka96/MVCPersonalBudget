@@ -76,6 +76,20 @@ class ExpenseCategory extends \Core\Model
     
     }
 
+    public function validateLimitAmount()
+    {
+        //Amount must be a number, maximum 2 decimals
+        
+        if(isset($this -> categoryLimit)) {
+        
+
+            if($this->categoryLimit <0 || $this->categoryLimit >=10000) {
+				$this->errors['limitError'] = 'The amount quoted must be between 0 and 10 thousand.';
+			}
+
+        }
+    }
+/*
     public function editCategory()
     {
         $this->validateCategoryName();
@@ -94,7 +108,30 @@ class ExpenseCategory extends \Core\Model
 		return false;
         
 	}
-    
+    */
+
+    public function editCategory()
+    {
+        $this->validateCategoryName();
+        $this->validateLimitAmount();
+
+        if(empty($this->errors)) {
+			$sql = "UPDATE expenses_category_assigned_to_users SET name = :name, categoryLimit = :categoryLimit WHERE id = :id";
+			
+			$db = static::getDBConnection();
+            $stmt = $db->prepare($sql);
+			
+			$stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
+            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+            $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
+
+            return $stmt->execute();
+		}
+		return false;
+        
+	}
+
+
     public function deleteCategory()
     {
         $this->validateCategoryName();
@@ -119,18 +156,40 @@ class ExpenseCategory extends \Core\Model
 
         if(empty($this->errors)) {
 			$sql = "INSERT INTO expenses_category_assigned_to_users 
-            VALUES(NULL, :user_id, :name)";
+            VALUES(NULL, :user_id, :name, :categoryLimit2)";
 			
 			$db = static::getDBConnection();
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
             $stmt->bindValue(':name', $this->newCategoryName2, PDO::PARAM_STR);
+            $stmt->bindValue(':categoryLimit2', $this->categoryLimit2, PDO::PARAM_INT);
 
             return $stmt->execute();
 		}
 		return false;
 	}
+
+
+    public static function getLimitWithId($categoryId)
+    {
+        $db = static::getDBConnection();
+        
+        $sql = "SELECT categoryLimit
+        FROM expenses_category_assigned_to_users 
+        WHERE  id=:idCategory";
+        
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+       
+        return $stmt->fetch();
+
+
+    }
 
 
 }

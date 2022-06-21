@@ -266,6 +266,7 @@ class Settings extends Authenticated
 
         } else {
 
+            Flash::addMessage('Your category has not been edited. Try again.');
             View::renderTemplate('Settings/expenseSettings.html', [
                 'expenseCategories' => $this->expenseCategories
             ]);

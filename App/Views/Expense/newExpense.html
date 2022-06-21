@@ -11,6 +11,9 @@
 <script>
     var lastDayJSON = '{{last_day_of_current_month|json_encode|raw}}';
     var lastDayOfCurrentMonth = JSON.parse(lastDayJSON);
+
+    var firstDayJSON = '{{first_day_of_current_month|json_encode|raw}}';
+    var firstDayOfCurrentMonth = JSON.parse(firstDayJSON);
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -19,6 +22,13 @@
 
 <script src="/js/data.js"></script>
 <script src="/js/validationExpenseIncomeForm.js"></script>
+
+
+<script src="/js/showLimit.js"></script>
+
+
+<script src="/js/showLimitWithId.js"></script>
+
 
 {% endblock %}
 
@@ -70,6 +80,34 @@
                 <div class="expense">
                     <div class="title"><span>Add Expense</span></div>
 
+                    <div id="showLimit" class="me-sm-4 bg-success text-white  mb-3 p-2  d-none justify-content-center"
+                        style="font-size: 16px !important; margin-right: 0 !important;">
+                        <h2 class="text-center fw-light" style="font-size: 18px !important;">Information about limit
+                        </h2>
+                        <div class="text-start">
+                            <div class="p-2 bg-white bg-opacity-25">
+                                <span class="fw-light">Category: </span>
+                                <span id="categoryName"></span>
+                            </div>
+                            <div class="p-2 bg-white bg-opacity-25">
+                                <span class="fw-light">Limit: </span>
+                                <span id="categoryLimit"></span>
+                                <span>zł</span>
+                            </div>
+                            <div class="p-2 bg-white bg-opacity-25">
+                                <span class="fw-light">Already spent: </span>
+                                <span id="categorySpent"></span>
+                                <span>zł</span>
+                            </div>
+                            <div class="p-2 bg-white bg-opacity-25">
+                                <span id="headerOfRemained"> Remaining: </span>
+                                <span id="amountOfRemained"></span>
+                                <span>zł</span>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <form id="data" method="post" action="/expense/create">
 
                         <div class="row mb-2">
@@ -78,6 +116,7 @@
                                 <input id="amount" class="form-control" type="number" step="0.01" min="0"
                                     aria-label="default input example" name="amount" required value={{expense.amount}}>
                             </div>
+
                             <span class="text-danger text-center error"
                                 id="amountError">{{expense.errors.amountError}}</span>
 
@@ -123,8 +162,8 @@
                             <div class="input-group">
 
                                 <label for="exampleDataList" class="form-label">Category</label>
-                                <select class="form-control userInput labeledInput" name="category" id="exampleDataList"
-                                    required value={{expense.category}}>
+                                <select class="form-control userInput labeledInput categorySelect" name="category"
+                                    id="exampleDataList" required value={{expense.category}}>
 
                                     <option value="" disabled selected hidden>- select category -</option>
 
@@ -139,6 +178,9 @@
                                     {% endfor %}
 
                                 </select>
+
+
+
                             </div>
                             <span class="text-danger text-center error"
                                 id="categoryError">{{expense.errors.categoryError}}</span>
