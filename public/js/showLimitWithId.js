@@ -1,26 +1,8 @@
-
-
-/*
-const getLimitWithId = async (categoryId) => {
-    let response = await fetch(`/api/getLimitWithId/${categoryId}`);
-    const data = await response.json();
-    console.log(data);
-    //return response.data.categoryLimit;
-}
-
-
-*/
 async function showLimit(limit) {
     const windowWithInformation = document.querySelector('#showLimit');
-    let nameOfCategory = document.querySelector('.categorySelect').value;
+    let nameOfCategory = document.querySelectorAll('.categorySelect');
 
     if (limit !== "0.00") {
-        console.log(limit);
-        console.log('Tak jest limit dla tej kategorii')
-        //Pobierz sumę wydatków dla tej kategorii
-        //let totalExpenseOfCategory 
-        // getSumOfExpenseOfCategory();
-
 
         let sumOfExpense = getSumOfExpenseOfCategory();
         console.log(sumOfExpense);
@@ -32,45 +14,31 @@ async function showLimit(limit) {
 
             if (value != null) {
                 expense = value;
-                console.log(expense);
+
             }
             else {
                 expense = 0;
-                console.log(expense);
+
             }
 
-
-            //Pokaz okno z informacjami
             showLimitInformation(limit, expense, nameOfCategory);
-
-
 
         })
 
 
 
     } else {
-        console.log("Nie ma limitu dla tek kategorii");
-        //Schowaj okno
+
         windowWithInformation.classList.add('d-none');
     }
 
 
 }
-/////////////////
+
 
 async function getTotalExpense(sum) {
-    // let expenses
-    // if (sum != null) {
-    console.log("Są wydatki");
-    console.log(sum);
-    //  let expenses = sum;
 
-    // } else {
-    //     console.log("Nie ma wydatków");
-    //     console.log(sum);
-    //     expenses = 0;
-    // }
+    console.log(sum);
     return sum
 }
 
@@ -129,12 +97,11 @@ const getChoosenDateFromInput = () => {
     let month = dateChooseByUser.slice(6, 7);
     let year = dateChooseByUser.slice(0, 4);
 
-
-
     let date2 = new Date(year, month - 1, day);
 
     return date2;
 }
+
 const getFirstDayOfSelectedPeriod = () => {
 
     let dateFromInput = getChoosenDateFromInput();
@@ -153,7 +120,7 @@ const getLastDayOfSelectedPeriod = () => {
 
 }
 
-////////////////
+
 const showLimitInformation = (limit, sumOfExpense, nameOfCategory) => {
     const windowWithInformation = document.querySelector('#showLimit');
     windowWithInformation.classList.remove('d-none');
@@ -220,7 +187,7 @@ const displaySumOfExpenseInWindow = (sumOfExpense) => {
     else { categorySpent.textContent = "0.00" }
 }
 
-/*
+
 const displayDifferrenceInWindow = (limit, sumOfExpense) => {
     const categoryRemainded = document.querySelector('#amountOfRemained')
     const headingRemainded = document.querySelector('#headerOfRemained');
@@ -233,8 +200,8 @@ const displayDifferrenceInWindow = (limit, sumOfExpense) => {
         categoryRemainded.textContent = difference.toFixed(2);
     }
 }
-*/
 
+/*
 const displayDifferrenceInWindow = (limit, sumOfExpense) => {
     let difference = limit - sumOfExpense;
     if (difference >= 0) {
@@ -260,7 +227,7 @@ Number.prototype.assignExceededAmount = function () {
     categoryRemainded.textContent = Math.abs(this).toFixed(2);
 }
 
-
+*/
 const changeWindowWithInformationAboutLimitColor = (limit, sumOfExpense) => {
     const windowWithInformationsAboutLimit = document.querySelector('#showLimit');
     let difference = limit - sumOfExpense;
@@ -273,7 +240,6 @@ const changeWindowWithInformationAboutLimitColor = (limit, sumOfExpense) => {
         windowWithInformationsAboutLimit.classList.add('bg-danger');
     }
 }
-
 
 
 const showLimitAfterChangeDate = () => {
