@@ -63,7 +63,7 @@ class ExpenseCategory extends \Core\Model
 		$stmt = $db->prepare($sql);
 
         $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+        $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
         $stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -89,26 +89,7 @@ class ExpenseCategory extends \Core\Model
 
         }
     }
-/*
-    public function editCategory()
-    {
-        $this->validateCategoryName();
 
-        if(empty($this->errors)) {
-			$sql = "UPDATE expenses_category_assigned_to_users SET name = :name WHERE id = :id";
-			
-			$db = static::getDBConnection();
-            $stmt = $db->prepare($sql);
-			
-			$stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
-
-            return $stmt->execute();
-		}
-		return false;
-        
-	}
-    */
 
     public function editCategory()
     {
@@ -122,7 +103,7 @@ class ExpenseCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+            $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
             $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
 
             return $stmt->execute();
@@ -175,7 +156,7 @@ class ExpenseCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName2, PDO::PARAM_STR);
+            $stmt->bindValue(':name', mb_convert_case($this->newCategoryName2, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
             $stmt->bindValue(':categoryLimit2', $this->categoryLimit2, PDO::PARAM_INT);
 
             return $stmt->execute();

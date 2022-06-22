@@ -43,7 +43,7 @@ class PaymentCategory extends \Core\Model
 		$stmt = $db->prepare($sql);
 
         $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+        $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
         $stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -68,7 +68,7 @@ class PaymentCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+            $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
             return $stmt->execute();
 		}
@@ -106,7 +106,7 @@ class PaymentCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName2, PDO::PARAM_STR);
+            $stmt->bindValue(':name', mb_convert_case($this->newCategoryName2, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
             return $stmt->execute();
 		}
