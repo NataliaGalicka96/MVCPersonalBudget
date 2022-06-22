@@ -23,6 +23,28 @@ class PaymentCategory extends \Core\Model
         };
     }
 
+    /**
+     * Find a category of payment assigned to user
+     * 
+     * 
+     */
+
+    public static function findCategoryAssignedToUser($newCategoryName)
+    {
+        $sql = "SELECT * FROM payment_methods_assigned_to_users WHERE user_id = :user_id AND name = :name";
+		
+		$db = static::getDBConnection();
+
+		$stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':name', mb_convert_case($newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
+
+        $stmt->execute();
+        
+        return $stmt -> fetchAll();
+    }
+
     public function validateCategoryName()
     {
 
@@ -36,6 +58,10 @@ class PaymentCategory extends \Core\Model
             $this->errors['categoryName'] = 'Name of category needs to be between 3 to 40 characters.';;
         }
 
+        if (static::findCategoryAssignedToUser($this->newCategoryName)) {
+            $this->errors['categoryName'] = 'Name already taken.';
+        }
+
        
 
 
@@ -45,23 +71,8 @@ class PaymentCategory extends \Core\Model
 
     public function editCategory()
     {
+        
         $this->validateCategoryName();
-
-        $sql = "SELECT * FROM payment_methods_assigned_to_users WHERE user_id = :user_id AND name = :name";
-		
-		$db = static::getDBConnection();
-
-		$stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
-
-        $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		if(count($result)==1){
-		$this->errors['categoryName'] = "Category already exists.";	
-		}
 
 
         if(empty($this->errors)) {
@@ -101,21 +112,9 @@ class PaymentCategory extends \Core\Model
     {
         $this->validateCategoryName();
 
-        $sql = "SELECT * FROM payment_methods_assigned_to_users WHERE user_id = :user_id AND name = :name";
-		
-		$db = static::getDBConnection();
-
-		$stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', mb_convert_case($this->newCategoryName2, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
-
-        $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		if(count($result)==1){
-		$this->errors['categoryName'] = "Category already exists.";	
-		}
+        if (static::findCategoryAssignedToUser($this->newCategoryName2)) {
+            $this->errors['categoryName'] = 'Name already taken.';
+        }
 
         if(empty($this->errors)) {
 			$sql = "INSERT INTO payment_methods_assigned_to_users 

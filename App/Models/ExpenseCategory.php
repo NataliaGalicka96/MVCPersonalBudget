@@ -23,6 +23,28 @@ class ExpenseCategory extends \Core\Model
         };
     }
 
+    /**
+     * Find a category of Expense assigned to user
+     * 
+     * 
+     */
+
+    public static function findCategoryAssignedToUser($newCategoryName)
+    {
+        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
+		
+		$db = static::getDBConnection();
+
+		$stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':name', mb_convert_case($newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
+
+        $stmt -> execute();
+        
+        return $stmt -> fetchAll();
+    }
+
 
     public function validateCategoryName()
     {
@@ -35,6 +57,10 @@ class ExpenseCategory extends \Core\Model
 
         if(strlen($this->newCategoryName) < 3 || strlen($this->newCategoryName) > 40){
             $this->errors['categoryName'] = 'Name of category needs to be between 3 to 40 characters.';;
+        }
+
+        if (static::findCategoryAssignedToUser($this->newCategoryName)) {
+            $this->errors['categoryName'] = 'Name already taken.';
         }
         
     
@@ -61,22 +87,6 @@ class ExpenseCategory extends \Core\Model
     {
         $this->validateCategoryName();
         $this->validateLimitAmount();
-
-        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
-		
-		$db = static::getDBConnection();
-
-		$stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name',$this->newCategoryName, PDO::PARAM_STR);
-
-        $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		if(count($result)==1){
-		$this->errors['categoryName'] = "Category already exists.";	
-        }
 
 
         if(empty($this->errors['categoryName'])) {
@@ -106,9 +116,6 @@ class ExpenseCategory extends \Core\Model
                 return $stmt->execute();
             }
 		
-
-        
-        
 		return false;
         
 	}
@@ -135,22 +142,12 @@ class ExpenseCategory extends \Core\Model
     public function addCategory()
     {
         $this->validateCategoryName();
+        
 
-        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
-		
-		$db = static::getDBConnection();
-
-		$stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name',$this->newCategoryName2, PDO::PARAM_STR);
-
-        $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		if(count($result)==1){
-		$this->errors['categoryName'] = "Category already exists.";	
+        if (static::findCategoryAssignedToUser($this->newCategoryName2)) {
+            $this->errors['categoryName'] = 'Name already taken.';
         }
+        
 
         if(empty($this->errors)) {
 			$sql = "INSERT INTO expenses_category_assigned_to_users 

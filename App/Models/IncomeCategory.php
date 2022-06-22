@@ -66,6 +66,7 @@ class IncomeCategory extends \Core\Model
             if (static::findCategoryAssignedToUser($this->newCategoryName)) {
                 $this->errors['categoryName'] = 'Name already taken.';
             }
+
             
 
         }
@@ -115,6 +116,10 @@ class IncomeCategory extends \Core\Model
     public function addCategory()
     {
         $this->validateCategoryName();
+
+        if (static::findCategoryAssignedToUser($this->newCategoryName2)) {
+            $this->errors['categoryName'] = 'Name already taken.';
+        }
 
         if(empty($this->errors)) {
 			$sql = "INSERT INTO incomes_category_assigned_to_users 
