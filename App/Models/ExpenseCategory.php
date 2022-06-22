@@ -23,24 +23,6 @@ class ExpenseCategory extends \Core\Model
         };
     }
 
-    /*
-    public static function expenseCategoryAssignedToUser($categoryName, $categoryOldId)
-    {
-        $db = static::getDBConnection();
-        
-        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name AND id=:idCategory";
-        
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', $categoryName, PDO::PARAM_STR);
-        $stmt->bindValue(':idCategory', $categoryOldId, PDO::PARAM_INT);
-
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    }
-    */
 
     public function validateCategoryName()
     {
@@ -54,27 +36,11 @@ class ExpenseCategory extends \Core\Model
         if(strlen($this->newCategoryName) < 3 || strlen($this->newCategoryName) > 40){
             $this->errors['categoryName'] = 'Name of category needs to be between 3 to 40 characters.';;
         }
-
         
-        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
-		
-		$db = static::getDBConnection();
-
-		$stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
-
-        $stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		if(count($result)==1){
-		$this->errors['categoryName'] = "Category already exists.";	
-		}
-        
-    }
+    
     
     }
+}
 
     public function validateLimitAmount()
     {
@@ -96,30 +62,52 @@ class ExpenseCategory extends \Core\Model
         $this->validateCategoryName();
         $this->validateLimitAmount();
 
-        if(empty($this->errors['categoryName'])) {
-			$sql = "UPDATE expenses_category_assigned_to_users SET name = :name, categoryLimit = :categoryLimit WHERE id = :id";
-			
-			$db = static::getDBConnection();
-            $stmt = $db->prepare($sql);
-			
-			$stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
-            $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
-            $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
+        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
+		
+		$db = static::getDBConnection();
 
-            return $stmt->execute();
-		}
+		$stmt = $db->prepare($sql);
 
-        if(empty($this->errors['limitError'])){
-            $sql = "UPDATE expenses_category_assigned_to_users SET categoryLimit = :categoryLimit WHERE id = :id";
-			
-			$db = static::getDBConnection();
-            $stmt = $db->prepare($sql);
-			
-			$stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
-            $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':name',$this->newCategoryName, PDO::PARAM_STR);
 
-            return $stmt->execute();
+        $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		if(count($result)==1){
+		$this->errors['categoryName'] = "Category already exists.";	
         }
+
+
+        if(empty($this->errors['categoryName'])) {
+
+                $sql = "UPDATE expenses_category_assigned_to_users SET name = :name, categoryLimit = :categoryLimit WHERE id = :id";
+                
+                $db = static::getDBConnection();
+                $stmt = $db->prepare($sql);
+                
+                $stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
+                $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
+                $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
+
+                return $stmt->execute();
+            }
+
+	    if(empty($this->errors['limitError'])){
+                
+            $sql = "UPDATE expenses_category_assigned_to_users SET categoryLimit = :categoryLimit WHERE id = :id";
+                
+                $db = static::getDBConnection();
+                $stmt = $db->prepare($sql);
+                
+                $stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
+                $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
+    
+                return $stmt->execute();
+            }
+		
+
+        
         
 		return false;
         
@@ -147,6 +135,22 @@ class ExpenseCategory extends \Core\Model
     public function addCategory()
     {
         $this->validateCategoryName();
+
+        $sql = "SELECT * FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :name";
+		
+		$db = static::getDBConnection();
+
+		$stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':name',$this->newCategoryName2, PDO::PARAM_STR);
+
+        $stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		if(count($result)==1){
+		$this->errors['categoryName'] = "Category already exists.";	
+        }
 
         if(empty($this->errors)) {
 			$sql = "INSERT INTO expenses_category_assigned_to_users 

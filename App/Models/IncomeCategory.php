@@ -38,7 +38,7 @@ class IncomeCategory extends \Core\Model
 		$stmt = $db->prepare($sql);
 
         $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', $newCategoryName, PDO::PARAM_STR);
+        $stmt->bindValue(':name', mb_convert_case($newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
         $stmt -> execute();
         
