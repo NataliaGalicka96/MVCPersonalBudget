@@ -1,29 +1,3 @@
-function showInputToSetLimit() {
-    let checkbox = document.getElementById('defaultCheck1');
-    let divLimit = document.getElementById('limit');
-
-
-    if (checkbox.checked == true) {
-        divLimit.style.visibility = 'visible';
-    } else {
-        divLimit.style.visibility = 'hidden';
-    }
-
-}
-
-function showInputToSetLimit2() {
-    let checkbox = document.getElementById('defaultCheck2');
-    let divLimit = document.getElementById('limit2');
-
-
-    if (checkbox.checked == true) {
-        divLimit.style.visibility = 'visible';
-    } else {
-        divLimit.style.visibility = 'hidden';
-    }
-
-}
-
 
 let categoryName = document.querySelector('.categorySelect');
 
@@ -58,8 +32,6 @@ const getExpenseForCategory = async () => {
 
 
     let date2 = new Date(year, month - 1, day);
-
-
 
     date2.setDate(2);
 
