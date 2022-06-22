@@ -38,40 +38,15 @@ class IncomeCategory extends \Core\Model
 		$stmt = $db->prepare($sql);
 
         $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':name', $newCategoryName, PDO::PARAM_STR);
-        /*
-        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->bindValue(':name', mb_convert_case($newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
-        $stmt->execute();
-
-        return $stmt->fetch();
-        */
         $stmt -> execute();
         
         return $stmt -> fetchAll();
     }
 
 
-    /**
-     * See if a category record already exists with the specified categoryName
-     * 
-     * 
-     */
-/*
-    public static function categoryExists($newCategoryName, $existing_user_id = null)
-    {
-        $category = static::findCategoryAssignedToUser($newCategoryName);
 
-        if($category) {
-            if($category->user_id != $existing_user_id){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-*/
 
     public function validateCategoryName()
     {
@@ -86,22 +61,18 @@ class IncomeCategory extends \Core\Model
             if(strlen($this->newCategoryName) < 3 || strlen($this->newCategoryName) > 40){
                 $this->errors['categoryName'] = 'Name of category needs to be between 3 to 40 characters.';
             }
-/*
-            if (static::categoryExists($this->newCategoryName, $this->user_id ?? null)) {
-                $this->errors['categoryName'] = 'Name already taken.';
-            }
-*/
+
 
             if (static::findCategoryAssignedToUser($this->newCategoryName)) {
                 $this->errors['categoryName'] = 'Name already taken.';
             }
+
             
 
         }
 
     }
     
-
 
     public function editCategory()
     {
@@ -116,7 +87,7 @@ class IncomeCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName, PDO::PARAM_STR);
+            $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
             return $stmt->execute();
 		}
@@ -146,6 +117,10 @@ class IncomeCategory extends \Core\Model
     {
         $this->validateCategoryName();
 
+        if (static::findCategoryAssignedToUser($this->newCategoryName2)) {
+            $this->errors['categoryName'] = 'Name already taken.';
+        }
+
         if(empty($this->errors)) {
 			$sql = "INSERT INTO incomes_category_assigned_to_users 
             VALUES(NULL, :user_id, :name)";
@@ -154,7 +129,7 @@ class IncomeCategory extends \Core\Model
             $stmt = $db->prepare($sql);
 			
 			$stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-            $stmt->bindValue(':name', $this->newCategoryName2, PDO::PARAM_STR);
+            $stmt->bindValue(':name',mb_convert_case($this->newCategoryName2, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
 
             return $stmt->execute();
 		}

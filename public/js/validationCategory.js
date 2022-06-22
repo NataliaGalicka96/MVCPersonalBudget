@@ -3,6 +3,7 @@ window.onload = validateCategoryForm2();
 
 
 
+
 $.validator.addMethod('validCategoryName',
     function (value, element, param) {
 
@@ -12,7 +13,7 @@ $.validator.addMethod('validCategoryName',
 
         if (incomes) {
             for (let i = 0; i < incomes.length; i++) {
-                if ((incomes[i].name == categoryNameToEdit.value) || (incomes[i].name == categoryNameToAdd.value)) {
+                if (((incomes[i].name).toLowerCase() == (categoryNameToEdit.value).toLowerCase()) || ((incomes[i].name).toLowerCase() == (categoryNameToAdd.value).toLowerCase())) {
 
                     return false;
                 }
@@ -23,7 +24,7 @@ $.validator.addMethod('validCategoryName',
 
         if (expenses) {
             for (let i = 0; i < expenses.length; i++) {
-                if ((expenses[i].name == categoryNameToEdit.value) || (expenses[i].name == categoryNameToAdd.value)) {
+                if (((expenses[i].name).toLowerCase() == (categoryNameToEdit.value).toLowerCase()) || ((expenses[i].name).toLowerCase() == (categoryNameToAdd.value).toLowerCase())) {
 
                     return false;
                 }
@@ -35,8 +36,7 @@ $.validator.addMethod('validCategoryName',
 
         if (payment) {
             for (let i = 0; i < payment.length; i++) {
-                if ((payment[i].name == categoryNameToEdit.value) || (payment[i].name == categoryNameToAdd.value)) {
-
+                if (((payment[i].name).toLowerCase() == (categoryNameToEdit.value).toLowerCase()) || ((payment[i].name).toLowerCase() == (categoryNameToAdd.value).toLowerCase())) {
                     return false;
                 }
 

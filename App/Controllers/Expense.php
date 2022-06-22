@@ -110,8 +110,15 @@ class Expense extends Authenticated
 
     public function getLimitWithIdAction()
     {
-        
-        echo json_encode(ExpenseCategory::getLimitNew($this->route_params['id']), JSON_UNESCAPED_UNICODE);
+        $content = trim(file_get_contents("php://input"));
+
+        $_arr = json_decode($content, true);
+
+        $id = $_arr["id"];
+
+        var_dump($id);
+	    
+        echo json_encode(ExpenseCategory::getLimitWithId($id), JSON_UNESCAPED_UNICODE);
     }
     
 }

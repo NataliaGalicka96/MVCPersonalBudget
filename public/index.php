@@ -48,8 +48,8 @@ $router->add('api/getLimit', ['controller' => 'Expense', 'action' => 'getLimit']
 $router->add('{controller}/{action}');
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 
-
-$router->add('api/getLimitWithId/{id:[\d]+}', ['controller' => 'Expense', 'action' => 'getLimitNew']);
+//////////////////
+$router->add('api/getLimitWithId', ['controller' => 'Expense', 'action' => 'getLimitWithId']);
 
 
 $router->dispatch($_SERVER['QUERY_STRING']);
