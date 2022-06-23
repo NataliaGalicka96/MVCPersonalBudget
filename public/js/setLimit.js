@@ -45,12 +45,15 @@ function manageModal() {
 
 async function showLimit(limit, categoryName) {
     let limitInput = document.querySelector('#categoryLimit');
+
     if (limit !== "0.00") {
 
         limitInput.placeholder = limit;
 
+
     } else {
         limitInput.placeholder = 0;
+
 
     }
 

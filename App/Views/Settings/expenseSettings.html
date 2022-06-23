@@ -109,8 +109,15 @@
 
                 <div class="row mt-3 mb-3">
                     <div class="col-lg-6 input-group">
+
                         <input class="form-control" type="text" value="{{category.name}}" disabled>
-                        <button class="btn" type="button" id="editButton" data-bs-category-id="{{ category.id }}"
+                        {% if category.categoryLimit != "0.00" %}
+                        <input class="form-control" type="text" value="Limit: {{ category.categoryLimit}}" disabled>
+                        {% endif %}
+
+
+
+                        <button class=" btn" type="button" id="editButton" data-bs-category-id="{{ category.id }}"
                             data-bs-category-name="{{ category.name }}" data-bs-toggle="modal"
                             data-bs-target="#editCategoryName"><i class="fa-solid fa-pen-to-square"></i></button>
                         <button class="btn" type="button" id="deleteButton" data-bs-category-id="{{ category.id }}"
