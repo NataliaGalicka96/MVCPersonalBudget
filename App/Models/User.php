@@ -53,11 +53,7 @@ class User extends \Core\Model
                 if(!preg_match('/^[A-Za-z]+$/', $this->username)){
                     $this->errors['usernameError3'] = "Username must contain letters only. Special characters are not allowed.";
                 }
-/*
-                if(static::usernameExists($this->username, $this-> id ?? NULL)){
-                    $this->errors['usernameError4'] = 'Username already taken.';
-                }
-                */
+
                 if(static::usernameExists($this->username)){
                     $this->errors['usernameError4'] = 'Username already taken.';
                 }

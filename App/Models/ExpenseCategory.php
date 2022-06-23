@@ -91,17 +91,20 @@ class ExpenseCategory extends \Core\Model
 
         if(empty($this->errors['categoryName'])) {
 
-                $sql = "UPDATE expenses_category_assigned_to_users SET name = :name,  categoryLimit = :categoryLimit WHERE id = :id";
+                $sql = "UPDATE expenses_category_assigned_to_users SET name = :name /*,  categoryLimit = :categoryLimit*/ WHERE id = :id";
                 
                 $db = static::getDBConnection();
                 $stmt = $db->prepare($sql);
                 
                 $stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
                 $stmt->bindValue(':name', mb_convert_case($this->newCategoryName, MB_CASE_TITLE,"UTF-8"), PDO::PARAM_STR);
-                $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
+                //$stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
 
                 return $stmt->execute();
-            }
+
+                
+
+        }
 
 	    if(empty($this->errors['limitError'])){
                 
@@ -115,8 +118,10 @@ class ExpenseCategory extends \Core\Model
     
                 return $stmt->execute();
             }
-		
+
+        	
 		return false;
+        
         
 	}
 
