@@ -22,6 +22,8 @@ async function showLimit(limit) {
             }
 
             showLimitInformation(limit, expense, nameOfCategory);
+            showDifferenceAfterEnteredAmount(limit, expense);
+
 
         })
 
@@ -35,12 +37,57 @@ async function showLimit(limit) {
 
 }
 
-
-async function getTotalExpense(sum) {
-
-    console.log(sum);
-    return sum
+const showDifferenceAfterEnteredAmount = (limit, expense) => {
+    const amountInput = document.querySelector('#amount');
+    showCurrentDifferenceBetweenLimitAndAmountOfExpense(limit, expense);
+    amountInput.addEventListener('change', () => {
+        showCurrentDifferenceBetweenLimitAndAmountOfExpense(limit, expense)
+    });
 }
+
+
+const showCurrentDifferenceBetweenLimitAndAmountOfExpense = (limit, expense) => {
+    const showInfoAfterEnteredAmount = document.querySelector('#afterExpense');
+    const windowWithInformationsAboutLimit = document.querySelector('#showLimit');
+    const amountAfter = document.querySelector('#amountAfterExpense')
+    const header = document.querySelector('#headerAfterExpense');
+
+    let amountValueFromInput = document.getElementById('amount');
+    console.log(amountValueFromInput.value);
+    let amount = amountValueFromInput.value;
+
+
+
+    if (amount > 0) {
+
+        let differenceBeforeEnteredAmount = limit - expense;
+        let differenceAfterEneteredAmount = differenceBeforeEnteredAmount - amount;
+
+
+
+        if (differenceAfterEneteredAmount >= 0) {
+            header.textContent = "Remained to limit: ";
+            amountAfter.textContent = differenceAfterEneteredAmount.toFixed(2);
+            windowWithInformationsAboutLimit.classList.remove('bg-danger');
+            windowWithInformationsAboutLimit.classList.add('bg-success');
+
+        } else {
+            header.textContent = "You will exceed the limit by: ";
+            amountAfter.textContent = differenceAfterEneteredAmount.toFixed(2);
+            windowWithInformationsAboutLimit.classList.remove('bg-success');
+            windowWithInformationsAboutLimit.classList.add('bg-danger');
+
+        }
+
+        showInfoAfterEnteredAmount.classList.remove('d-none');
+    } else {
+
+        showInfoAfterEnteredAmount.classList.add('d-none');
+    }
+
+
+}
+
 
 const getSumOfExpenseOfCategory = async () => {
 
@@ -201,33 +248,7 @@ const displayDifferrenceInWindow = (limit, sumOfExpense) => {
     }
 }
 
-/*
-const displayDifferrenceInWindow = (limit, sumOfExpense) => {
-    let difference = limit - sumOfExpense;
-    if (difference >= 0) {
-        difference.assignRemaindedAmount();
-    } else {
-        difference.assignExceededAmount();
-    }
-}
 
-
-
-Number.prototype.assignRemaindedAmount = function () {
-    const categoryRemainded = document.querySelector('#amountOfRemained')
-    const headingRemainded = document.querySelector('#headerOfRemained');
-    headingRemainded.textContent = "Remained: ";
-    categoryRemainded.textContent = this.toFixed(2);
-}
-
-Number.prototype.assignExceededAmount = function () {
-    const categoryRemainded = document.querySelector('#amountOfRemained')
-    const headingRemainded = document.querySelector('#headerOfRemained');
-    headingRemainded.textContent = "Exceeded: ";
-    categoryRemainded.textContent = Math.abs(this).toFixed(2);
-}
-
-*/
 const changeWindowWithInformationAboutLimitColor = (limit, sumOfExpense) => {
     const windowWithInformationsAboutLimit = document.querySelector('#showLimit');
     let difference = limit - sumOfExpense;
@@ -256,3 +277,8 @@ chooseDate = document.getElementById('date');
 chooseDate.addEventListener('change', showLimitAfterChangeDate);
 
 
+async function getTotalExpense(sum) {
+
+    console.log(sum);
+    return sum;
+}
