@@ -275,6 +275,9 @@ class Settings extends Authenticated
         
     }
 
+
+
+
     /**
      * Deleting the category and expenses related to that category
      *

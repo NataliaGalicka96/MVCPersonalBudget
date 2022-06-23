@@ -91,7 +91,7 @@ class ExpenseCategory extends \Core\Model
 
         if(empty($this->errors['categoryName'])) {
 
-                $sql = "UPDATE expenses_category_assigned_to_users SET name = :name, categoryLimit = :categoryLimit WHERE id = :id";
+                $sql = "UPDATE expenses_category_assigned_to_users SET name = :name,  categoryLimit = :categoryLimit WHERE id = :id";
                 
                 $db = static::getDBConnection();
                 $stmt = $db->prepare($sql);
@@ -119,8 +119,30 @@ class ExpenseCategory extends \Core\Model
 		return false;
         
 	}
+/*
+    public function editLimit() {
 
+        $this->validateLimitAmount();
 
+        if(empty($this->errors['limitError'])){
+                
+            $sql = "UPDATE expenses_category_assigned_to_users SET categoryLimit = :categoryLimit WHERE id = :id";
+                
+                $db = static::getDBConnection();
+                $stmt = $db->prepare($sql);
+                
+                $stmt->bindValue(':id', $this->categoryOldId, PDO::PARAM_INT);
+                $stmt->bindValue(':categoryLimit', $this->categoryLimit, PDO::PARAM_INT);
+    
+                return $stmt->execute();
+            }
+		
+		return false;
+        
+
+    }
+
+*/
     public function deleteCategory()
     {
         $this->validateCategoryName();
