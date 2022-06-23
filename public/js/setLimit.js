@@ -47,10 +47,10 @@ async function showLimit(limit, categoryName) {
     let limitInput = document.querySelector('#categoryLimit');
     if (limit !== "0.00") {
 
-        limitInput.value = limit;
+        limitInput.placeholder = limit;
 
     } else {
-        limitInput.value = 0;
+        limitInput.placeholder = 0;
 
     }
 
